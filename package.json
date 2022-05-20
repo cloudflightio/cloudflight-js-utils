@@ -1,7 +1,7 @@
 {
   "name": "akita-selection",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "prepare": "husky install",
     "build": "nx affected --target=build --parallel",
