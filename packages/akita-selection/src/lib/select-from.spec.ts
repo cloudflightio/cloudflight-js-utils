@@ -54,33 +54,68 @@ describe('select-from', () => {
                 });
             });
         });
+
+        describe('when creating a new selection for a sub-state', () => {
+            let selection: Selection<number>;
+
+            beforeEach(() => {
+                selection = selectFrom(query, 'count');
+            });
+
+            it('should be created', () => {
+                expect(selection).toBeDefined();
+            });
+
+            describe('and when subscribing', () => {
+                it('should observe the whole state', () => {
+                    testScheduler.run(({ expectObservable, cold }) => {
+                        const expected = cold('a', { a: initial.count });
+                        expectObservable(from(selection)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('and when synchronously accessing', () => {
+                it('should return the whole state', () => {
+                    expect(selection.sync).toEqual(initial.count);
+                });
+            });
+        });
     });
 
     describe('given an Akita EntityQuery', () => {
-        interface Data {
+        interface EntityData {
             id: string;
             value: string;
             count: number;
         }
 
+        interface Data {
+            value: number;
+        }
+
+        type State = EntityState<EntityData> & Data;
+
         const initial: Data = {
+            value: 50,
+        };
+
+        const initialEntity: EntityData = {
             id: 'key',
             value: 'test',
             count: 10,
         };
-
-        type DataEntity = EntityState<Data>;
-        const store = new EntityStore<DataEntity>(undefined, { name: 'store' });
+        const store = new EntityStore<State>(initial, { name: 'store' });
         const query = new QueryEntity(store);
-        let expectedState: DataEntity;
+        let expectedState: State;
 
         beforeEach(() => {
-            store.set([initial]);
+            store.set([initialEntity]);
             expectedState = query.getValue();
         });
 
         describe('when creating a new selection for the whole state', () => {
-            let selection: Selection<DataEntity>;
+            let selection: Selection<State>;
 
             beforeEach(() => {
                 selection = selectFrom(query);
@@ -102,6 +137,33 @@ describe('select-from', () => {
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
                     expect(selection.sync).toEqual(expectedState);
+                });
+            });
+        });
+
+        describe('when creating a new selection for a sub-state', () => {
+            let selection: Selection<number>;
+
+            beforeEach(() => {
+                selection = selectFrom(query, 'value');
+            });
+
+            it('should be created', () => {
+                expect(selection).toBeDefined();
+            });
+
+            describe('and when subscribing', () => {
+                it('should observe the whole state', () => {
+                    testScheduler.run(({ expectObservable, cold }) => {
+                        const expected = cold('a', { a: initial.value });
+                        expectObservable(from(selection)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('and when synchronously accessing', () => {
+                it('should return the whole state', () => {
+                    expect(selection.sync).toEqual(initial.value);
                 });
             });
         });
