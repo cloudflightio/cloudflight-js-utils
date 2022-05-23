@@ -1,1 +1,1 @@
-export * from './lib/akita-selection';
+export * from './lib/select-from';
