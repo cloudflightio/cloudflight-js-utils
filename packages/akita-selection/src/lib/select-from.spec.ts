@@ -55,11 +55,38 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state', () => {
+        describe('when creating a new selection for a sub-state using a key', () => {
             let selection: Selection<number>;
 
             beforeEach(() => {
                 selection = selectFrom(query, 'count');
+            });
+
+            it('should be created', () => {
+                expect(selection).toBeDefined();
+            });
+
+            describe('and when subscribing', () => {
+                it('should observe the whole state', () => {
+                    testScheduler.run(({ expectObservable, cold }) => {
+                        const expected = cold('a', { a: initial.count });
+                        expectObservable(from(selection)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('and when synchronously accessing', () => {
+                it('should return the whole state', () => {
+                    expect(selection.sync).toEqual(initial.count);
+                });
+            });
+        });
+
+        describe('when creating a new selection for a sub-state using a projection', () => {
+            let selection: Selection<number>;
+
+            beforeEach(() => {
+                selection = selectFrom(query, (state) => state.count);
             });
 
             it('should be created', () => {
@@ -141,11 +168,38 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state', () => {
+        describe('when creating a new selection for a sub-state using a key', () => {
             let selection: Selection<number>;
 
             beforeEach(() => {
                 selection = selectFrom(query, 'value');
+            });
+
+            it('should be created', () => {
+                expect(selection).toBeDefined();
+            });
+
+            describe('and when subscribing', () => {
+                it('should observe the whole state', () => {
+                    testScheduler.run(({ expectObservable, cold }) => {
+                        const expected = cold('a', { a: initial.value });
+                        expectObservable(from(selection)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('and when synchronously accessing', () => {
+                it('should return the whole state', () => {
+                    expect(selection.sync).toEqual(initial.value);
+                });
+            });
+        });
+
+        describe('when creating a new selection for a sub-state using a key', () => {
+            let selection: Selection<number>;
+
+            beforeEach(() => {
+                selection = selectFrom(query, (state) => state.value);
             });
 
             it('should be created', () => {

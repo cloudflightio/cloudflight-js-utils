@@ -28,16 +28,22 @@ export class Selection<T> implements InteropObservable<T>, Subscribable<T> {
     }
 }
 
+type Projection<T, P = unknown> = (state: T) => P;
+
 export function selectFrom<T, K extends keyof T>(
     query: Query<T>,
     key: K
 ): Selection<T[K]>;
+export function selectFrom<T, P>(
+    query: Query<T>,
+    project: (state: T) => P
+): Selection<P>;
 export function selectFrom<T>(query: Query<T>): Selection<T>;
 export function selectFrom<T, K extends keyof T>(
     query: Query<T>,
-    key?: K
-): Selection<T | T[K]> {
-    if (key == null) {
+    keyOrProjection?: K | Projection<T>
+): Selection<T | T[K] | unknown> {
+    if (keyOrProjection == null) {
         return new Selection<T>({
             observable(): Observable<T> {
                 return query.select();
@@ -46,13 +52,22 @@ export function selectFrom<T, K extends keyof T>(
                 return query.getValue();
             },
         });
+    } else if (typeof keyOrProjection === 'function') {
+        return new Selection<unknown>({
+            observable(): Observable<unknown> {
+                return query.select(keyOrProjection);
+            },
+            sync(): unknown {
+                return keyOrProjection(query.getValue());
+            },
+        });
     } else {
         return new Selection<T[K]>({
             observable(): Observable<T[K]> {
-                return query.select(key);
+                return query.select(keyOrProjection);
             },
             sync(): T[K] {
-                return query.getValue()[key];
+                return query.getValue()[keyOrProjection];
             },
         });
     }
