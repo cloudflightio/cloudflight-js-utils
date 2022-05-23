@@ -5,7 +5,7 @@ import {
     QueryEntity,
     Store,
 } from '@datorama/akita';
-import { selectFrom, Selection } from './select-from';
+import { readFrom, Read } from './read-from';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
@@ -29,82 +29,82 @@ describe('select-from', () => {
         const query = new Query(store);
 
         describe('when creating a new selection for the whole state', () => {
-            let selection: Selection<Data>;
+            let read: Read<Data>;
 
             beforeEach(() => {
-                selection = selectFrom(query);
+                read = readFrom(query);
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: initial });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(initial);
+                    expect(read.value).toEqual(initial);
                 });
             });
         });
 
         describe('when creating a new selection for a sub-state using a key', () => {
-            let selection: Selection<number>;
+            let read: Read<number>;
 
             beforeEach(() => {
-                selection = selectFrom(query, 'count');
+                read = readFrom(query, 'count');
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: initial.count });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(initial.count);
+                    expect(read.value).toEqual(initial.count);
                 });
             });
         });
 
         describe('when creating a new selection for a sub-state using a projection', () => {
-            let selection: Selection<number>;
+            let read: Read<number>;
 
             beforeEach(() => {
-                selection = selectFrom(query, (state) => state.count);
+                read = readFrom(query, (state) => state.count);
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: initial.count });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(initial.count);
+                    expect(read.value).toEqual(initial.count);
                 });
             });
         });
@@ -142,82 +142,82 @@ describe('select-from', () => {
         });
 
         describe('when creating a new selection for the whole state', () => {
-            let selection: Selection<State>;
+            let read: Read<State>;
 
             beforeEach(() => {
-                selection = selectFrom(query);
+                read = readFrom(query);
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: expectedState });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(expectedState);
+                    expect(read.value).toEqual(expectedState);
                 });
             });
         });
 
         describe('when creating a new selection for a sub-state using a key', () => {
-            let selection: Selection<number>;
+            let read: Read<number>;
 
             beforeEach(() => {
-                selection = selectFrom(query, 'value');
+                read = readFrom(query, 'value');
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: initial.value });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(initial.value);
+                    expect(read.value).toEqual(initial.value);
                 });
             });
         });
 
         describe('when creating a new selection for a sub-state using a key', () => {
-            let selection: Selection<number>;
+            let read: Read<number>;
 
             beforeEach(() => {
-                selection = selectFrom(query, (state) => state.value);
+                read = readFrom(query, (state) => state.value);
             });
 
             it('should be created', () => {
-                expect(selection).toBeDefined();
+                expect(read).toBeDefined();
             });
 
             describe('and when subscribing', () => {
                 it('should observe the whole state', () => {
                     testScheduler.run(({ expectObservable, cold }) => {
                         const expected = cold('a', { a: initial.value });
-                        expectObservable(from(selection)).toEqual(expected);
+                        expectObservable(from(read)).toEqual(expected);
                     });
                 });
             });
 
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
-                    expect(selection.sync).toEqual(initial.value);
+                    expect(read.value).toEqual(initial.value);
                 });
             });
         });

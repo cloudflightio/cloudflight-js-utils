@@ -1,1 +1,1 @@
-export * from './lib/select-from';
+export * from './lib/read-from';
