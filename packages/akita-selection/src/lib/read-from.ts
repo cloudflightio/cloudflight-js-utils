@@ -3,10 +3,15 @@ import {
     InteropObservable,
     Observable,
     Observer,
+    pipe,
     Subscribable,
     Unsubscribable,
 } from 'rxjs';
-import { PipeOperator } from './type-helpers';
+import {
+    OperatorPipeline,
+    PipeOperator,
+    ReturnTypeOfTailOperator,
+} from './operators/operator.types';
 
 interface SelectionProviders<T> {
     observable(): Observable<T>;
@@ -28,14 +33,29 @@ export class Read<T> implements InteropObservable<T>, Subscribable<T> {
         return this.provider.value();
     }
 
-    public pipe<R>(operator: PipeOperator<T, R>): Read<R> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public pipe<Operators extends PipeOperator<any, any>[]>(
+        ...operators: OperatorPipeline<T, Operators>
+    ): Read<ReturnTypeOfTailOperator<Operators>> {
         const provider = this.provider;
-        return new Read<R>({
-            observable(): Observable<R> {
-                return provider.observable().pipe(operator.observableOperator);
+        return new Read<ReturnTypeOfTailOperator<Operators>>({
+            observable(): Observable<ReturnTypeOfTailOperator<Operators>> {
+                return (
+                    provider
+                        .observable()
+                        /* the pipe function does provide a rest parameter implementation,
+                         TS just cannot find it for some reason
+                         @ts-expect-error */
+                        .pipe(...operators.map((it) => it.observableOperator))
+                );
             },
-            value(): R {
-                return operator.valueOperator(provider.value());
+            value(): ReturnTypeOfTailOperator<Operators> {
+                /* the pipe function does provide a rest parameter implementation,
+                 TS just cannot find it for some reason
+                 @ts-expect-error */
+                return pipe(...operators.map((it) => it.valueOperator))(
+                    provider.value()
+                );
             },
         });
     }

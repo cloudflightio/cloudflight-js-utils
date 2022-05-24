@@ -1,7 +1,7 @@
 import { Query, Store } from '@datorama/akita';
-import { Read, readFrom } from 'akita-selection';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
+import { Read, readFrom } from '../read-from';
 import { map } from './map.operator';
 
 const testScheduler = new TestScheduler((actual, expected) => {
@@ -33,7 +33,7 @@ describe('map-operator', () => {
             let mappedRead: Read<number>;
 
             beforeEach(() => {
-                mappedRead = read.pipe(map((data) => data.count));
+                mappedRead = read.pipe(map((data: Data) => data.count));
             });
 
             describe('and when subscribing', () => {
