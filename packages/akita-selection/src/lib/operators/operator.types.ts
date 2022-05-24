@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Observable } from 'rxjs';
-import { Tail, UnaryFn } from '../type-helpers';
-
-export interface PipeOperator<I, R> {
-    observableOperator: UnaryFn<Observable<I>, Observable<R>>;
-    valueOperator: UnaryFn<I, R>;
-}
+import { Tail } from '../type-helpers';
+import { PipeOperator } from '../util/pipe.operator';
 
 export type ReturnTypeOfTailOperator<
     Operators extends PipeOperator<any, any>[]

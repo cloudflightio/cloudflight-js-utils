@@ -55,7 +55,9 @@ describe('map-operator', () => {
                 let finalRead: Read<string>;
 
                 beforeEach(() => {
-                    finalRead = mappedRead.pipe(map((value) => `${value}`));
+                    finalRead = mappedRead.pipe(
+                        map((value: number) => `${value}`)
+                    );
                 });
 
                 describe('and when subscribing', () => {

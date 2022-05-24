@@ -3,23 +3,40 @@ import {
     InteropObservable,
     Observable,
     Observer,
-    pipe,
     Subscribable,
     Unsubscribable,
 } from 'rxjs';
 import {
     OperatorPipeline,
-    PipeOperator,
     ReturnTypeOfTailOperator,
 } from './operators/operator.types';
+import { pipe, PipeFnNext, PipeFnResult } from './pipe/pipe';
+import { And, MaybeUndefined } from './type-helpers';
+import {
+    ContainsCancellingPipeOperator,
+    PipeOperator,
+} from './util/pipe.operator';
 
-interface SelectionProviders<T> {
+interface ContinuingReadProvider<T> {
     observable(): Observable<T>;
-    value(): T;
+    result(): PipeFnNext<T>;
 }
 
-export class Read<T> implements InteropObservable<T>, Subscribable<T> {
-    public constructor(private provider: SelectionProviders<T>) {}
+interface CancellingReadProvider<T> {
+    observable(): Observable<T>;
+    result(): PipeFnResult<T>;
+}
+
+type MaybeCancellingReadProvider<T, B extends boolean> = B extends true
+    ? CancellingReadProvider<T>
+    : ContinuingReadProvider<T>;
+
+export class Read<T, Cancelling extends boolean = false>
+    implements InteropObservable<T>, Subscribable<T>
+{
+    public constructor(
+        private provider: MaybeCancellingReadProvider<T, Cancelling>
+    ) {}
 
     public [Symbol.observable](): Subscribable<T> {
         return this;
@@ -29,16 +46,19 @@ export class Read<T> implements InteropObservable<T>, Subscribable<T> {
         return this.provider.observable().subscribe(observer);
     }
 
-    public get value(): T {
-        return this.provider.value();
+    public get value(): MaybeUndefined<T, Cancelling> {
+        return this.provider.result().value as MaybeUndefined<T, Cancelling>;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public pipe<Operators extends PipeOperator<any, any>[]>(
         ...operators: OperatorPipeline<T, Operators>
-    ): Read<ReturnTypeOfTailOperator<Operators>> {
+    ): Read<
+        ReturnTypeOfTailOperator<Operators>,
+        And<Cancelling | ContainsCancellingPipeOperator<Operators>>
+    > {
         const provider = this.provider;
-        return new Read<ReturnTypeOfTailOperator<Operators>>({
+        return new Read<ReturnTypeOfTailOperator<Operators>, any>({
             observable(): Observable<ReturnTypeOfTailOperator<Operators>> {
                 return (
                     provider
@@ -49,12 +69,14 @@ export class Read<T> implements InteropObservable<T>, Subscribable<T> {
                         .pipe(...operators.map((it) => it.observableOperator))
                 );
             },
-            value(): ReturnTypeOfTailOperator<Operators> {
-                /* the pipe function does provide a rest parameter implementation,
-                 TS just cannot find it for some reason
-                 @ts-expect-error */
+            result(): PipeFnResult<ReturnTypeOfTailOperator<Operators>> {
+                const result = provider.result();
+                if (result.type === 'cancel') {
+                    return result;
+                }
+
                 return pipe(...operators.map((it) => it.valueOperator))(
-                    provider.value()
+                    result.value
                 );
             },
         });
@@ -81,8 +103,8 @@ export function readFrom<T, K extends keyof T>(
             observable(): Observable<T> {
                 return query.select();
             },
-            value(): T {
-                return query.getValue();
+            result(): PipeFnNext<T> {
+                return { type: 'next', value: query.getValue() };
             },
         });
     } else if (typeof keyOrProjection === 'function') {
@@ -90,8 +112,11 @@ export function readFrom<T, K extends keyof T>(
             observable(): Observable<unknown> {
                 return query.select(keyOrProjection);
             },
-            value(): unknown {
-                return keyOrProjection(query.getValue());
+            result(): PipeFnNext<unknown> {
+                return {
+                    type: 'next',
+                    value: keyOrProjection(query.getValue()),
+                };
             },
         });
     } else {
@@ -99,8 +124,11 @@ export function readFrom<T, K extends keyof T>(
             observable(): Observable<T[K]> {
                 return query.select(keyOrProjection);
             },
-            value(): T[K] {
-                return query.getValue()[keyOrProjection];
+            result(): PipeFnNext<T[K]> {
+                return {
+                    type: 'next',
+                    value: query.getValue()[keyOrProjection],
+                };
             },
         });
     }
