@@ -141,7 +141,7 @@ describe('select-from', () => {
         });
     });
 
-    describe('given an Akita EntityQuery', () => {
+    describe('given an Akita QueryEntity', () => {
         interface EntityData {
             id: string;
             value: string;
