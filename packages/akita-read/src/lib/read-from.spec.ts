@@ -18,11 +18,13 @@ describe('select-from', () => {
         interface Data {
             value: string;
             count: number;
+            unused: string;
         }
 
         const initial: Data = {
             value: 'test',
             count: 10,
+            unused: 'unused',
         };
 
         const store = new Store<Data>(initial, { name: 'store' });
@@ -78,6 +80,34 @@ describe('select-from', () => {
             describe('and when synchronously accessing', () => {
                 it('should return the whole state', () => {
                     expect(read.value).toEqual(initial.count);
+                });
+            });
+        });
+
+        describe('when creating a new Read for a sub-state using multiple keys', () => {
+            let read: Read<Pick<Data, 'count' | 'value'>>;
+            const { unused, ...expectedRead } = initial;
+
+            beforeEach(() => {
+                read = readFrom(query, ['count', 'value']);
+            });
+
+            it('should be created', () => {
+                expect(read).toBeDefined();
+            });
+
+            describe('and when subscribing', () => {
+                it('should observe the whole state', () => {
+                    testScheduler.run(({ expectObservable, cold }) => {
+                        const expected = cold('a', { a: expectedRead });
+                        expectObservable(from(read)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('and when synchronously accessing', () => {
+                it('should return the whole state', () => {
+                    expect(read.value).toEqual(expectedRead);
                 });
             });
         });
