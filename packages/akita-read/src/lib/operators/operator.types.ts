@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tail } from '../type-helpers';
 import { PipeOperator } from '../util/pipe.operator';
 

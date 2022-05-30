@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Observable } from 'rxjs';
 import { PipeFnNext, PipeFnResult } from '../pipe/pipe';
 import { And, UnaryFn } from '../type-helpers';

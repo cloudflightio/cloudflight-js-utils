@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tail, UnaryFn } from '../type-helpers';
 
 export interface PipeFnNext<T> {

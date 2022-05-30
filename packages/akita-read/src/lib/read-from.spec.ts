@@ -5,7 +5,8 @@ import {
     QueryEntity,
     Store,
 } from '@datorama/akita';
-import { readFrom, Read } from './read-from';
+import { Read } from './read';
+import { readFrom } from './read-from';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 

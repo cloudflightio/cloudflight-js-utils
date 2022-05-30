@@ -1,7 +1,8 @@
 import { Query, Store } from '@datorama/akita';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
-import { Read, readFrom } from '../read-from';
+import { Read } from '../read';
+import { readFrom } from '../read-from';
 import { filter } from './filter.operator';
 import { map } from './map.operator';
 import MockedFn = jest.MockedFn;
