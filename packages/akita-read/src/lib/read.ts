@@ -10,11 +10,11 @@ import {
     ReturnTypeOfTailOperator,
 } from './operators/operator.types';
 import { pipe, PipeFnNext, PipeFnResult } from './pipe/pipe';
-import { And, MaybeUndefined } from './type-helpers';
 import {
     ContainsCancellingPipeOperator,
     PipeOperator,
 } from './util/pipe.operator';
+import { And, MaybeUndefined } from './util/type-helpers';
 
 export interface ContinuingReadProvider<T> {
     observable(): Observable<T>;

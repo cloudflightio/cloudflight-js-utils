@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { PipeFnNext, PipeFnResult } from '../pipe/pipe';
-import { And, UnaryFn } from '../type-helpers';
+import { And, UnaryFn } from './type-helpers';
 
 export interface ContinuingPipeOperator<I, R> {
     observableOperator: UnaryFn<Observable<I>, Observable<R>>;
@@ -11,6 +11,14 @@ export interface CancellingPipeOperator<I, R> {
     observableOperator: UnaryFn<Observable<I>, Observable<R>>;
     valueOperator: UnaryFn<I, PipeFnResult<R>>;
 }
+
+export type MaybeCancellingPipeOperator<
+    I,
+    R,
+    B extends boolean = false
+> = true extends B
+    ? CancellingPipeOperator<I, R>
+    : ContinuingPipeOperator<I, R>;
 
 export type PipeOperator<I, R> =
     | ContinuingPipeOperator<I, R>

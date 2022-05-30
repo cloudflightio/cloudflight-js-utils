@@ -1,4 +1,4 @@
-import { Tail, UnaryFn } from '../type-helpers';
+import { Tail, UnaryFn } from '../util/type-helpers';
 
 export interface PipeFnNext<T> {
     type: 'next';

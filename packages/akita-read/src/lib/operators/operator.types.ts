@@ -1,5 +1,5 @@
-import { Tail } from '../type-helpers';
 import { PipeOperator } from '../util/pipe.operator';
+import { Tail } from '../util/type-helpers';
 
 export type ReturnTypeOfTailOperator<
     Operators extends PipeOperator<any, any>[]

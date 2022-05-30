@@ -1,9 +1,9 @@
-import { QueryEntity } from '@datorama/akita';
 import {
     EntityState,
     getEntityType,
     getIDType,
-} from '@datorama/akita/src/lib/types';
+    QueryEntity,
+} from '@datorama/akita';
 import { Observable } from 'rxjs';
 import { PipeFnNext } from './pipe/pipe';
 import { Read } from './read';
