@@ -5,7 +5,7 @@
         {
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
             "parserOptions": {
-                "project": ["packages/akita-selection/tsconfig.*?.json"]
+                "project": ["packages/akita-read/tsconfig.*?.json"]
             },
             "rules": {}
         },

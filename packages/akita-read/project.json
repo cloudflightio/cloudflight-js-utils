@@ -1,22 +1,22 @@
 {
-    "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
-    "sourceRoot": "packages/akita-selection/src",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/akita-read/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nrwl/js:tsc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/packages/akita-selection",
-                "main": "packages/akita-selection/src/index.ts",
-                "tsConfig": "packages/akita-selection/tsconfig.lib.json",
-                "assets": ["packages/akita-selection/*.md"]
+                "outputPath": "dist/packages/akita-read",
+                "main": "packages/akita-read/src/index.ts",
+                "tsConfig": "packages/akita-read/tsconfig.lib.json",
+                "assets": ["packages/akita-read/*.md"]
             }
         },
         "publish": {
             "executor": "@nrwl/workspace:run-commands",
             "options": {
-                "command": "node tools/scripts/publish.mjs akita-selection {args.ver} {args.tag}"
+                "command": "node tools/scripts/publish.mjs akita-read {args.ver} {args.tag}"
             },
             "dependsOn": [
                 {
@@ -29,14 +29,14 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["packages/akita-selection/**/*.ts"]
+                "lintFilePatterns": ["packages/akita-read/**/*.ts"]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
-            "outputs": ["coverage/packages/akita-selection"],
+            "outputs": ["coverage/packages/akita-read"],
             "options": {
-                "jestConfig": "packages/akita-selection/jest.config.ts",
+                "jestConfig": "packages/akita-read/jest.config.ts",
                 "passWithNoTests": true
             }
         }

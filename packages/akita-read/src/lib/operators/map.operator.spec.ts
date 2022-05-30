@@ -22,7 +22,7 @@ describe('map-operator', () => {
     const store = new Store<Data>(initial, { name: 'store' });
     const query = new Query(store);
 
-    describe('given a Selection', () => {
+    describe('given a Read', () => {
         let read: Read<Data>;
 
         beforeEach(() => {

@@ -28,7 +28,7 @@ describe('select-from', () => {
         const store = new Store<Data>(initial, { name: 'store' });
         const query = new Query(store);
 
-        describe('when creating a new selection for the whole state', () => {
+        describe('when creating a new Read for the whole state', () => {
             let read: Read<Data>;
 
             beforeEach(() => {
@@ -55,7 +55,7 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state using a key', () => {
+        describe('when creating a new Read for a sub-state using a key', () => {
             let read: Read<number>;
 
             beforeEach(() => {
@@ -82,7 +82,7 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state using a projection', () => {
+        describe('when creating a new Read for a sub-state using a projection', () => {
             let read: Read<number>;
 
             beforeEach(() => {
@@ -141,7 +141,7 @@ describe('select-from', () => {
             expectedState = query.getValue();
         });
 
-        describe('when creating a new selection for the whole state', () => {
+        describe('when creating a new Read for the whole state', () => {
             let read: Read<State>;
 
             beforeEach(() => {
@@ -168,7 +168,7 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state using a key', () => {
+        describe('when creating a new Read for a sub-state using a key', () => {
             let read: Read<number>;
 
             beforeEach(() => {
@@ -195,7 +195,7 @@ describe('select-from', () => {
             });
         });
 
-        describe('when creating a new selection for a sub-state using a key', () => {
+        describe('when creating a new Read for a sub-state using a key', () => {
             let read: Read<number>;
 
             beforeEach(() => {

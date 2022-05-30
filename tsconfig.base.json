@@ -15,7 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "akita-selection": ["packages/akita-selection/src/index.ts"]
+            "akita-read": ["packages/akita-read/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

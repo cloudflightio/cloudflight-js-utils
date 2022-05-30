@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-    displayName: 'akita-selection',
+    displayName: 'akita-read',
     preset: '../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
@@ -14,5 +14,5 @@ export default {
     },
     transformIgnorePatterns: ['/node_modules/(?!(@datorama)/)'],
     moduleFileExtensions: ['ts', 'js', 'html', 'mjs'],
-    coverageDirectory: '../../coverage/packages/akita-selection',
+    coverageDirectory: '../../coverage/packages/akita-read',
 };
