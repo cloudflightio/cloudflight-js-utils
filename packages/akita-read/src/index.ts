@@ -2,6 +2,7 @@ export { Read } from './lib/read';
 export { readAllFrom } from './lib/read-all-from';
 export { readEntityFrom } from './lib/read-entity-from';
 export { readFrom } from './lib/read-from';
+export { readManyFrom } from './lib/read-many-from';
 
 export { combineLatest } from './lib/combine-latest';
 
