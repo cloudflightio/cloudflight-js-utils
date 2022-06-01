@@ -1,5 +1,5 @@
 import { Query } from '@datorama/akita';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PipeFnNext } from './pipe/pipe';
 import { Read } from './read';
 
@@ -17,12 +17,26 @@ export function readFrom<T, K extends keyof T>(
     query: Query<T>,
     keys: readonly K[]
 ): Read<Pick<T, K>>;
-export function readFrom<T>(query: Query<T>): Read<T>;
+export function readFrom<T>(query: Query<T> | BehaviorSubject<T>): Read<T>;
 export function readFrom<T, K extends keyof T>(
-    query: Query<T>,
+    query: Query<T> | BehaviorSubject<T>,
     project?: K | Projection<T> | K[]
 ): Read<T | T[K] | unknown> {
-    if (project == null) {
+    if (query instanceof BehaviorSubject) {
+        return new Read<T>({
+            observable(): Observable<T> {
+                return query.asObservable();
+            },
+            result(): PipeFnNext<T> {
+                return {
+                    type: 'next',
+                    get value() {
+                        return query.getValue();
+                    },
+                };
+            },
+        });
+    } else if (project == null) {
         return new Read<T>({
             observable(): Observable<T> {
                 return query.select();
