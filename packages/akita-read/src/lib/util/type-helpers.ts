@@ -5,6 +5,9 @@ export type Tail<I extends any[]> = I extends [...infer Rest, infer T]
 
 export type UnaryFn<I, R> = (input: I) => R;
 
+export type TypeOfArray<A extends readonly any[]> =
+    A extends readonly (infer T)[] ? T : never;
+
 export type MaybeUndefined<T, Con extends boolean> = Con extends true
     ? T | undefined
     : T;
