@@ -32,12 +32,36 @@ export type MaybeCancellingReadProvider<T, B extends boolean> = B extends true
     ? CancellingReadProvider<T>
     : ContinuingReadProvider<T>;
 
+class EagerObservableReadProvider<T, Cancelling extends boolean>
+    implements CancellingReadProvider<T>
+{
+    private readonly obs: Observable<T>;
+
+    public constructor(
+        private readonly provider: MaybeCancellingReadProvider<T, Cancelling>
+    ) {
+        this.obs = this.provider.observable();
+    }
+
+    public observable(): Observable<T> {
+        return this.obs;
+    }
+
+    public result(): PipeFnResult<T> {
+        return this.provider.result();
+    }
+}
+
 export class Read<T, Cancelling extends boolean = false>
     implements InteropObservable<T>, Subscribable<T>
 {
-    public constructor(
-        public readonly provider: MaybeCancellingReadProvider<T, Cancelling>
-    ) {}
+    public readonly provider: MaybeCancellingReadProvider<T, Cancelling>;
+
+    public constructor(provider: MaybeCancellingReadProvider<T, Cancelling>) {
+        this.provider = new EagerObservableReadProvider<T, Cancelling>(
+            provider
+        ) as MaybeCancellingReadProvider<T, Cancelling>;
+    }
 
     public [Symbol.observable](): Subscribable<T> {
         return this;

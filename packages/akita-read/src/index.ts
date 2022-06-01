@@ -10,4 +10,5 @@ export { combineLatest } from './lib/combine-latest';
 export { distinctUntilChanged } from './lib/operators/distinct-until-changed.operator';
 export { filter } from './lib/operators/filter.operator';
 export { map } from './lib/operators/map.operator';
+export { shareReplay } from './lib/operators/share-replay.operator';
 export { switchMap } from './lib/operators/switch-map';

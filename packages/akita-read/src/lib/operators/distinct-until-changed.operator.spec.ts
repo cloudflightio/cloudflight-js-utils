@@ -16,6 +16,9 @@ describe('distinctUntilChanged-operator', () => {
 
     beforeEach(() => {
         jest.resetAllMocks();
+        dummyProvider.observable.mockReturnValue(
+            testScheduler.createColdObservable('aabb', { a: 'a', b: 'b' })
+        );
     });
 
     describe('given a Read', () => {
@@ -34,11 +37,8 @@ describe('distinctUntilChanged-operator', () => {
 
             it('should only emit when the value changes', () => {
                 testScheduler.run(({ expectObservable, cold }) => {
-                    dummyProvider.observable.mockReturnValue(
-                        cold('aab', { a: 'a', b: 'b' })
-                    );
                     expectObservable(from(pipped)).toEqual(
-                        cold('a-b', { a: 'a', b: 'b' })
+                        cold('a-b-', { a: 'a', b: 'b' })
                     );
                 });
             });
@@ -66,9 +66,6 @@ describe('distinctUntilChanged-operator', () => {
 
             it('should only emit when the comparator returns false and the first value', () => {
                 testScheduler.run(({ expectObservable, cold }) => {
-                    dummyProvider.observable.mockReturnValue(
-                        cold('aabb', { a: 'a', b: 'b' })
-                    );
                     expectObservable(from(pipped)).toEqual(
                         cold('aa-b', { a: 'a', b: 'b' })
                     );
