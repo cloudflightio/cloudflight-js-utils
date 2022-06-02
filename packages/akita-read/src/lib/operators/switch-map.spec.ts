@@ -17,7 +17,7 @@ const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
 });
 
-describe('switchMap', () => {
+describe('switchMap-operator', () => {
     describe('given an Akita Query and an Akita QueryEntity', () => {
         interface Data {
             value: string;

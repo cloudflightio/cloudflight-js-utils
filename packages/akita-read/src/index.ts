@@ -12,3 +12,4 @@ export { filter } from './lib/operators/filter.operator';
 export { map } from './lib/operators/map.operator';
 export { shareReplay } from './lib/operators/share-replay.operator';
 export { switchMap } from './lib/operators/switch-map';
+export { withLatestFrom } from './lib/operators/with-latest-from.operator';
