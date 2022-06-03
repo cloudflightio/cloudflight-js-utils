@@ -10,6 +10,7 @@ import {
     ReturnTypeOfTailOperator,
 } from './operators/operator.types';
 import { pipe, PipeFnNext, PipeFnResult } from './pipe/pipe';
+import { AnyToUnknown } from './util/any-to-unknown';
 import {
     ContainsCancellingPipeOperator,
     PipeOperator,
@@ -78,7 +79,8 @@ export class Read<T, Cancelling extends boolean = false>
     public pipe<Operators extends PipeOperator<any, any>[]>(
         ...operators: OperatorPipeline<T, Operators>
     ): Read<
-        ReturnTypeOfTailOperator<Operators>,
+        // change any to unknown to avoid issues when the ReturnType inference does not work completely
+        AnyToUnknown<ReturnTypeOfTailOperator<Operators>>,
         And<Cancelling | ContainsCancellingPipeOperator<Operators>>
     > {
         const provider = this.provider;

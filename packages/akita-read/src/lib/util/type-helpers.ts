@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export type Tail<I extends any[]> = I extends [...infer Rest, infer T]
+export type Tail<I extends readonly any[]> = I extends [...infer Rest, infer T]
     ? T
     : never;
 
