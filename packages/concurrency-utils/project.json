@@ -4,13 +4,16 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "project": "packages/concurrency-utils/package.json",
         "outputPath": "dist/packages/concurrency-utils",
-        "main": "packages/concurrency-utils/src/index.ts",
+        "entryFile": "packages/concurrency-utils/src/index.ts",
         "tsConfig": "packages/concurrency-utils/tsconfig.lib.json",
-        "assets": ["packages/concurrency-utils/*.md"]
+        "compiler": "babel",
+        "external": ["typescript"],
+        "format": ["cjs", "esm"]
       }
     },
     "publish": {

@@ -15,8 +15,12 @@ module.exports = {
             allow: [],
             depConstraints: [
               {
-                sourceTag: '*',
-                onlyDependOnLibsWithTags: ['*'],
+                sourceTag: 'angular',
+                onlyDependOnLibsWithTags: ['js', 'angular'],
+              },
+              {
+                sourceTag: 'js',
+                onlyDependOnLibsWithTags: ['js'],
               },
             ],
           },
@@ -28,6 +32,7 @@ module.exports = {
       extends: [
         'plugin:@nrwl/nx/typescript',
         'plugin:@cloudflight/typescript/recommended',
+        'plugin:@cloudflight/angular/recommended',
       ],
       rules: {
         '@typescript-eslint/space-before-function-paren': 'off',
