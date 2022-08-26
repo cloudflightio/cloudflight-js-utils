@@ -12,9 +12,9 @@
   "keywords": [
     "js-util"
   ],
-  "homepage": "https://github.com/cloudflightio/js-utils",
+  "homepage": "https://github.com/cloudflightio/cloudflight-js-utils",
   "bugs": {
-    "url": "https://github.com/cloudflightio/js-utils/issues"
+    "url": "https://github.com/cloudflightio/cloudflight-js-utils/issues"
   },
   "volta": {
     "node": "16.17.0",
