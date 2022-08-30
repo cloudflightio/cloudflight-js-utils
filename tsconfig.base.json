@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cloudflight/angular-teleport": [
+        "packages/angular-teleport/src/index.ts"
+      ],
       "@cloudflight/concurrency-utils": [
         "packages/concurrency-utils/src/index.ts"
       ]
