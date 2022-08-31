@@ -3,6 +3,14 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 module.exports = {
   root: true,
   ignorePatterns: ['**/*'],
+  settings: {
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: ['packages/**/tsconfig.*?.json', 'tsconfig.*?.json'],
+      },
+    },
+  },
   plugins: ['@nrwl/nx', '@cloudflight/typescript'],
   overrides: [
     {
