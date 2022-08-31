@@ -34,9 +34,7 @@ module.exports = {
         'plugin:@cloudflight/typescript/recommended',
         'plugin:@cloudflight/angular/recommended',
       ],
-      rules: {
-        '@typescript-eslint/space-before-function-paren': 'off',
-      },
+      rules: {},
     },
     {
       files: ['*.js', '*.jsx'],
