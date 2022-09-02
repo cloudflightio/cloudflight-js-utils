@@ -10,17 +10,19 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cloudflight/angular-logger": ["packages/angular-logger/src/index.ts"],
       "@cloudflight/angular-teleport": [
         "packages/angular-teleport/src/index.ts"
       ],
       "@cloudflight/concurrency-utils": [
         "packages/concurrency-utils/src/index.ts"
-      ]
+      ],
+      "@cloudflight/logger": ["packages/logger/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
