@@ -1,0 +1,48 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/akita-read/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "packages/akita-read/package.json",
+        "outputPath": "dist/packages/akita-read",
+        "entryFile": "packages/akita-read/src/index.ts",
+        "tsConfig": "packages/akita-read/tsconfig.lib.json",
+        "compiler": "babel",
+        "external": ["typescript"],
+        "format": ["cjs", "esm"]
+      }
+    },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs akita-read {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/akita-read/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/akita-read"],
+      "options": {
+        "jestConfig": "packages/akita-read/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["js"]
+}

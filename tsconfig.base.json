@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cloudflight/akita-read": ["packages/akita-read/src/index.ts"],
       "@cloudflight/angular-teleport": [
         "packages/angular-teleport/src/index.ts"
       ],
