@@ -23,7 +23,8 @@
       "@cloudflight/concurrency-utils": [
         "packages/concurrency-utils/src/index.ts"
       ],
-      "@cloudflight/logger": ["packages/logger/src/index.ts"]
+      "@cloudflight/logger": ["packages/logger/src/index.ts"],
+      "@cloudflight/rxjs-read": ["packages/rxjs-read/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

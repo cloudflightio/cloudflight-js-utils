@@ -1,7 +1,10 @@
 import { Query } from '@datorama/akita';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PipeFnNext } from './pipe/pipe';
-import { Read } from './read';
+import {
+  Read,
+  PipeFnNext,
+  readFrom as rxjsReadFrom,
+} from '@cloudflight/rxjs-read';
 
 type Projection<T, P = unknown> = (state: T) => P;
 
@@ -23,19 +26,7 @@ export function readFrom<T, K extends keyof T>(
   project?: K | Projection<T> | K[]
 ): Read<T | T[K] | unknown> {
   if (query instanceof BehaviorSubject) {
-    return new Read<T>({
-      observable(): Observable<T> {
-        return query.asObservable();
-      },
-      result(): PipeFnNext<T> {
-        return {
-          type: 'next',
-          get value() {
-            return query.getValue();
-          },
-        };
-      },
-    });
+    return rxjsReadFrom(query);
   } else if (project == null) {
     return new Read<T>({
       observable(): Observable<T> {

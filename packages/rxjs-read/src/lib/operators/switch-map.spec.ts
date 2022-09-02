@@ -1,15 +1,8 @@
-import {
-  EntityState,
-  EntityStore,
-  Query,
-  QueryEntity,
-  Store,
-} from '@datorama/akita';
-import { from } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { Read } from '../read';
-import { readEntityFrom } from '../read-entity-from';
 import { readFrom } from '../read-from';
+import { readOf } from '../read-of';
 import { filter } from './filter.operator';
 import { switchMap } from './switch-map';
 
@@ -18,19 +11,10 @@ const testScheduler = new TestScheduler((actual, expected) => {
 });
 
 describe('switchMap-operator', () => {
-  describe('given an Akita Query and an Akita QueryEntity', () => {
-    interface Data {
-      value: string;
-      count: number;
-    }
+  describe('given a BehaviorSubject', () => {
+    const initial = 'key';
 
-    const initial: Data = {
-      value: 'key',
-      count: 10,
-    };
-
-    let store: Store<Data>;
-    let query: Query<Data>;
+    let subject: BehaviorSubject<string>;
 
     interface EntityData {
       id: string;
@@ -38,29 +22,21 @@ describe('switchMap-operator', () => {
       count: number;
     }
 
-    type State = EntityState<EntityData>;
-
-    const initialEntity: EntityData = {
+    const switchedData: EntityData = {
       id: 'key',
       value: 'test',
       count: 10,
     };
-    let entityStore: EntityStore<State>;
-    let queryEntity: QueryEntity<State>;
 
     beforeEach(() => {
-      store = new Store<Data>(initial, { name: 'store' });
-      query = new Query(store);
-      entityStore = new EntityStore<State>(undefined, { name: 'store' });
-      queryEntity = new QueryEntity(entityStore);
-      entityStore.set([initialEntity]);
+      subject = new BehaviorSubject(initial);
     });
 
-    describe('and given a "normal" Read for the Akita Query', () => {
+    describe('and given a Read for the BehaviorSubject', () => {
       let read: Read<string>;
 
       beforeEach(() => {
-        read = readFrom(query, 'value');
+        read = readFrom(subject);
       });
 
       describe('when piping with the switchMap operator', () => {
@@ -68,14 +44,14 @@ describe('switchMap-operator', () => {
 
         beforeEach(() => {
           mappedRead = read.pipe(
-            switchMap((key: string) => readEntityFrom(queryEntity, key))
+            switchMap((key: string) => readOf(switchedData))
           );
         });
 
         describe('and when subscribing', () => {
           it('should observe mapped state', () => {
             testScheduler.run(({ expectObservable, cold }) => {
-              const expected = cold('a', { a: initialEntity });
+              const expected = cold('a', { a: switchedData });
               expectObservable(from(mappedRead)).toEqual(expected);
             });
           });
@@ -83,17 +59,17 @@ describe('switchMap-operator', () => {
 
         describe('and when synchronously accessing', () => {
           it('should return the mapped state', () => {
-            expect(mappedRead.value).toEqual(initialEntity);
+            expect(mappedRead.value).toEqual(switchedData);
           });
         });
       });
     });
 
-    describe('and given a filtered Read for the Akita Query', () => {
+    describe('and given a filtered Read for the BehaviorSubject', () => {
       let read: Read<string, true>;
 
       beforeEach(() => {
-        read = readFrom(query, 'value').pipe(filter((value: string) => false));
+        read = readFrom(subject).pipe(filter((value: string) => false));
       });
 
       describe('when piping with the switchMap operator', () => {
@@ -101,7 +77,7 @@ describe('switchMap-operator', () => {
 
         beforeEach(() => {
           mappedRead = read.pipe(
-            switchMap((key: string) => readEntityFrom(queryEntity, key))
+            switchMap((key: string) => readOf(switchedData))
           );
         });
 

@@ -1,18 +1,16 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/akita-read/src",
+  "sourceRoot": "packages/rxjs-read/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "project": "packages/akita-read/package.json",
-        "outputPath": "dist/packages/akita-read",
-        "entryFile": "packages/akita-read/src/index.ts",
-        "tsConfig": "packages/akita-read/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true,
-        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "project": "packages/rxjs-read/package.json",
+        "outputPath": "dist/packages/rxjs-read",
+        "entryFile": "packages/rxjs-read/src/index.ts",
+        "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
         "compiler": "babel",
         "external": ["typescript"],
         "format": ["cjs", "esm"]
@@ -21,7 +19,7 @@
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "node tools/scripts/publish.mjs akita-read {args.ver} {args.tag}"
+        "command": "node tools/scripts/publish.mjs rxjs-read {args.ver} {args.tag}"
       },
       "dependsOn": [
         {
@@ -34,14 +32,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/akita-read/**/*.ts"]
+        "lintFilePatterns": ["packages/rxjs-read/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/akita-read"],
+      "outputs": ["coverage/packages/rxjs-read"],
       "options": {
-        "jestConfig": "packages/akita-read/jest.config.ts",
+        "jestConfig": "packages/rxjs-read/jest.config.ts",
         "passWithNoTests": true
       }
     }

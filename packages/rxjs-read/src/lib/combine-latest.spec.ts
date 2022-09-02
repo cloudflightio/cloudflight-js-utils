@@ -1,5 +1,4 @@
-import { Query, Store } from '@datorama/akita';
-import { from } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { combineLatest } from './combine-latest';
 import { filter } from './operators/filter.operator';
@@ -13,24 +12,15 @@ const testScheduler = new TestScheduler((actual, expected) => {
 });
 
 describe('combineLatest', () => {
-  interface Data {
-    value: string;
-    count: number;
-    unused: string;
-  }
+  const initial1 = 'test';
+  const initial2 = 10;
 
-  const initial: Data = {
-    value: 'test',
-    count: 10,
-    unused: 'unused',
-  };
-
-  let store: Store<Data>;
-  let query: Query<Data>;
+  let subject1: BehaviorSubject<string>;
+  let subject2: BehaviorSubject<number>;
 
   beforeEach(() => {
-    store = new Store<Data>(initial, { name: 'store' });
-    query = new Query(store);
+    subject1 = new BehaviorSubject(initial1);
+    subject2 = new BehaviorSubject(initial2);
   });
 
   describe('given multiple reads', () => {
@@ -38,12 +28,12 @@ describe('combineLatest', () => {
     let read2: Read<number>;
 
     beforeEach(() => {
-      read1 = readFrom(query, 'value');
-      read2 = readFrom(query, 'count');
+      read1 = readFrom(subject1);
+      read2 = readFrom(subject2);
     });
 
     describe('when combining them with combineLatest', () => {
-      const expectedRead: [string, number] = [initial.value, initial.count];
+      const expectedRead: [string, number] = [initial1, initial2];
       let combined: Read<[string, number]>;
 
       beforeEach(() => {
@@ -72,15 +62,15 @@ describe('combineLatest', () => {
     let read2: Read<number>;
 
     beforeEach(() => {
-      read1 = readFrom(query, 'value').pipe(
-        filter((value: string) => value === initial.value)
+      read1 = readFrom(subject1).pipe(
+        filter((value: string) => value === initial1)
       );
-      read2 = readFrom(query, 'count');
+      read2 = readFrom(subject2);
     });
 
     describe('and given nothing gets filtered', () => {
       describe('when combining them with combineLatest', () => {
-        const expectedRead: [string, number] = [initial.value, initial.count];
+        const expectedRead: [string, number] = [initial1, initial2];
         let combined: Read<[string, number], true>;
 
         beforeEach(() => {
@@ -107,7 +97,7 @@ describe('combineLatest', () => {
     describe('and given at least one gets filtered', () => {
       describe('from the beginning', () => {
         beforeEach(() => {
-          store.update({ value: 'filtered' });
+          subject1.next('filtered');
         });
 
         describe('when combining them with combineLatest', () => {
@@ -144,21 +134,21 @@ describe('combineLatest', () => {
           result: jest.fn(),
         };
 
-        const expectedRead: [string, number] = [initial.value, initial.count];
+        const expectedRead: [string, number] = [initial1, initial2];
         let combined: Read<[string, number], true>;
 
         beforeEach(() => {
           jest.resetAllMocks();
           mockedProvider1.observable.mockReturnValue(
             testScheduler.createColdObservable('ab', {
-              a: initial.value,
+              a: initial1,
               b: 'filtered',
             })
           );
           mockedProvider1.result
             .mockReturnValueOnce({
               type: 'next',
-              value: initial.value,
+              value: initial1,
             })
             .mockReturnValueOnce({
               type: 'next',
@@ -166,21 +156,21 @@ describe('combineLatest', () => {
             });
           mockedProvider2.observable.mockReturnValue(
             testScheduler.createColdObservable('aa', {
-              a: initial.count,
+              a: initial2,
             })
           );
           mockedProvider2.result
             .mockReturnValueOnce({
               type: 'next',
-              value: initial.count,
+              value: initial2,
             })
             .mockReturnValueOnce({
               type: 'next',
-              value: initial.count,
+              value: initial2,
             });
 
           read1 = new Read<string>(mockedProvider1).pipe(
-            filter((value: string) => value === initial.value)
+            filter((value: string) => value === initial1)
           );
           read2 = new Read<number>(mockedProvider2);
 

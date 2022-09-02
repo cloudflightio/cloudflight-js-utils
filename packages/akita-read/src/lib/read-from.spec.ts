@@ -1,3 +1,4 @@
+import { Read } from '@cloudflight/rxjs-read';
 import {
   EntityState,
   EntityStore,
@@ -5,10 +6,9 @@ import {
   QueryEntity,
   Store,
 } from '@datorama/akita';
-import { Read } from './read';
-import { readFrom } from './read-from';
 import { BehaviorSubject, from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
+import { readFrom } from './read-from';
 
 const testScheduler = new TestScheduler((actual, expected) => {
   expect(actual).toEqual(expected);

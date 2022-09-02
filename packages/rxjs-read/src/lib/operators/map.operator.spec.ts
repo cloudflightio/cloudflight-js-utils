@@ -1,5 +1,4 @@
-import { Query, Store } from '@datorama/akita';
-import { from } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { Read } from '../read';
 import { readFrom } from '../read-from';
@@ -20,14 +19,13 @@ describe('map-operator', () => {
     count: 10,
   };
 
-  const store = new Store<Data>(initial, { name: 'store' });
-  const query = new Query(store);
+  const subject = new BehaviorSubject(initial);
 
   describe('given a Read', () => {
     let read: Read<Data>;
 
     beforeEach(() => {
-      read = readFrom(query);
+      read = readFrom(subject);
     });
 
     describe('when piping with the map operator', () => {

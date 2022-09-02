@@ -1,3 +1,4 @@
+import { PipeFnNext, Read } from '@cloudflight/rxjs-read';
 import {
   EntityState,
   getEntityType,
@@ -5,8 +6,6 @@ import {
   QueryEntity,
 } from '@datorama/akita';
 import { Observable } from 'rxjs';
-import { PipeFnNext } from './pipe/pipe';
-import { Read } from './read';
 
 type EntityProjection<EntityType, R = unknown> = (entity?: EntityType) => R;
 

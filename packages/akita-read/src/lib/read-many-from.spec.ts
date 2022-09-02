@@ -1,7 +1,7 @@
+import { Read } from '@cloudflight/rxjs-read';
 import { EntityState, EntityStore, QueryEntity } from '@datorama/akita';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
-import { Read } from './read';
 import { readManyFrom } from './read-many-from';
 
 const testScheduler = new TestScheduler((actual, expected) => {

@@ -1,3 +1,4 @@
+import { PipeFnNext, Read } from '@cloudflight/rxjs-read';
 import {
   EntityState,
   getEntityType,
@@ -10,9 +11,7 @@ import {
   SelectAllOptionsE,
   SelectOptions,
 } from '@datorama/akita';
-import { Read } from './read';
 import { Observable } from 'rxjs';
-import { PipeFnNext } from './pipe/pipe';
 
 export function readAllFrom<
   S extends EntityState,
