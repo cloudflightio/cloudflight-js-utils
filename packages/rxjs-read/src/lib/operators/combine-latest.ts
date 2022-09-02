@@ -1,7 +1,7 @@
 import { combineLatest as RxCombineLatest, Observable } from 'rxjs';
-import { PipeFnResult } from './pipe/pipe';
-import { Read } from './read';
-import { ContainsCancellingRead } from './util/is-cancelling-read';
+import { PipeFnResult } from '../pipe/pipe';
+import { Read } from '../read';
+import { ContainsCancellingRead } from '../util/is-cancelling-read';
 
 type ReturnTypesOf<R extends Read<any, any>[]> = {
   [T in keyof R]: R[T] extends Read<infer Return, any> ? Return : never;

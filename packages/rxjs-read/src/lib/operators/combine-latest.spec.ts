@@ -1,10 +1,10 @@
 import { BehaviorSubject, from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { combineLatest } from './combine-latest';
-import { filter } from './operators/filter.operator';
-import { Read } from './read';
-import { readFrom } from './read-from';
-import { ContinuingReadProvider } from './read-providers';
+import { filter } from './filter.operator';
+import { Read } from '../read';
+import { readFrom } from '../read-from';
+import { ContinuingReadProvider } from '../read-providers';
 import Mocked = jest.Mocked;
 
 const testScheduler = new TestScheduler((actual, expected) => {

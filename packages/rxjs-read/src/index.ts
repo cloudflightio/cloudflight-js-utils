@@ -4,7 +4,7 @@ export { readOf } from './lib/read-of';
 
 export { PipeFnNext, PipeFnCancel } from './lib/pipe/pipe';
 
-export { combineLatest } from './lib/combine-latest';
+export { combineLatest } from './lib/operators/combine-latest';
 export { distinctUntilChanged } from './lib/operators/distinct-until-changed.operator';
 export { filter } from './lib/operators/filter.operator';
 export { map } from './lib/operators/map.operator';

@@ -18,6 +18,14 @@
       }
     }
   },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
   "generators": {
     "@nrwl/angular:application": {
       "style": "css",
