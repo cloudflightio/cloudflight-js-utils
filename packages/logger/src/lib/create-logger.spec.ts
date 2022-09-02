@@ -12,13 +12,16 @@ describe('createLogger', () => {
 
   beforeEach(() => {
     consumer = {
+      get accessKey(): string {
+        return 'default-test-consumer';
+      },
       logLevel: undefined,
       consume: jest.fn(),
     };
   });
 
   test('given consumer when logging then consumer gets called', () => {
-    const logger = createLogger();
+    const logger = createLogger({ accessKey: 'default-test-logger' });
 
     logger.addConsumer(consumer);
 
@@ -33,7 +36,7 @@ describe('createLogger', () => {
   });
 
   test('given consumer level changing when logging then consumer does not get called', () => {
-    const logger = createLogger();
+    const logger = createLogger({ accessKey: 'default-test-logger' });
 
     logger.addConsumer(consumer);
 
@@ -45,7 +48,7 @@ describe('createLogger', () => {
   });
 
   test('given logger level changing when logging then consumer does not get called', () => {
-    const logger = createLogger();
+    const logger = createLogger({ accessKey: 'default-test-logger' });
 
     logger.addConsumer(consumer);
 

@@ -12,4 +12,5 @@ export {
   createLogger,
   NamedLogger,
   createNamedLogger,
+  LoggerCreationConfig,
 } from '@cloudflight/logger';

@@ -8,6 +8,7 @@ import {
 import { createSpyFromClass } from 'jest-auto-spies';
 
 class LogConsumerImpl extends LogConsumer {
+  public accessKey = 'test-logger-key';
   public logLevel = LogLevel.Debug;
 
   public consume(name: string, level: LogLevel, messages: unknown[]): void {

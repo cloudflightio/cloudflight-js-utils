@@ -2,6 +2,7 @@ import { LogLevel } from './log-level';
 import { LogConsumer } from './log-consumer';
 
 export interface Logger {
+  readonly accessKey: string;
   logLevel: LogLevel;
 
   debug(source: string | unknown, ...messages: unknown[]): void;

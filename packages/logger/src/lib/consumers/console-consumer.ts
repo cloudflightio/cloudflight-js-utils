@@ -6,6 +6,9 @@ let hue = 0;
 
 export function createConsoleConsumer(): LogConsumer {
   return {
+    get accessKey(): string {
+      return 'default-console-consumer';
+    },
     logLevel: undefined,
     consume(name: string, level: LogLevel, messages: unknown[]) {
       const identifier = `%c[${name}][${getLevelName(level)}]`;

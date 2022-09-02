@@ -14,6 +14,9 @@ describe('ClassLogger', () => {
 
   beforeEach(() => {
     consumer = {
+      get accessKey(): string {
+        return 'default-test-consumer';
+      },
       logLevel: undefined,
       consume: jest.fn(),
     };
@@ -23,7 +26,7 @@ describe('ClassLogger', () => {
     @LoggerMark('TestClass')
     class TestClass {}
 
-    const logger = createLogger();
+    const logger = createLogger({ accessKey: 'default-test-logger' });
 
     logger.addConsumer(consumer);
 
@@ -40,7 +43,7 @@ describe('ClassLogger', () => {
   test('given class without decorator when logging then name is unknown', () => {
     class TestClass {}
 
-    const logger = createLogger();
+    const logger = createLogger({ accessKey: 'default-test-logger' });
 
     logger.addConsumer(consumer);
 

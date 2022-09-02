@@ -2,12 +2,20 @@ import { LogConsumer } from './model/log-consumer';
 import { Logger } from './model/logger';
 import { LogLevel } from './model/log-level';
 import { nameOf } from './logger-class-support';
+import { addConsumer, addLogger } from './global-access';
 
-export function createLogger(): Logger {
-  const consumers: LogConsumer[] = [];
+export interface LoggerCreationConfig {
+  accessKey: string;
+}
+
+export function createLogger(config: LoggerCreationConfig): Logger {
+  const consumers = new Set<LogConsumer>();
   let logLevel = LogLevel.Debug;
 
-  return {
+  const logger: Logger = {
+    get accessKey(): string {
+      return config.accessKey;
+    },
     get logLevel() {
       return logLevel;
     },
@@ -15,7 +23,8 @@ export function createLogger(): Logger {
       logLevel = level;
     },
     addConsumer(consumer: LogConsumer): void {
-      consumers.push(consumer);
+      addConsumer(consumer);
+      consumers.add(consumer);
     },
     debug(source: string | unknown, ...messages: unknown[]): void {
       if (logLevel > LogLevel.Debug) {
@@ -67,4 +76,8 @@ export function createLogger(): Logger {
       }
     },
   };
+
+  addLogger(logger);
+
+  return logger;
 }
