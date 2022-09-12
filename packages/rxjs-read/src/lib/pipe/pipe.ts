@@ -49,12 +49,10 @@ export function pipe<Functions extends ((arg: any) => PipeFnResult<any>)[]>(
   arg: Parameters<Functions[0]>[0]
 ) => PipeFnResult<ReturnTypeOfTail<Functions>> {
   return (arg) => {
-    const length = functions.length;
-
     let pipeline = arg;
 
-    for (let index = 0; index < length; index += 1) {
-      const result = functions[index](pipeline);
+    for (const fn of functions) {
+      const result = fn(pipeline);
       if (result.type === 'cancel') {
         return result;
       }
