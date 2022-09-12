@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/documentation/src",
+  "tags": [],
+  "targets": {
+    "generate-docs": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "vuepress build apps/documentation/src"
+      },
+      "dependsOn": ["^generate-docs"]
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "vuepress dev apps/documentation/src"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/documentation/**/*.ts"]
+      }
+    }
+  }
+}

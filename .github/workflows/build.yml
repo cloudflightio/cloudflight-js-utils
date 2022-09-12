@@ -19,3 +19,5 @@ jobs:
         run: yarn run test
       - name: Lint
         run: yarn run lint
+      - name: Generate docs
+        run: yarn run generate:docs

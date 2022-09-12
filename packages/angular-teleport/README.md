@@ -1,7 +1,13 @@
 # angular-teleport
 
-This library was generated with [Nx](https://nx.dev).
+Inspired by [Teleport](https://vuejs.org/guide/built-ins/teleport.html) from Vuejs.
 
-## Running unit tests
+## Installation
 
-Run `nx test angular-teleport` to execute the unit tests.
+Add the following in your `package.json`:
+
+```
+"dependencies": {
+  "@cloudflight/angular-teleport": "0.1.0"
+}
+```

@@ -14,7 +14,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e", "generate-docs"]
       }
     }
   },
@@ -28,7 +28,7 @@
   },
   "generators": {
     "@nrwl/angular:application": {
-      "style": "css",
+      "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "none"
@@ -38,7 +38,19 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
-      "style": "css"
+      "style": "scss"
+    },
+    "@nrwl/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none"
+    },
+    "@nrwl/web:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "none"
     }
-  }
+  },
+  "defaultProject": "documentation"
 }
