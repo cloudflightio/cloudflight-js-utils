@@ -1,0 +1,7 @@
+{
+  "name": "@cloudflight/rxjs-read",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "rxjs": ">=7.0.0 <8.0.0"
+  }
+}

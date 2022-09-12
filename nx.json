@@ -3,7 +3,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "cloudflight",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "pluginsConfig": {
     "@nrwl/js": {
@@ -17,6 +17,14 @@
         "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   },
   "generators": {
     "@nrwl/angular:application": {

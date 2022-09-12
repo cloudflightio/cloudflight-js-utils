@@ -1,0 +1,48 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/rxjs-read/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "packages/rxjs-read/package.json",
+        "outputPath": "dist/packages/rxjs-read",
+        "entryFile": "packages/rxjs-read/src/index.ts",
+        "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
+        "compiler": "babel",
+        "external": ["typescript"],
+        "format": ["cjs", "esm"]
+      }
+    },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs rxjs-read {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/rxjs-read/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/rxjs-read"],
+      "options": {
+        "jestConfig": "packages/rxjs-read/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["js"]
+}

@@ -1,4 +1,7 @@
-import { LogConsumer as LogConsumerInterface, LogLevel } from '@cloudflight/logger';
+import {
+  LogConsumer as LogConsumerInterface,
+  LogLevel,
+} from '@cloudflight/logger';
 import { Injectable } from '@angular/core';
 
 @Injectable()
