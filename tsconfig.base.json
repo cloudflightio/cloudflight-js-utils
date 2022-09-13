@@ -18,6 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "@cloudflight/akita-read": ["packages/akita-read/src/index.ts"],
+      "@cloudflight/angular-display": ["packages/angular-display/src/index.ts"],
       "@cloudflight/angular-logger": ["packages/angular-logger/src/index.ts"],
       "@cloudflight/angular-teleport": [
         "packages/angular-teleport/src/index.ts"

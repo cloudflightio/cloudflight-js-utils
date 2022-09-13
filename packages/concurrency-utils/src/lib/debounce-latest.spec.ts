@@ -48,7 +48,7 @@ describe('debounceLatestWithPool', () => {
       await expect(invocation7).resolves.toEqual(7);
 
       expect(fn).toHaveBeenCalledTimes(1);
-      expect(fn.mock.calls[0][0]).toBe(7);
+      expect(fn.mock.calls[0]?.[0]).toBe(7);
     });
 
     it('given multiple invocations and the last one throws an error, then all promises should reject', async () => {
@@ -75,7 +75,7 @@ describe('debounceLatestWithPool', () => {
       await expect(invocation3).rejects.toThrow();
 
       expect(fn).toHaveBeenCalledTimes(1);
-      expect(fn.mock.calls[0][0]).toBe(-1);
+      expect(fn.mock.calls[0]?.[0]).toBe(-1);
     });
   });
 });
