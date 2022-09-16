@@ -148,3 +148,7 @@ sketch
 # System Files
 .DS_Store
 Thumbs.db
+
+.temp
+.cache
+apps/documentation/src/api

@@ -5,9 +5,11 @@
     "build": "nx run-many --target=build --all --parallel",
     "test": "nx run-many --target=test --all --parallel",
     "lint": "nx run-many --target=lint --all --parallel",
+    "generate:docs": "nx run-many --target=generate-docs --all --parallel",
     "postinstall": "husky install && ngcc --properties es2020 browser module main",
     "lint:format": "nx format:check --all",
-    "format:staged": "nx format:write --uncommitted"
+    "format:staged": "nx format:write --uncommitted",
+    "docs:serve": "nx run --target=serve apps-documentation:serve"
   },
   "private": true,
   "author": "Cloudflight GmbH",
@@ -24,7 +26,8 @@
     "yarn": "1.22.19"
   },
   "workspaces": [
-    "packages/**"
+    "packages/**",
+    "apps/*"
   ],
   "dependencies": {
     "@angular/animations": "~14.2.0",
@@ -58,6 +61,7 @@
     "@rushstack/eslint-patch": "1.1.4",
     "@types/jest": "28.1.8",
     "@types/node": "16.11.7",
+    "@vuepress/bundler-webpack": "2.0.0-beta.51",
     "eslint": "8.22.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-import-resolver-typescript": "3.5.0",
@@ -74,9 +78,13 @@
     "postcss-preset-env": "7.5.0",
     "postcss-url": "10.1.3",
     "prettier": "2.7.1",
+    "sass-loader": "13.0.2",
     "symbol-observable": "^4.0.0",
     "ts-jest": "28.0.8",
     "ts-node": "10.9.1",
-    "typescript": "4.7.4"
+    "typedoc": "0.23.14",
+    "typedoc-plugin-markdown": "3.13.6",
+    "typescript": "4.7.4",
+    "vuepress": "2.0.0-beta.51"
   }
 }

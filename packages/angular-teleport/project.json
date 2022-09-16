@@ -35,6 +35,13 @@
           "packages/angular-teleport/**/*.html"
         ]
       }
+    },
+    "generate-docs": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "node tools/scripts/generate-doc.js --project angular-teleport"
+      }
     }
   },
   "tags": ["angular"]
