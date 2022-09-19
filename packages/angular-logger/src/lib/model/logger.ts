@@ -13,11 +13,11 @@ export abstract class Logger implements LoggerInterface {
 
   public abstract addConsumer(consumer: LogConsumer): void;
 
-  public abstract debug(source: string | unknown, ...messages: unknown[]): void;
+  public abstract debug(source: string, ...messages: unknown[]): void;
 
-  public abstract error(source: string | unknown, ...messages: unknown[]): void;
+  public abstract error(source: string, ...messages: unknown[]): void;
 
-  public abstract info(source: string | unknown, ...messages: unknown[]): void;
+  public abstract info(source: string, ...messages: unknown[]): void;
 
-  public abstract warn(source: string | unknown, ...messages: unknown[]): void;
+  public abstract warn(source: string, ...messages: unknown[]): void;
 }

@@ -4,6 +4,9 @@ import { LogLevel } from '../model/log-level';
 const nameToColor = new Map<string, number>();
 let hue = 0;
 
+/**
+ * Consumer to print the logs into the browser/node console with fancy colors.
+ */
 export function createConsoleConsumer(): LogConsumer {
   return {
     get accessKey(): string {

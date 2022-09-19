@@ -1,5 +1,4 @@
 export { createLogger, LoggerCreationConfig } from './lib/create-logger';
-export { LoggerMark } from './lib/logger-class-support';
 export { globalLoggerInstance } from './lib/logger-global';
 export { NamedLogger, createNamedLogger } from './lib/logger-named';
 

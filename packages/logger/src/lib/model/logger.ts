@@ -5,13 +5,13 @@ export interface Logger {
   readonly accessKey: string;
   logLevel: LogLevel;
 
-  debug(source: string | unknown, ...messages: unknown[]): void;
+  debug(source: string, ...messages: unknown[]): void;
 
-  info(source: string | unknown, ...messages: unknown[]): void;
+  info(source: string, ...messages: unknown[]): void;
 
-  warn(source: string | unknown, ...messages: unknown[]): void;
+  warn(source: string, ...messages: unknown[]): void;
 
-  error(source: string | unknown, ...messages: unknown[]): void;
+  error(source: string, ...messages: unknown[]): void;
 
   addConsumer(consumer: LogConsumer): void;
 }

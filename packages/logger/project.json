@@ -42,6 +42,13 @@
         "jestConfig": "packages/logger/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "generate-docs": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "node tools/scripts/generate-doc.js --project logger"
+      }
     }
   },
   "tags": ["js"]
