@@ -7,7 +7,7 @@ import {
 } from '@cloudflight/angular-logger';
 import { createSpyFromClass } from 'jest-auto-spies';
 
-class LogConsumerImpl extends LogConsumer {
+class LogConsumerImpl implements LogConsumer {
   public accessKey = 'test-logger-key';
   public logLevel = LogLevel.Debug;
 

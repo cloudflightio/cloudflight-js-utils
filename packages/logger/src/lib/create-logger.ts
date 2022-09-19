@@ -1,13 +1,22 @@
 import { LogConsumer } from './model/log-consumer';
 import { Logger } from './model/logger';
 import { LogLevel } from './model/log-level';
-import { nameOf } from './logger-class-support';
 import { addConsumer, addLogger } from './global-access';
 
 export interface LoggerCreationConfig {
   accessKey: string;
 }
 
+/**
+ * Creates a new logger instance with no consumers attached. This is most
+ * probably not what you want in 99% of the cases. It is recommended to use
+ * the {@link globalLoggerInstance} for logging, since it has your log
+ * consumers attached.
+ *
+ * The reason this function is exposed is so ui fragments (think of something
+ * like google maps) can use this to have their logs separated. This usecase is
+ * rare, but still exists in large business applications.
+ */
 export function createLogger(config: LoggerCreationConfig): Logger {
   const consumers = new Set<LogConsumer>();
   let logLevel = LogLevel.Debug;
@@ -26,52 +35,47 @@ export function createLogger(config: LoggerCreationConfig): Logger {
       addConsumer(consumer);
       consumers.add(consumer);
     },
-    debug(source: string | unknown, ...messages: unknown[]): void {
+    debug(source: string, ...messages: unknown[]): void {
       if (logLevel > LogLevel.Debug) {
         return;
       }
 
-      const name = typeof source === 'string' ? source : nameOf(source);
-
       for (const consumer of consumers) {
         if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Debug) {
-          consumer.consume(name, LogLevel.Debug, messages);
+          consumer.consume(source, LogLevel.Debug, messages);
         }
       }
     },
-    info(source: string | unknown, ...messages: unknown[]): void {
+    info(source: string, ...messages: unknown[]): void {
       if (logLevel > LogLevel.Info) {
         return;
       }
 
-      const name = typeof source === 'string' ? source : nameOf(source);
       for (const consumer of consumers) {
         if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Info) {
-          consumer.consume(name, LogLevel.Info, messages);
+          consumer.consume(source, LogLevel.Info, messages);
         }
       }
     },
-    warn(source: string | unknown, ...messages: unknown[]): void {
+    warn(source: string, ...messages: unknown[]): void {
       if (logLevel > LogLevel.Warn) {
         return;
       }
 
-      const name = typeof source === 'string' ? source : nameOf(source);
       for (const consumer of consumers) {
         if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Warn) {
-          consumer.consume(name, LogLevel.Warn, messages);
+          consumer.consume(source, LogLevel.Warn, messages);
         }
       }
     },
-    error(source: string | unknown, ...messages: unknown[]): void {
+    error(source: string, ...messages: unknown[]): void {
       if (logLevel > LogLevel.Error) {
         return;
       }
 
-      const name = typeof source === 'string' ? source : nameOf(source);
       for (const consumer of consumers) {
         if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Error) {
-          consumer.consume(name, LogLevel.Error, messages);
+          consumer.consume(source, LogLevel.Error, messages);
         }
       }
     },

@@ -2,11 +2,27 @@ const TypeDoc = require('typedoc');
 
 const projects = new Map([
   [
+    'angular-logger',
+    {
+      config: 'packages/angular-logger/tsconfig.lib.json',
+      entryPoints: ['packages/angular-logger/src/index.ts'],
+      out: 'apps/documentation/src/api/angular-logger',
+    },
+  ],
+  [
     'angular-teleport',
     {
       config: 'packages/angular-teleport/tsconfig.lib.json',
       entryPoints: ['packages/angular-teleport/src/index.ts'],
       out: 'apps/documentation/src/api/angular-teleport',
+    },
+  ],
+  [
+    'logger',
+    {
+      config: 'packages/logger/tsconfig.lib.json',
+      entryPoints: ['packages/logger/src/index.ts'],
+      out: 'apps/documentation/src/api/logger',
     },
   ],
 ]);
@@ -42,6 +58,7 @@ async function generateDoc(project) {
     tsconfig: project.config,
     excludePrivate: true,
     excludeInternal: true,
+    sort: ['source-order'],
     // typedoc-plugin-markdown configs
     hideInPageTOC: true,
     // uncomment when developing docs to prevent
