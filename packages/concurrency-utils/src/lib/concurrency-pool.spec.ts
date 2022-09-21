@@ -21,12 +21,6 @@ describe('ConcurrencyPool', () => {
     it('given positive number then pool is created', () => {
       expect(() => concurrencyPoolOfSize(1)).not.toThrow();
     });
-
-    it('given positive number the pool should start idle', () => {
-      const pool = concurrencyPoolOfSize(1);
-
-      expect(pool.isIdle).toEqual(true);
-    });
   });
 
   describe('when acquiring single token', () => {
@@ -125,25 +119,6 @@ describe('ConcurrencyPool', () => {
       expect(acquired1).toEqual(true);
       expect(acquired2).toEqual(true);
       expect(acquired3).toEqual(true);
-    });
-
-    it('given pool with multiple tokens then the pool is idle only when all tokens are released', async () => {
-      const pool = concurrencyPoolOfSize(2);
-
-      const token1 = pool.acquireToken();
-      const token2 = pool.acquireToken();
-
-      expect(pool.isIdle).toEqual(false);
-
-      (await token1).release();
-      expect(pool.isIdle).toEqual(false);
-
-      const token3 = pool.acquireToken();
-      (await token2).release();
-      expect(pool.isIdle).toEqual(false);
-
-      (await token3).release();
-      expect(pool.isIdle).toEqual(true);
     });
   });
 
