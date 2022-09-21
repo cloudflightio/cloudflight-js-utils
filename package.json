@@ -5,11 +5,11 @@
     "build": "nx run-many --target=build --all --parallel",
     "test": "nx run-many --target=test --all --parallel",
     "lint": "nx run-many --target=lint --all --parallel",
-    "generate:docs": "nx run-many --target=generate-docs --all --parallel",
+    "generate:docs": "nx run-many --target=generate-docs --all --parallel --exclude apps-documentation && nx run apps-documentation:generate-docs",
     "postinstall": "husky install && ngcc --properties es2020 browser module main",
     "lint:format": "nx format:check --all",
     "format:staged": "nx format:write --uncommitted",
-    "docs:serve": "nx run --target=serve apps-documentation:serve"
+    "docs:serve": "nx run apps-documentation:serve"
   },
   "private": true,
   "author": "Cloudflight GmbH",
