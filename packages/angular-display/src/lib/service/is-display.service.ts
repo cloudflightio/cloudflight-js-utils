@@ -14,6 +14,11 @@ type IsDisplayQueries = Record<
   { query: MediaQueryList; listener: MediaQueryEventListener }
 >;
 
+/**
+ * Service for querying the display size programmatically.
+ *
+ * For the string values passed to the `isDisplay` methods please consult {@link DisplayModule}.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -21,6 +26,9 @@ export class IsDisplayService implements OnDestroy {
   private readonly isDisplayQueries: IsDisplayQueries = {};
   private readonly isDisplayState: IsDisplay = {};
 
+  /**
+   * @internal
+   */
   public constructor(
     @Inject(breakpointsInjectionToken)
     breakpoints: Breakpoints,
@@ -61,6 +69,9 @@ export class IsDisplayService implements OnDestroy {
       });
   }
 
+  /**
+   * @internal
+   */
   public ngOnDestroy(): void {
     Object.entries(this.isDisplayQueries).forEach(([, { query, listener }]) => {
       if (query.removeEventListener != null) {

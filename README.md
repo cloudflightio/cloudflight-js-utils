@@ -10,6 +10,7 @@ This repository contains multiple Stylelint plugins to enforce rules for clean c
 Please refer to the README's of each plugin to get started:
 
 - [@cloudflight/akita-read](packages/akita-read/README.md)
+- [@cloudflight/angular-display](packages/angular-display/README.md)
 - [@cloudflight/angular-logger](packages/angular-logger/README.md)
 - [@cloudflight/angular-teleport](packages/angular-teleport/README.md)
 - [@cloudflight/concurrency-utils](packages/concurrency-utils/README.md)
