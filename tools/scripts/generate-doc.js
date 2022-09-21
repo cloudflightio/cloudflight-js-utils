@@ -26,6 +26,14 @@ const projects = new Map([
     },
   ],
   [
+    'concurrency-utils',
+    {
+      config: 'packages/concurrency-utils/tsconfig.lib.json',
+      entryPoints: ['packages/concurrency-utils/src/index.ts'],
+      out: 'apps/documentation/src/api/concurrency-utils',
+    },
+  ],
+  [
     'logger',
     {
       config: 'packages/logger/tsconfig.lib.json',

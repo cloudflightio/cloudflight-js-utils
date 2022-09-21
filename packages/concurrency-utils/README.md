@@ -1,11 +1,13 @@
 # concurrency-utils
 
-This library was generated with [Nx](https://nx.dev).
+Primitives for scheduling work in javascript.
 
-## Running unit tests
+## Installation
 
-Run `nx test concurrency-utils` to execute the unit tests via [Jest](https://jestjs.io).
+Add the following in your `package.json`:
 
-## Running lint
-
-Run `nx lint concurrency-utils` to execute the lint via [ESLint](https://eslint.org/).
+```
+"dependencies": {
+  "@cloudflight/concurrency-utils": "0.1.0"
+}
+```

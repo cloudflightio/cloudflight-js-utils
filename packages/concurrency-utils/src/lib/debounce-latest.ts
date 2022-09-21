@@ -9,6 +9,17 @@ interface Item<T, Args extends unknown[]> {
   args: Args;
 }
 
+/**
+ * Debounce the given function. Only one instance of the function can ever run.
+ * The `pool` is required on purpose, because the only reason you would want
+ * to use this instead of a normal debounce function is to also acquire a
+ * concurrency token when it runs.
+ *
+ * The returned function returns the result of the last call to all previous
+ * invocations on purpose and might be called multiple times itself. If you only
+ * want the function to execute one on multiple invocations then take a look
+ * at {@link reusePending}.
+ */
 export function debounceLatestWithPool<Args extends unknown[], Return>(
   pool: ConcurrencyPool,
   fn: (...params: Args) => Promise<Return>

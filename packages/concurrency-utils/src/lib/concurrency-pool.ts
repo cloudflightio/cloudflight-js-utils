@@ -6,17 +6,34 @@ import {
 const concurrencyPoolTypeGuard = Symbol('concurrencyPoolTypeGuard');
 
 export interface ConcurrencyPool {
+  /**
+   * Type guard to prevent anyone outside from this library
+   * from creating concurrency pools. Type casting can still
+   * circumvent this mechanism but that is unsound in itself
+   * anyway.
+   */
   [concurrencyPoolTypeGuard]: never;
 
-  readonly isIdle: boolean;
-
+  /**
+   * Acquires a token from the pool. If there are no tokens left, i.e.
+   * pool is of size 3 and 3 token have been granted, then this method
+   * will wait until one is available again.
+   */
   acquireToken(): Promise<ConcurrencyToken>;
 }
 
 export interface ConcurrencyToken {
+  /**
+   * Gives back the token to pool it belongs to and is ready to be
+   * acquired again. Calling this method multiple times does nothing.
+   */
   release(): void;
 }
 
+/**
+ * Gets thrown when trying to create a {@link ConcurrencyPool} with anything
+ * smaller than 1. An empty or negative sized pool does not make any sense.
+ */
 export class InvalidConcurrencyPoolSizeException extends Error {
   public constructor(size: number) {
     super(
@@ -60,9 +77,6 @@ export function concurrencyPoolOfSize(maxCount: number): ConcurrencyPool {
 
   return {
     [concurrencyPoolTypeGuard]: undefined as never,
-    get isIdle(): boolean {
-      return queue.length === 0 && currentTaskCount === 0;
-    },
     async acquireToken(): Promise<ConcurrencyToken> {
       const handle = createDeferredPromise<ConcurrencyToken>();
 
@@ -75,6 +89,12 @@ export function concurrencyPoolOfSize(maxCount: number): ConcurrencyPool {
   };
 }
 
+/**
+ * Creates a sub concurrency pool which acquires tokens from the parent pool
+ * instead. The size of this sub pool is the max limit it can acquire.
+ *
+ * This is useful when resource distribution is needed.
+ */
 export function subConcurrencyPoolFrom(
   size: number,
   pool: ConcurrencyPool
@@ -83,9 +103,6 @@ export function subConcurrencyPoolFrom(
 
   return {
     [concurrencyPoolTypeGuard]: undefined as never,
-    get isIdle(): boolean {
-      return subPool.isIdle;
-    },
     async acquireToken(): Promise<ConcurrencyToken> {
       const subPoolToken = await subPool.acquireToken();
       const token = await pool.acquireToken();
