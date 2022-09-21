@@ -1,7 +1,13 @@
 # angular-display
 
-This library was generated with [Nx](https://nx.dev).
+Breakpoint based conditional component display for angular.
 
-## Running unit tests
+## Installation
 
-Run `nx test angular-display` to execute the unit tests.
+Add the following in your `package.json`:
+
+```
+"dependencies": {
+  "@cloudflight/angular-display": "0.1.0"
+}
+```

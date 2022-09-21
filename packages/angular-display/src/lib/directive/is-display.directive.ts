@@ -10,6 +10,45 @@ import {
 import { Subscription } from 'rxjs';
 import { IsDisplayService } from '../service/is-display.service';
 
+/**
+ * For the string values passed to this directive please consult {@link DisplayModule}.
+ *
+ * Example 1
+ * ```html
+ * <div *clfIsDisplay="'small'">
+ *   small
+ * </div>
+ * ```
+ *
+ * Example 2
+ * ```html
+ * <div *clfIsNotDisplay="'small'">
+ *   not small
+ * </div>
+ * ```
+ *
+ * Example 3
+ * ```html
+ * <div *clfIsDisplay="'small'; else implicitNotSmall">small</div>
+ *
+ * <ng-template #implicitNotSmall>
+ *   <div>not small</div>
+ * </ng-template>
+ * ```
+ *
+ * Example 4
+ * ```html
+ * <ng-container *clfIsDisplay="'small'; then explicitSmall; else explicitNotSmall"></ng-container>
+ *
+ * <ng-template #explicitSmall>
+ *   <div>small</div>
+ * </ng-template>
+ *
+ * <ng-template #explicitNotSmall>
+ *   <div>not small</div>
+ * </ng-template>
+ * ```
+ */
 @Directive({
   selector: '[clfIsDisplay] , [clfIsNotDisplay]',
 })
@@ -17,7 +56,7 @@ export class IsDisplayDirective implements OnDestroy {
   private isDisplaySub?: Subscription;
   private invert = false;
 
-  private context: IsDisplayContext = new IsDisplayContext();
+  private readonly context = new IsDisplayContext();
   private thenTemplateRef: TemplateRef<IsDisplayContext> | null = null;
   private elseTemplateRef: TemplateRef<IsDisplayContext> | null = null;
   private thenViewRef: EmbeddedViewRef<IsDisplayContext> | null = null;
@@ -28,6 +67,7 @@ export class IsDisplayDirective implements OnDestroy {
    *
    * The presence of this method is a signal to the Ivy template type-check compiler that the
    * `IsDisplay` structural directive renders its template with a specific context type.
+   * @internal
    */
   public static ngTemplateContextGuard(
     dir: IsDisplayDirective,
@@ -36,6 +76,9 @@ export class IsDisplayDirective implements OnDestroy {
     return true;
   }
 
+  /**
+   * @internal
+   */
   public constructor(
     private readonly _viewContainer: ViewContainerRef,
     templateRef: TemplateRef<IsDisplayContext>,
@@ -44,6 +87,9 @@ export class IsDisplayDirective implements OnDestroy {
     this.thenTemplateRef = templateRef;
   }
 
+  /**
+   * @internal
+   */
   public ngOnDestroy(): void {
     this.isDisplaySub?.unsubscribe();
   }
@@ -82,6 +128,7 @@ export class IsDisplayDirective implements OnDestroy {
 
   /**
    * A template to show if the display size is above or equal to the breakpoint.
+   * @internal
    */
   @Input()
   public set clfIsDisplayThen(
@@ -93,6 +140,9 @@ export class IsDisplayDirective implements OnDestroy {
     this._updateView();
   }
 
+  /**
+   * @internal
+   */
   @Input()
   public set clfIsNotDisplayThen(
     templateRef: TemplateRef<IsDisplayContext> | null
@@ -102,6 +152,7 @@ export class IsDisplayDirective implements OnDestroy {
 
   /**
    * A template to show if the display size is below the breakpoint.
+   * @internal
    */
   @Input()
   public set clfIsDisplayElse(
@@ -113,6 +164,9 @@ export class IsDisplayDirective implements OnDestroy {
     this._updateView();
   }
 
+  /**
+   * @internal
+   */
   @Input()
   public set clfIsNotDisplayElse(
     templateRef: TemplateRef<IsDisplayContext> | null
@@ -147,7 +201,7 @@ export class IsDisplayDirective implements OnDestroy {
   }
 }
 
-export class IsDisplayContext {
+class IsDisplayContext {
   public $implicit: boolean | undefined;
   public isDisplay: string | undefined;
 }

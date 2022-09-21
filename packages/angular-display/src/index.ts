@@ -1,4 +1,4 @@
-export * from './lib/display.module';
+export { DisplayModule } from './lib/display.module';
 
-export * from './lib/directive/is-display.directive';
-export * from './lib/service/is-display.service';
+export { IsDisplayDirective } from './lib/directive/is-display.directive';
+export { IsDisplayService } from './lib/service/is-display.service';

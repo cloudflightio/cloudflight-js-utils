@@ -2,6 +2,14 @@ const TypeDoc = require('typedoc');
 
 const projects = new Map([
   [
+    'angular-display',
+    {
+      config: 'packages/angular-display/tsconfig.lib.json',
+      entryPoints: ['packages/angular-display/src/index.ts'],
+      out: 'apps/documentation/src/api/angular-display',
+    },
+  ],
+  [
     'angular-logger',
     {
       config: 'packages/angular-logger/tsconfig.lib.json',
