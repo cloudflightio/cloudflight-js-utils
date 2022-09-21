@@ -39,7 +39,7 @@
     },
     "generate-docs": {
       "executor": "nx:run-commands",
-      "outputs": [],
+      "outputs": ["apps/documentation/src/api/angular-logger"],
       "options": {
         "command": "node tools/scripts/generate-doc.js --project angular-logger"
       }
