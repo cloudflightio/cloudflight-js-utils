@@ -4,12 +4,12 @@ Angular wrapper for `@cloudflight/logger`.
 
 ## Installation
 
-Add the following in your `package.json`:
-
-```
-"dependencies": {
-  "@cloudflight/anglar-logger": "0.1.0"
-}
+```shell
+npm install --save @cloudflight/angular-logger
+# or
+yarn add @cloudflight/angular-logger
+# or
+pnpm add @cloudflight/angular-logger
 ```
 
 ## Usage

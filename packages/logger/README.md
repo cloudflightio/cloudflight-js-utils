@@ -4,12 +4,12 @@ Extensible logging facility for the browser and Node.js.
 
 ## Installation
 
-Add the following in your `package.json`:
-
-```
-"dependencies": {
-  "@cloudflight/logger": "0.1.0"
-}
+```shell
+npm install --save @cloudflight/logger
+# or
+yarn add @cloudflight/logger
+# or
+pnpm add @cloudflight/logger
 ```
 
 ## Usage
