@@ -4,10 +4,10 @@ Breakpoint based conditional component display for angular.
 
 ## Installation
 
-Add the following in your `package.json`:
-
-```
-"dependencies": {
-  "@cloudflight/angular-display": "0.1.0"
-}
+```shell
+npm install --save @cloudflight/angular-display
+# or
+yarn add @cloudflight/angular-display
+# or
+pnpm add @cloudflight/angular-display
 ```
