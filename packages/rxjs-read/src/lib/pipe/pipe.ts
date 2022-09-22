@@ -1,15 +1,29 @@
 import { Tail, UnaryFn } from '../util/type-helpers';
 
+/**
+ * Type used as a successful result of a {@link PipeOperator} when calculating a synchronous value.
+ *
+ * @typeParam T type of the calculated value
+ */
 export interface PipeFnNext<T> {
   type: 'next';
   value: T;
 }
 
+/**
+ * Type used as a cancelling result of a {@link PipeOperator} when calculating a synchronous value.
+ * Returning this value cancels all further calculations in the pipeline.
+ *
+ * This cannot be returned by a {@link ContinuingPipeOperator}.
+ */
 export interface PipeFnCancel {
   type: 'cancel';
   value: undefined;
 }
 
+/**
+ * Base type returned by the synchronous calculation of a {@link PipeOperator}
+ */
 export type PipeFnResult<T> = PipeFnNext<T> | PipeFnCancel;
 
 export type ReturnTypeOfTail<

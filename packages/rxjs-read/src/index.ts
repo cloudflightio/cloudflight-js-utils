@@ -1,8 +1,17 @@
 export { Read } from './lib/read';
+export {
+  ContinuingReadProvider,
+  CancellingReadProvider,
+} from './lib/read-providers';
 export { readFrom } from './lib/read-from';
 export { readOf } from './lib/read-of';
 
-export { PipeFnNext, PipeFnCancel } from './lib/pipe/pipe';
+export { PipeFnNext, PipeFnCancel, PipeFnResult } from './lib/pipe/pipe';
+export {
+  ContinuingPipeOperator,
+  CancellingPipeOperator,
+  PipeOperator,
+} from './lib/util/pipe.operator';
 
 export { combineLatest } from './lib/operators/combine-latest';
 export { distinctUntilChanged } from './lib/operators/distinct-until-changed.operator';

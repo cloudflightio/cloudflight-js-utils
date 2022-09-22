@@ -1,0 +1,60 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nx-plugin-typedoc/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nx-plugin-typedoc",
+        "main": "packages/nx-plugin-typedoc/src/index.ts",
+        "tsConfig": "packages/nx-plugin-typedoc/tsconfig.lib.json",
+        "assets": [
+          "packages/nx-plugin-typedoc/*.md",
+          {
+            "input": "./packages/nx-plugin-typedoc/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-plugin-typedoc/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-plugin-typedoc",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-plugin-typedoc",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/nx-plugin-typedoc/**/*.ts",
+          "packages/nx-plugin-typedoc/generators.json",
+          "packages/nx-plugin-typedoc/executors.json",
+          "packages/nx-plugin-typedoc/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nx-plugin-typedoc"],
+      "options": {
+        "jestConfig": "packages/nx-plugin-typedoc/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

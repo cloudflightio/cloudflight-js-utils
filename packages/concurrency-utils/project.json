@@ -44,10 +44,13 @@
       }
     },
     "generate-docs": {
-      "executor": "nx:run-commands",
-      "outputs": ["apps/documentation/src/api/concurrency-utils"],
+      "executor": "@cloudflight/nx-plugin-typedoc:build",
+      "outputs": ["{options.output}"],
+      "inputs": ["default"],
       "options": {
-        "command": "node tools/scripts/generate-doc.js --project concurrency-utils"
+        "output": "apps/documentation/src/api/concurrency-utils",
+        "entryPoint": "packages/concurrency-utils/src/index.ts",
+        "tsConfig": "packages/concurrency-utils/tsconfig.lib.json"
       }
     }
   },

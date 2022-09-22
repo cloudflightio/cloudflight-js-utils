@@ -49,10 +49,13 @@
       }
     },
     "generate-docs": {
-      "executor": "nx:run-commands",
-      "outputs": ["apps/documentation/src/api/angular-display"],
+      "executor": "@cloudflight/nx-plugin-typedoc:build",
+      "outputs": ["{options.output}"],
+      "inputs": ["default"],
       "options": {
-        "command": "node tools/scripts/generate-doc.js --project angular-display"
+        "output": "apps/documentation/src/api/angular-display",
+        "entryPoint": "packages/angular-display/src/index.ts",
+        "tsConfig": "packages/angular-display/tsconfig.lib.json"
       }
     }
   },

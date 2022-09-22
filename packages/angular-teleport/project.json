@@ -49,10 +49,13 @@
       }
     },
     "generate-docs": {
-      "executor": "nx:run-commands",
-      "outputs": ["apps/documentation/src/api/angular-teleport"],
+      "executor": "@cloudflight/nx-plugin-typedoc:build",
+      "outputs": ["{options.output}"],
+      "inputs": ["default"],
       "options": {
-        "command": "node tools/scripts/generate-doc.js --project angular-teleport"
+        "output": "apps/documentation/src/api/angular-teleport",
+        "entryPoint": "packages/angular-teleport/src/index.ts",
+        "tsConfig": "packages/angular-teleport/tsconfig.lib.json"
       }
     }
   },
