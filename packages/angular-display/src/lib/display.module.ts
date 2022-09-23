@@ -18,6 +18,16 @@ export class DisplayModule {
    * ```
    *
    * These names can then be used for {@link IsDisplayDirective} and {@link IsDisplayService}.
+   *
+   * Additionally, these values will also be available as css custom properties.
+   * Which is equivalent as having the following defined:
+   * ```css
+   * :root {
+   *   --breakpoint-small: 480px;
+   *   --breakpoint-medium: 800px;
+   *   --breakpoint-big: 1024px;
+   * }
+   * ```
    */
 
   public static forRoot(
