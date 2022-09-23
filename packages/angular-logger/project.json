@@ -20,6 +20,18 @@
       "defaultConfiguration": "production",
       "dependsOn": ["^build"]
     },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs angular-logger"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular-logger"],

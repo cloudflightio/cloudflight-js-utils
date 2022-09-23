@@ -1,11 +1,21 @@
 {
   "name": "@cloudflight/angular-teleport",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^14.1.0",
-    "@angular/core": "^14.1.0"
+  "version": "0.1.0",
+  "keywords": [
+    "angular-teleport",
+    "teleport"
+  ],
+  "homepage": "https://github.com/cloudflightio/cloudflight-js-utils",
+  "bugs": {
+    "url": "https://github.com/cloudflightio/cloudflight-js-utils/issues"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
+  "author": "Cloudflight GmbH",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
   }
 }

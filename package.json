@@ -5,6 +5,7 @@
     "build": "nx run-many --target=build --all --parallel",
     "test": "nx run-many --target=test --all --parallel",
     "lint": "nx run-many --target=lint --all --parallel",
+    "publish-workspaces": "node ./tools/scripts/prepare.js && nx run-many --target=publish --all --parallel --skip-nx-cache",
     "generate:docs": "nx run-many --target=generate-docs --all --parallel --exclude apps-documentation && nx run apps-documentation:generate-docs",
     "postinstall": "husky install && ngcc --properties es2020 browser module main",
     "lint:format": "nx format:check --all",
@@ -26,7 +27,7 @@
     "yarn": "1.22.19"
   },
   "workspaces": [
-    "packages/**",
+    "packages/*",
     "apps/*"
   ],
   "dependencies": {
