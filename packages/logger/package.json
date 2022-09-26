@@ -1,4 +1,16 @@
 {
   "name": "@cloudflight/logger",
-  "version": "0.0.1"
+  "version": "0.1.0",
+  "keywords": [
+    "logger"
+  ],
+  "homepage": "https://github.com/cloudflightio/cloudflight-js-utils",
+  "bugs": {
+    "url": "https://github.com/cloudflightio/cloudflight-js-utils/issues"
+  },
+  "author": "Cloudflight GmbH",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }
