@@ -9,6 +9,19 @@ import { Observable } from 'rxjs';
 
 type EntityProjection<EntityType, R = unknown> = (entity?: EntityType) => R;
 
+/**
+ * Create a new {@link Read} by selecting an entity from a {@link @datorama/akita!QueryEntity | QueryEntity} using its id:
+ *
+ * ```ts
+ * const entity$: Read<EntityData | undefined> = readEntityFrom(queryEntity, entityId);
+ * ```
+ *
+ * @group Selectors
+ * @typeParam S entity state used by the queryEntity
+ * @param queryEntity QueryEntity to select from
+ * @param id entity id to select
+ * @return Returns a new {@link Read} that emits the selected entity or undefined if the entity does not exist
+ */
 export function readEntityFrom<
   S extends EntityState,
   EntityType = getEntityType<S>,
@@ -17,6 +30,23 @@ export function readEntityFrom<
   queryEntity: QueryEntity<S, EntityType, IDType>,
   id: IDType
 ): Read<EntityType | undefined>;
+
+/**
+ * Create a new {@link Read} by selecting an entity from a {@link @datorama/akita!QueryEntity | QueryEntity} using its id
+ * and extracting the value using a given key:
+ *
+ * ```ts
+ * const name$: Read<string | undefined> = readEntityFrom(queryEntity, entityId, 'name');
+ * ```
+ *
+ * @group Selectors
+ * @typeParam S entity state used by the queryEntity
+ * @typeParam K key of the entity
+ * @param queryEntity QueryEntity to select from
+ * @param id entity id to select
+ * @param key key to extract from the entity
+ * @return Returns a new {@link Read} that emits extracted value of the selected entity or undefined if the entity does not exist
+ */
 export function readEntityFrom<
   S extends EntityState,
   K extends keyof EntityType,
@@ -27,6 +57,23 @@ export function readEntityFrom<
   id: IDType,
   key: K
 ): Read<EntityType[K] | undefined>;
+
+/**
+ * Create a new {@link Read} by selecting an entity from a {@link @datorama/akita!QueryEntity | QueryEntity} using its id
+ * and extracting the value using a given projection:
+ *
+ * ```ts
+ * const name$: Read<string | undefined> = readEntityFrom(queryEntity, entityId, entity => entity.name);
+ * ```
+ *
+ * @group Selectors
+ * @typeParam S entity state used by the queryEntity
+ * @typeParam R returned type of the projection
+ * @param queryEntity QueryEntity to select from
+ * @param id entity id to select
+ * @param projection projection to pick from the entity
+ * @return Returns a new {@link Read} that emits the result of the projection or `undefined` if the entity does not exist
+ */
 export function readEntityFrom<
   S extends EntityState,
   R,
@@ -35,8 +82,11 @@ export function readEntityFrom<
 >(
   queryEntity: QueryEntity<S, EntityType, IDType>,
   id: IDType,
-  project: (entity?: EntityType) => R
+  projection: (entity?: EntityType) => R
 ): Read<R | undefined>;
+/**
+ * @internal
+ */
 export function readEntityFrom<
   S extends EntityState,
   K extends keyof EntityType,
@@ -66,9 +116,18 @@ export function readEntityFrom<
         return queryEntity.selectEntity(id, keyOrProject);
       },
       result(): PipeFnNext<R | undefined> {
+        const entity = queryEntity.getEntity(id);
+        let value = undefined;
+        if (entity != null) {
+          // the types of Akita state that the projection should handle if the entity does not exist, but in the implementation
+          // (https://github.com/salesforce/akita/blob/d879000c4586319d3fe62761af3abea7a48b2fb7/packages/akita/src/lib/queryEntity.ts#L155)
+          // the projection is never called if it does not. So we also don't call the projection.
+          value = keyOrProject(entity);
+        }
+
         return {
           type: 'next',
-          value: keyOrProject(queryEntity.getEntity(id)),
+          value,
         };
       },
     });

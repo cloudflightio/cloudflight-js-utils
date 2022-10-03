@@ -50,10 +50,13 @@
       }
     },
     "generate-docs": {
-      "executor": "nx:run-commands",
-      "outputs": ["apps/documentation/src/api/angular-logger"],
+      "executor": "@cloudflight/nx-plugin-typedoc:build",
+      "outputs": ["{options.output}"],
+      "inputs": ["default"],
       "options": {
-        "command": "node tools/scripts/generate-doc.js --project angular-logger"
+        "output": "apps/documentation/src/api/angular-logger",
+        "entryPoint": "packages/angular-logger/src/index.ts",
+        "tsConfig": "packages/angular-logger/tsconfig.lib.json"
       }
     }
   },

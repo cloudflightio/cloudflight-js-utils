@@ -42,6 +42,32 @@
         "jestConfig": "packages/rxjs-read/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "generate-docs": {
+      "executor": "@cloudflight/nx-plugin-typedoc:build",
+      "outputs": ["{options.output}"],
+      "inputs": ["default"],
+      "options": {
+        "output": "apps/documentation/src/api/rxjs-read",
+        "entryPoint": "packages/rxjs-read/src/index.ts",
+        "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
+        "externalSymbolLinkMappings": {
+          "rxjs": {
+            "Observable": "https://rxjs.dev/api/index/class/Observable",
+            "BehaviorSubject": "https://rxjs.dev/api/index/class/BehaviorSubject",
+            "of": "https://rxjs.dev/api/index/function/of",
+            "combineLatest": "https://rxjs.dev/api/index/function/combineLatest",
+            "distinctUntilChanged": "https://rxjs.dev/api/operators/distinctUntilChanged",
+            "filter": "https://rxjs.dev/api/index/function/filter",
+            "map": "https://rxjs.dev/api/index/function/map",
+            "shareReplay": "https://rxjs.dev/api/index/function/shareReplay",
+            "skip": "https://rxjs.dev/api/index/function/skip",
+            "switchMap": "https://rxjs.dev/api/index/function/switchMap",
+            "takeUntil": "https://rxjs.dev/api/index/function/takeUntil",
+            "withLatestFrom": "https://rxjs.dev/api/index/function/withLatestFrom"
+          }
+        }
+      }
     }
   },
   "tags": ["js"]

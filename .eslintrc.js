@@ -49,5 +49,10 @@ module.exports = {
       extends: ['plugin:@nrwl/nx/javascript'],
       rules: {},
     },
+    {
+      files: '*.json',
+      parser: 'jsonc-eslint-parser',
+      rules: {},
+    },
   ],
 };

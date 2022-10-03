@@ -27,6 +27,9 @@
         "packages/concurrency-utils/src/index.ts"
       ],
       "@cloudflight/logger": ["packages/logger/src/index.ts"],
+      "@cloudflight/nx-plugin-typedoc": [
+        "packages/nx-plugin-typedoc/src/index.ts"
+      ],
       "@cloudflight/rxjs-read": ["packages/rxjs-read/src/index.ts"]
     }
   },

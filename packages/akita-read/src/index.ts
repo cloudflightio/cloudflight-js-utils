@@ -5,6 +5,14 @@ export { readManyFrom } from './lib/read-many-from';
 
 export {
   Read,
+  ContinuingReadProvider,
+  CancellingReadProvider,
+  ContinuingPipeOperator,
+  CancellingPipeOperator,
+  PipeOperator,
+  PipeFnNext,
+  PipeFnCancel,
+  PipeFnResult,
   readOf,
   combineLatest,
   distinctUntilChanged,

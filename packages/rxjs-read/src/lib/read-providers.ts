@@ -1,12 +1,22 @@
 import { Observable } from 'rxjs';
 import { PipeFnNext, PipeFnResult } from './pipe/pipe';
 
+/**
+ * ReadProvider that will never cancel a synchronous calculation.
+ *
+ * @typeParam T type of the value
+ */
 export interface ContinuingReadProvider<T> {
   observable(): Observable<T>;
 
   result(): PipeFnNext<T>;
 }
 
+/**
+ * ReadProvider that might cancel a synchronous calculation.
+ *
+ * @typeParam T type of the value
+ */
 export interface CancellingReadProvider<T> {
   observable(): Observable<T>;
 

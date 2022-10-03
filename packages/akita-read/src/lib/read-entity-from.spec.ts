@@ -3,6 +3,7 @@ import { EntityState, EntityStore, QueryEntity } from '@datorama/akita';
 import { from } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { readEntityFrom } from './read-entity-from';
+import MockedFn = jest.MockedFn;
 
 const testScheduler = new TestScheduler((actual, expected) => {
   expect(actual).toEqual(expected);
@@ -87,13 +88,14 @@ describe('readEntityFrom', () => {
 
       describe('when creating a new Read for the a entity using its id and a projection', () => {
         let read: Read<number | undefined>;
+        let projection: MockedFn<(entity?: EntityData) => number>;
 
         beforeEach(() => {
-          read = readEntityFrom(
-            query,
-            initialEntity.id,
-            (entity?: EntityData) => entity?.count
-          );
+          projection = jest
+            .fn()
+            .mockImplementation((entity?: EntityData) => entity?.count);
+
+          read = readEntityFrom(query, initialEntity.id, projection);
         });
 
         it('should be created', () => {
@@ -101,17 +103,19 @@ describe('readEntityFrom', () => {
         });
 
         describe('and when subscribing', () => {
-          it('should observe undefined', () => {
+          it('should observe undefined and the projection is never called', () => {
             testScheduler.run(({ expectObservable, cold }) => {
               const expected = cold('a', { a: undefined });
               expectObservable(from(read)).toEqual(expected);
             });
+            expect(projection).not.toBeCalled();
           });
         });
 
         describe('and when synchronously accessing', () => {
-          it('should return undefined', () => {
+          it('should return undefined and the projection is never called', () => {
             expect(read.value).not.toBeDefined();
+            expect(projection).not.toBeCalled();
           });
         });
       });

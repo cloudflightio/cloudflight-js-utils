@@ -2,11 +2,23 @@ import { Observable } from 'rxjs';
 import { PipeFnNext, PipeFnResult } from '../pipe/pipe';
 import { And, UnaryFn } from './type-helpers';
 
+/**
+ * PipeOperator that will never cancel a synchronous calculation.
+ *
+ * @typeParam I type of the input value passed to the operator
+ * @typeParam R type of the return value returned from the operator
+ */
 export interface ContinuingPipeOperator<I, R> {
   observableOperator: UnaryFn<Observable<I>, Observable<R>>;
   valueOperator: UnaryFn<I, PipeFnNext<R>>;
 }
 
+/**
+ * PipeOperator that might cancel a synchronous calculation.
+ *
+ * @typeParam I type of the input value passed to the operator
+ * @typeParam R type of the return value returned from the operator
+ */
 export interface CancellingPipeOperator<I, R> {
   observableOperator: UnaryFn<Observable<I>, Observable<R>>;
   valueOperator: UnaryFn<I, PipeFnResult<R>>;
@@ -20,6 +32,9 @@ export type MaybeCancellingPipeOperator<
   ? CancellingPipeOperator<I, R>
   : ContinuingPipeOperator<I, R>;
 
+/**
+ * Base type returned by a operator function used to pipe a {@link Read}
+ */
 export type PipeOperator<I, R> =
   | ContinuingPipeOperator<I, R>
   | CancellingPipeOperator<I, R>;
