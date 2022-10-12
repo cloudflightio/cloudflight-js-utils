@@ -1,5 +1,7 @@
 # logger
 
+[![@cloudflight/logger](https://img.shields.io/npm/v/@cloudflight/logger?label=@cloudflight/logger)](https://www.npmjs.com/package/@cloudflight/logger)
+
 Extensible logging facility for the browser and Node.js.
 
 ## Installation

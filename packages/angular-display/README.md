@@ -1,5 +1,7 @@
 # angular-display
 
+[![@cloudflight/angular-display](https://img.shields.io/npm/v/@cloudflight/angular-display?label=@cloudflight/angular-display)](https://www.npmjs.com/package/@cloudflight/angular-display)
+
 Breakpoint based conditional component display for angular.
 
 ## Installation
