@@ -1,5 +1,7 @@
 # Akita-Read
 
+[![@cloudflight/akita-read](https://img.shields.io/npm/v/@cloudflight/akita-read?label=@cloudflight/akita-read)](https://www.npmjs.com/package/@cloudflight/akita-read)
+
 This library is a small wrapper to make working with the [Akita-Store](https://opensource.salesforce.com/akita/) more convenient.
 
 ## Installation

@@ -1,5 +1,7 @@
 # RxJS-Read
 
+[![@cloudflight/rxjs-read](https://img.shields.io/npm/v/@cloudflight/rxjs-read?label=@cloudflight/rxjs-read)](https://www.npmjs.com/package/@cloudflight/rxjs-read)
+
 This library provides the basic functionality for [`@cloudflight/akita-read`](../akita-read/README.md).
 
 **:warning: This library is not meant to be used directly, it should only be used in combination with `@cloudflight/akita-read`. Read about why [here](../akita-read/README.md#Usage).:warning:**

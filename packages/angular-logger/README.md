@@ -1,5 +1,7 @@
 # angular-logger
 
+[![@cloudflight/angular-logger](https://img.shields.io/npm/v/@cloudflight/angular-logger?label=@cloudflight/angular-logger)](https://www.npmjs.com/package/@cloudflight/angular-logger)
+
 Angular wrapper for `@cloudflight/logger`.
 
 ## Installation
