@@ -4,7 +4,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "project": "packages/akita-read/package.json",
@@ -19,7 +19,7 @@
       }
     },
     "publish": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "node tools/scripts/publish.mjs akita-read"
       },
@@ -39,7 +39,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/akita-read"],
+      "outputs": ["{workspaceRoot}/coverage/packages/akita-read"],
       "options": {
         "jestConfig": "packages/akita-read/jest.config.ts",
         "passWithNoTests": true

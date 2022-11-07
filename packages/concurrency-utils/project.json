@@ -4,7 +4,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "project": "packages/concurrency-utils/package.json",
@@ -17,7 +17,7 @@
       }
     },
     "publish": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "node tools/scripts/publish.mjs concurrency-utils"
       },
@@ -37,7 +37,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/concurrency-utils"],
+      "outputs": ["{workspaceRoot}/coverage/packages/concurrency-utils"],
       "options": {
         "jestConfig": "packages/concurrency-utils/jest.config.ts",
         "passWithNoTests": true

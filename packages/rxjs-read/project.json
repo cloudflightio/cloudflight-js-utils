@@ -4,7 +4,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "project": "packages/rxjs-read/package.json",
@@ -17,7 +17,7 @@
       }
     },
     "publish": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "node tools/scripts/publish.mjs rxjs-read"
       },
@@ -37,7 +37,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/rxjs-read"],
+      "outputs": ["{workspaceRoot}/coverage/packages/rxjs-read"],
       "options": {
         "jestConfig": "packages/rxjs-read/jest.config.ts",
         "passWithNoTests": true
