@@ -5,7 +5,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/angular-teleport"],
+      "outputs": ["{workspaceRoot}/dist/packages/angular-teleport"],
       "options": {
         "project": "packages/angular-teleport/ng-package.json"
       },
@@ -20,7 +20,7 @@
       "defaultConfiguration": "production"
     },
     "publish": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "node tools/scripts/publish.mjs angular-teleport"
       },
@@ -33,7 +33,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/angular-teleport"],
+      "outputs": ["{workspaceRoot}/coverage/packages/angular-teleport"],
       "options": {
         "jestConfig": "packages/angular-teleport/jest.config.ts",
         "passWithNoTests": true

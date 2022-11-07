@@ -40,9 +40,13 @@ module.exports = {
       extends: [
         'plugin:@nrwl/nx/typescript',
         'plugin:@cloudflight/typescript/recommended',
-        'plugin:@cloudflight/angular/recommended',
+        'plugin:@cloudflight/angular/recommended-typescript',
       ],
       rules: {},
+    },
+    {
+      files: ['*.html'],
+      extends: ['plugin:@cloudflight/angular/recommended-html'],
     },
     {
       files: ['*.js', '*.jsx'],
