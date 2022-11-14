@@ -53,7 +53,7 @@
     "@cloudflight/eslint-plugin-angular": "0.5.0",
     "@cloudflight/eslint-plugin-typescript": "0.5.0",
     "@nrwl/angular": "15.0.10",
-    "@nrwl/cli": "15.0.10",
+    "@nrwl/cli": "15.0.13",
     "@nrwl/devkit": "15.0.10",
     "@nrwl/eslint-plugin-nx": "15.0.10",
     "@nrwl/jest": "15.0.10",
