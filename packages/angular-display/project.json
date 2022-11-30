@@ -5,7 +5,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["{workspaceRoot}/dist/packages/angular-display"],
+      "outputs": ["dist/packages/angular-display"],
       "options": {
         "project": "packages/angular-display/ng-package.json"
       },

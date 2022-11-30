@@ -36,7 +36,7 @@ const outputPath =
 
 invariant(
   outputPath,
-  `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`
+  `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`
 );
 
 process.chdir(outputPath);
