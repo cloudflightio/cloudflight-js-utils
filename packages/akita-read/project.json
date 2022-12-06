@@ -76,5 +76,6 @@
       }
     }
   },
-  "tags": ["js"]
+  "tags": ["js"],
+  "name": "akita-read"
 }

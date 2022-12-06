@@ -70,5 +70,6 @@
       }
     }
   },
-  "tags": ["js"]
+  "tags": ["js"],
+  "name": "rxjs-read"
 }
