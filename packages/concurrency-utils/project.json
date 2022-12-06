@@ -54,5 +54,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "name": "concurrency-utils"
 }

@@ -60,5 +60,6 @@
       }
     }
   },
-  "tags": ["angular"]
+  "tags": ["angular"],
+  "name": "angular-logger"
 }

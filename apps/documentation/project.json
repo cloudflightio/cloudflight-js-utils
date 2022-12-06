@@ -36,5 +36,6 @@
         "lintFilePatterns": ["apps/documentation/**/*.ts"]
       }
     }
-  }
+  },
+  "name": "apps-documentation"
 }

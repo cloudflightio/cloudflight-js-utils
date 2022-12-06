@@ -54,5 +54,6 @@
       }
     }
   },
-  "tags": ["js"]
+  "tags": ["js"],
+  "name": "logger"
 }
