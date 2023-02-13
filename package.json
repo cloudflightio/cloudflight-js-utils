@@ -65,7 +65,7 @@
     "@rushstack/eslint-patch": "1.2.0",
     "@swc-node/register": "1.5.5",
     "@swc/cli": "0.1.61",
-    "@swc/core": "1.3.32",
+    "@swc/core": "1.3.35",
     "@types/jest": "29.4.0",
     "@types/node": "18.11.18",
     "@vuepress/bundler-webpack": "2.0.0-beta.60",
