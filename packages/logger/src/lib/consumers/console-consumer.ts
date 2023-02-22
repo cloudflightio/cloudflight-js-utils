@@ -1,6 +1,7 @@
 import { LogConsumer } from '../model/log-consumer';
 import { LogLevel } from '../model/log-level';
 
+const nextHueStep = 31;
 const nameToColor = new Map<string, number>();
 let hue = 0;
 
@@ -48,7 +49,7 @@ function getColorFor(name: string): number {
   const color = nameToColor.get(name);
 
   if (color == null) {
-    hue += 31;
+    hue += nextHueStep;
     nameToColor.set(name, hue);
 
     return hue;

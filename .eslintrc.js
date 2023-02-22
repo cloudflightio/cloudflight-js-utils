@@ -2,6 +2,7 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  extends: ['prettier'],
   ignorePatterns: ['**/*'],
   settings: {
     'import/resolver': {
@@ -57,6 +58,12 @@ module.exports = {
       files: '*.json',
       parser: 'jsonc-eslint-parser',
       rules: {},
+    },
+    {
+      files: ['*.spec.ts'],
+      rules: {
+        'no-magic-numbers': 'off',
+      },
     },
   ],
 };

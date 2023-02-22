@@ -50,6 +50,7 @@ export function concurrencyPoolOfSize(maxCount: number): ConcurrencyPool {
   const queue: DeferredPromiseHandle<ConcurrencyToken>[] = [];
   let currentTaskCount = 0;
 
+  // eslint-disable-next-line func-style
   const acquireNextIfPossible = (): void => {
     if (currentTaskCount >= maxCount || queue.length === 0) {
       return;
