@@ -106,6 +106,8 @@ function createMediaQuery(
     query = `${query} and `;
   }
   if (maxWidthExclusive != null) {
+    // a very small number to make exclusive work
+    // eslint-disable-next-line no-magic-numbers
     const maxWidth = maxWidthExclusive - 0.001;
     query = `${query}(max-width: ${maxWidth}px)`;
   }

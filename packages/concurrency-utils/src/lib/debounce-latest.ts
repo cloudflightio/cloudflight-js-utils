@@ -27,35 +27,6 @@ export function debounceLatestWithPool<Args extends unknown[], Return>(
   const subPool = subConcurrencyPoolFrom(1, pool);
   const buffer: Item<Return, Args>[] = [];
 
-  const doStuff = async (items: Item<Return, Args>[]): Promise<Return> => {
-    const itemToUse = items[items.length - 1];
-
-    if (itemToUse == null) {
-      throw new Error('itemToUse is empty but should never happen');
-    }
-
-    try {
-      const value = await fn(...itemToUse.args);
-
-      items.forEach((item) => {
-        // we don't want to resolve the current item because its handle will not be returned
-        if (item !== itemToUse) {
-          item.handle.resolve(value);
-        }
-      });
-
-      return value;
-    } catch (e: unknown) {
-      items.forEach((item) => {
-        // we don't want to reject the current item because its handle will not be returned
-        if (item !== itemToUse) {
-          item.handle.reject(e);
-        }
-      });
-      throw e;
-    }
-  };
-
   return async (...args: Args) => {
     const selfData: Item<Return, Args> = {
       handle: createDeferredPromise<Return>(),
@@ -75,9 +46,41 @@ export function debounceLatestWithPool<Args extends unknown[], Return>(
     const toX = buffer.splice(0);
 
     try {
-      return await doStuff(toX);
+      return await doStuff(fn, toX);
     } finally {
       token.release();
     }
   };
+}
+
+async function doStuff<Args extends unknown[], Return>(
+  fn: (...params: Args) => Promise<Return>,
+  items: Item<Return, Args>[]
+): Promise<Return> {
+  const itemToUse = items[items.length - 1];
+
+  if (itemToUse == null) {
+    throw new Error('itemToUse is empty but should never happen');
+  }
+
+  try {
+    const value = await fn(...itemToUse.args);
+
+    items.forEach((item) => {
+      // we don't want to resolve the current item because its handle will not be returned
+      if (item !== itemToUse) {
+        item.handle.resolve(value);
+      }
+    });
+
+    return value;
+  } catch (e: unknown) {
+    items.forEach((item) => {
+      // we don't want to reject the current item because its handle will not be returned
+      if (item !== itemToUse) {
+        item.handle.reject(e);
+      }
+    });
+    throw e;
+  }
 }
