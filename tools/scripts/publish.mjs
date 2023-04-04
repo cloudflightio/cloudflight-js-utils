@@ -7,7 +7,7 @@
  * You might need to authenticate with NPM before running this script.
  */
 
-import { readCachedProjectGraph } from '@nrwl/devkit';
+import devkit from '@nrwl/devkit';
 import { execSync } from 'child_process';
 import chalk from 'chalk';
 
@@ -22,7 +22,7 @@ function invariant(condition, message) {
 // Default "tag" to "next" so we won't publish the "latest" tag by accident.
 const [, , name] = process.argv;
 
-const graph = readCachedProjectGraph();
+const graph = devkit.readCachedProjectGraph();
 const project = graph.nodes[name];
 
 invariant(
