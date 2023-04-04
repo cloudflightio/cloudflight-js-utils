@@ -15,7 +15,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@datorama/akita": ">=7.1.1 <8.0.0",
+    "@datorama/akita": ">=8.0.0 <9.0.0",
     "rxjs": ">=7.0.0 <8.0.0"
   }
 }
