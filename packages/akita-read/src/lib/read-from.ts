@@ -1,8 +1,8 @@
 import { Query } from '@datorama/akita';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
-  Read,
   PipeFnNext,
+  Read,
   readFrom as rxjsReadFrom,
 } from '@cloudflight/rxjs-read';
 
@@ -134,10 +134,10 @@ export function readFrom<T, K extends keyof T>(
           type: 'next',
           get value(): Pick<T, K> {
             const value = query.getValue();
-            return projection.reduce(
+            return projection.reduce<Partial<Pick<T, K>>>(
               (selection, key) =>
                 Object.assign(selection, { [key]: value[key] }),
-              {} as Partial<Pick<T, K>>
+              {}
             ) as Pick<T, K>;
           },
         };
