@@ -1,55 +1,53 @@
-import { map } from './map.operator';
-import { TestScheduler } from 'rxjs/testing';
-import { Read } from '../read';
-import { BehaviorSubject, from } from 'rxjs';
-import { shareReplay } from './share-replay.operator';
+import {map} from './map.operator';
+import {TestScheduler} from 'rxjs/testing';
+import {Read} from '../read';
+import {BehaviorSubject, from} from 'rxjs';
+import {shareReplay} from './share-replay.operator';
 import MockedFn = jest.MockedFn;
-import { readFrom } from '../read-from';
+import {readFrom} from '../read-from';
 
 const testScheduler = new TestScheduler((actual, expected) => {
-  expect(actual).toEqual(expected);
+    expect(actual).toEqual(expected);
 });
 
 describe('shareReplay-operator', () => {
-  let behavior: BehaviorSubject<string>;
-
-  beforeEach(() => {
-    behavior = new BehaviorSubject<string>('initial');
-  });
-
-  describe('given a mapped Read', () => {
-    let read: Read<number>;
-    const mapFn: MockedFn<(v: string) => number> = jest.fn();
+    let behavior$: BehaviorSubject<string>;
 
     beforeEach(() => {
-      jest.resetAllMocks();
-
-      mapFn.mockImplementation((v: string) => v.length);
-
-      read = readFrom(behavior).pipe(map(mapFn));
+        behavior$ = new BehaviorSubject<string>('initial');
     });
 
-    describe('when pipping with the shareReplay operator', () => {
-      let pipped: Read<number>;
+    describe('given a mapped Read', () => {
+        let read: Read<number>;
+        const mapFn: MockedFn<(v: string) => number> = jest.fn();
 
-      beforeEach(() => {
-        pipped = read.pipe(
-          shareReplay<number>({ bufferSize: 1, refCount: true })
-        );
-      });
+        beforeEach(() => {
+            jest.resetAllMocks();
 
-      it('when subscribing twice to the read should call mapFn only once', () => {
-        testScheduler.run(({ expectObservable, cold }) => {
-          const expected = cold('a', { a: 7 });
-          expectObservable(from(pipped)).toEqual(expected);
-          expectObservable(from(pipped)).toEqual(expected);
+            mapFn.mockImplementation((v: string) => v.length);
+
+            read = readFrom(behavior$).pipe(map(mapFn));
         });
-        expect(mapFn).toBeCalledTimes(1);
-      });
 
-      it('when getting the value sync it should not have any effect', () => {
-        expect(pipped.value).toEqual(7);
-      });
+        describe('when pipping with the shareReplay operator', () => {
+            let pipped: Read<number>;
+
+            beforeEach(() => {
+                pipped = read.pipe(shareReplay<number>({bufferSize: 1, refCount: true}));
+            });
+
+            it('when subscribing twice to the read should call mapFn only once', () => {
+                testScheduler.run(({expectObservable, cold}) => {
+                    const expected$ = cold('a', {a: 7});
+                    expectObservable(from(pipped)).toEqual(expected$);
+                    expectObservable(from(pipped)).toEqual(expected$);
+                });
+                expect(mapFn).toBeCalledTimes(1);
+            });
+
+            it('when getting the value sync it should not have any effect', () => {
+                expect(pipped.value).toEqual(7);
+            });
+        });
     });
-  });
 });
