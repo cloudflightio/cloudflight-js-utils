@@ -1,7 +1,7 @@
-import { MaybeCancellingPipeOperator } from '../util/pipe.operator';
-import { Observable } from 'rxjs';
-import { takeUntil as RxTakeUntil } from 'rxjs/operators';
-import { identityValueOperator } from './identity-value-operator.util';
+import {MaybeCancellingPipeOperator} from '../util/pipe.operator';
+import {Observable} from 'rxjs';
+import {takeUntil as RxTakeUntil} from 'rxjs/operators';
+import {identityValueOperator} from './identity-value-operator.util';
 
 /**
  * Emit values until the passed {@link rxjs!Observable | Observable} emits.
@@ -24,13 +24,11 @@ import { identityValueOperator } from './identity-value-operator.util';
  *
  * @group Operators
  * @typeParam T type of the value
- * @param until Observable to cancel emissions
+ * @param until$ Observable to cancel emissions
  */
-export function takeUntil<T>(
-  until: Observable<unknown>
-): MaybeCancellingPipeOperator<T, T> {
-  return {
-    observableOperator: RxTakeUntil(until),
-    valueOperator: identityValueOperator,
-  };
+export function takeUntil<T>(until$: Observable<unknown>): MaybeCancellingPipeOperator<T, T> {
+    return {
+        observableOperator: RxTakeUntil(until$),
+        valueOperator: identityValueOperator,
+    };
 }

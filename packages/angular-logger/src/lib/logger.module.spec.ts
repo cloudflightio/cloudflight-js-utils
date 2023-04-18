@@ -1,42 +1,35 @@
-import { TestBed } from '@angular/core/testing';
-import {
-  LogConsumer,
-  Logger,
-  LoggerModule,
-  LogLevel,
-} from '@cloudflight/angular-logger';
-import { createSpyFromClass } from 'jest-auto-spies';
+import {TestBed} from '@angular/core/testing';
+import {LogConsumer, Logger, LoggerModule, LogLevel} from '@cloudflight/angular-logger';
+import {createSpyFromClass} from 'jest-auto-spies';
 
 class LogConsumerImpl implements LogConsumer {
-  public accessKey = 'test-logger-key';
-  public logLevel = LogLevel.Debug;
+    public accessKey = 'test-logger-key';
+    public logLevel = LogLevel.Debug;
 
-  public consume(name: string, level: LogLevel, messages: unknown[]): void {
-    // do nothing
-  }
+    public consume(name: string, level: LogLevel, messages: unknown[]): void {
+        // do nothing
+    }
 }
 
 describe('LoggerModule', () => {
-  test('given default config when initialized for root then logger is set up properly', () => {
-    const consumer = createSpyFromClass(LogConsumerImpl);
+    test('given default config when initialized for root then logger is set up properly', () => {
+        const consumer = createSpyFromClass(LogConsumerImpl);
 
-    TestBed.configureTestingModule({
-      imports: [
-        LoggerModule.forRoot({
-          consumers: [consumer],
-        }),
-      ],
+        TestBed.configureTestingModule({
+            imports: [
+                LoggerModule.forRoot({
+                    consumers: [consumer],
+                }),
+            ],
+        });
+
+        const logger = TestBed.inject(Logger);
+
+        logger.debug('source', 'message');
+
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(consumer.consume).toHaveBeenCalledTimes(1);
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(consumer.consume).toHaveBeenLastCalledWith('source', LogLevel.Debug, ['message']);
     });
-
-    const logger = TestBed.inject(Logger);
-
-    logger.debug('source', 'message');
-
-    expect(consumer.consume).toHaveBeenCalledTimes(1);
-    expect(consumer.consume).toHaveBeenLastCalledWith(
-      'source',
-      LogLevel.Debug,
-      ['message']
-    );
-  });
 });

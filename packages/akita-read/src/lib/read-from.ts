@@ -1,10 +1,6 @@
-import { Query } from '@datorama/akita';
-import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  PipeFnNext,
-  Read,
-  readFrom as rxjsReadFrom,
-} from '@cloudflight/rxjs-read';
+import {Query} from '@datorama/akita';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {PipeFnNext, Read, readFrom as rxjsReadFrom} from '@cloudflight/rxjs-read';
 
 type Projection<T, P = unknown> = (state: T) => P;
 
@@ -37,10 +33,7 @@ export function readFrom<T>(target: Query<T> | BehaviorSubject<T>): Read<T>;
  * @param key key to select from the state
  * @return Returns a new {@link Read} that emits the value of the selected field of the state
  */
-export function readFrom<T, K extends keyof T>(
-  query: Query<T>,
-  key: K
-): Read<T[K]>;
+export function readFrom<T, K extends keyof T>(query: Query<T>, key: K): Read<T[K]>;
 /**
  * Create a new {@link Read} using a projection from the Store using a {@link @datorama/akita!Query | Query}:
  *
@@ -65,10 +58,7 @@ export function readFrom<T, K extends keyof T>(
  * @param projection projection to pick from the state
  * @return Returns a new {@link Read} that emits the value returned by the projection
  */
-export function readFrom<T, P>(
-  query: Query<T>,
-  projection: (state: T) => P
-): Read<P>;
+export function readFrom<T, P>(query: Query<T>, projection: (state: T) => P): Read<P>;
 /**
  * Create a new {@link Read} by selecting a list of keys from the Store using a {@link @datorama/akita!Query | Query}:
  *
@@ -83,77 +73,73 @@ export function readFrom<T, P>(
  * @param keys array of keys to select from the state
  * @return Returns a new {@link Read} that emits an object containing the values selected by the keys
  */
-export function readFrom<T, K extends keyof T>(
-  query: Query<T>,
-  keys: readonly K[]
-): Read<Pick<T, K>>;
+export function readFrom<T, K extends keyof T>(query: Query<T>, keys: readonly K[]): Read<Pick<T, K>>;
 /**
  * @internal
  */
 export function readFrom<T, K extends keyof T>(
-  query: Query<T> | BehaviorSubject<T>,
-  projection?: K | Projection<T> | K[]
+    query$: Query<T> | BehaviorSubject<T>,
+    projection?: K | Projection<T> | K[],
 ): Read<T | T[K] | unknown> {
-  if (query instanceof BehaviorSubject) {
-    return rxjsReadFrom(query);
-  } else if (projection == null) {
-    return new Read<T>({
-      observable(): Observable<T> {
-        return query.select();
-      },
-      result(): PipeFnNext<T> {
-        return {
-          type: 'next',
-          get value() {
-            return query.getValue();
-          },
-        };
-      },
-    });
-  } else if (typeof projection === 'function') {
-    return new Read<unknown>({
-      observable(): Observable<unknown> {
-        return query.select(projection);
-      },
-      result(): PipeFnNext<unknown> {
-        return {
-          type: 'next',
-          get value() {
-            return projection(query.getValue());
-          },
-        };
-      },
-    });
-  } else if (Array.isArray(projection)) {
-    return new Read<Pick<T, K>>({
-      observable(): Observable<Pick<T, K>> {
-        return query.select(projection);
-      },
-      result(): PipeFnNext<Pick<T, K>> {
-        return {
-          type: 'next',
-          get value(): Pick<T, K> {
-            const value = query.getValue();
-            return projection.reduce<Partial<Pick<T, K>>>(
-              (selection, key) =>
-                Object.assign(selection, { [key]: value[key] }),
-              {}
-            ) as Pick<T, K>;
-          },
-        };
-      },
-    });
-  } else {
-    return new Read<T[K]>({
-      observable(): Observable<T[K]> {
-        return query.select(projection);
-      },
-      result(): PipeFnNext<T[K]> {
-        return {
-          type: 'next',
-          value: query.getValue()[projection],
-        };
-      },
-    });
-  }
+    if (query$ instanceof BehaviorSubject) {
+        return rxjsReadFrom(query$);
+    } else if (projection == null) {
+        return new Read<T>({
+            observable(): Observable<T> {
+                return query$.select();
+            },
+            result(): PipeFnNext<T> {
+                return {
+                    type: 'next',
+                    get value() {
+                        return query$.getValue();
+                    },
+                };
+            },
+        });
+    } else if (typeof projection === 'function') {
+        return new Read<unknown>({
+            observable(): Observable<unknown> {
+                return query$.select(projection);
+            },
+            result(): PipeFnNext<unknown> {
+                return {
+                    type: 'next',
+                    get value() {
+                        return projection(query$.getValue());
+                    },
+                };
+            },
+        });
+    } else if (Array.isArray(projection)) {
+        return new Read<Pick<T, K>>({
+            observable(): Observable<Pick<T, K>> {
+                return query$.select(projection);
+            },
+            result(): PipeFnNext<Pick<T, K>> {
+                return {
+                    type: 'next',
+                    get value(): Pick<T, K> {
+                        const value = query$.getValue();
+                        return projection.reduce<Partial<Pick<T, K>>>(
+                            (selection, key) => Object.assign(selection, {[key]: value[key]}),
+                            {},
+                        ) as Pick<T, K>;
+                    },
+                };
+            },
+        });
+    } else {
+        return new Read<T[K]>({
+            observable(): Observable<T[K]> {
+                return query$.select(projection);
+            },
+            result(): PipeFnNext<T[K]> {
+                return {
+                    type: 'next',
+                    value: query$.getValue()[projection],
+                };
+            },
+        });
+    }
 }
