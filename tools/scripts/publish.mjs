@@ -7,15 +7,15 @@
  * You might need to authenticate with NPM before running this script.
  */
 
-import devkit from '@nrwl/devkit';
-import { execSync } from 'child_process';
+import devkit from '@nx/devkit';
+import {execSync} from 'child_process';
 import chalk from 'chalk';
 
 function invariant(condition, message) {
-  if (!condition) {
-    console.error(chalk.bold.red(message));
-    process.exit(1);
-  }
+    if (!condition) {
+        console.error(chalk.bold.red(message));
+        process.exit(1);
+    }
 }
 
 // Executing publish script: node path/to/publish.mjs {name} --version {version} --tag {tag}
@@ -25,19 +25,11 @@ const [, , name] = process.argv;
 const graph = devkit.readCachedProjectGraph();
 const project = graph.nodes[name];
 
-invariant(
-  project,
-  `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`
-);
+invariant(project, `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`);
 
-const outputPath =
-  project.data?.targets?.build?.options?.outputPath ??
-  project.data?.targets?.build?.outputs?.[0];
+const outputPath = project.data?.targets?.build?.options?.outputPath ?? project.data?.targets?.build?.outputs?.[0];
 
-invariant(
-  outputPath,
-  `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`
-);
+invariant(outputPath, `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`);
 
 process.chdir(outputPath);
 

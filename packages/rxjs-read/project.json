@@ -1,75 +1,74 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/rxjs-read/src",
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "project": "packages/rxjs-read/package.json",
-        "outputPath": "dist/packages/rxjs-read",
-        "entryFile": "packages/rxjs-read/src/index.ts",
-        "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
-        "compiler": "babel",
-        "external": ["typescript"],
-        "format": ["cjs", "esm"]
-      }
-    },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs rxjs-read"
-      },
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
+    "name": "rxjs-read",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/rxjs-read/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/rollup:rollup",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "project": "packages/rxjs-read/package.json",
+                "outputPath": "dist/packages/rxjs-read",
+                "entryFile": "packages/rxjs-read/src/index.ts",
+                "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
+                "compiler": "babel",
+                "external": ["typescript"],
+                "format": ["cjs", "esm"]
+            }
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node tools/scripts/publish.mjs rxjs-read"
+            },
+            "dependsOn": [
+                {
+                    "target": "build"
+                }
+            ]
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/rxjs-read/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/packages/rxjs-read"],
+            "options": {
+                "jestConfig": "packages/rxjs-read/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "generate-docs": {
+            "executor": "@cloudflight/nx-plugin-typedoc:build",
+            "outputs": ["{options.output}"],
+            "inputs": ["default"],
+            "options": {
+                "output": "apps/documentation/src/api/rxjs-read",
+                "entryPoint": "packages/rxjs-read/src/index.ts",
+                "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
+                "externalSymbolLinkMappings": {
+                    "rxjs": {
+                        "Observable": "https://rxjs.dev/api/index/class/Observable",
+                        "BehaviorSubject": "https://rxjs.dev/api/index/class/BehaviorSubject",
+                        "of": "https://rxjs.dev/api/index/function/of",
+                        "combineLatest": "https://rxjs.dev/api/index/function/combineLatest",
+                        "distinctUntilChanged": "https://rxjs.dev/api/operators/distinctUntilChanged",
+                        "filter": "https://rxjs.dev/api/index/function/filter",
+                        "map": "https://rxjs.dev/api/index/function/map",
+                        "shareReplay": "https://rxjs.dev/api/index/function/shareReplay",
+                        "skip": "https://rxjs.dev/api/index/function/skip",
+                        "switchMap": "https://rxjs.dev/api/index/function/switchMap",
+                        "takeUntil": "https://rxjs.dev/api/index/function/takeUntil",
+                        "withLatestFrom": "https://rxjs.dev/api/index/function/withLatestFrom"
+                    }
+                }
+            }
         }
-      ]
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/rxjs-read/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/packages/rxjs-read"],
-      "options": {
-        "jestConfig": "packages/rxjs-read/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "generate-docs": {
-      "executor": "@cloudflight/nx-plugin-typedoc:build",
-      "outputs": ["{options.output}"],
-      "inputs": ["default"],
-      "options": {
-        "output": "apps/documentation/src/api/rxjs-read",
-        "entryPoint": "packages/rxjs-read/src/index.ts",
-        "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
-        "externalSymbolLinkMappings": {
-          "rxjs": {
-            "Observable": "https://rxjs.dev/api/index/class/Observable",
-            "BehaviorSubject": "https://rxjs.dev/api/index/class/BehaviorSubject",
-            "of": "https://rxjs.dev/api/index/function/of",
-            "combineLatest": "https://rxjs.dev/api/index/function/combineLatest",
-            "distinctUntilChanged": "https://rxjs.dev/api/operators/distinctUntilChanged",
-            "filter": "https://rxjs.dev/api/index/function/filter",
-            "map": "https://rxjs.dev/api/index/function/map",
-            "shareReplay": "https://rxjs.dev/api/index/function/shareReplay",
-            "skip": "https://rxjs.dev/api/index/function/skip",
-            "switchMap": "https://rxjs.dev/api/index/function/switchMap",
-            "takeUntil": "https://rxjs.dev/api/index/function/takeUntil",
-            "withLatestFrom": "https://rxjs.dev/api/index/function/withLatestFrom"
-          }
-        }
-      }
-    }
-  },
-  "tags": ["js"],
-  "name": "rxjs-read"
+    "tags": ["js"]
 }

@@ -31,30 +31,30 @@ http://developercertificate.org/ for more information).
 
 1. create a new Nx library using a suitable generator with a standalone project.json
 2. add a `generate-docs` target to the project.json
-   ```
-     "generate-docs": {
-      "executor": "@cloudflight/nx-plugin-typedoc:build",
-      "outputs": ["{options.output}"],
-      "inputs": ["default"],
-      "options": {
-        "output": "apps/documentation/src/api/<libName>",
-        "entryPoint": "packages/<libName>/src/index.ts",
-        "tsConfig": "packages/<libName>/tsconfig.lib.json"
-      }
-   ```
+    ```
+      "generate-docs": {
+       "executor": "@cloudflight/nx-plugin-typedoc:build",
+       "outputs": ["{options.output}"],
+       "inputs": ["default"],
+       "options": {
+         "output": "apps/documentation/src/api/<libName>",
+         "entryPoint": "packages/<libName>/src/index.ts",
+         "tsConfig": "packages/<libName>/tsconfig.lib.json"
+       }
+    ```
 3. add a implicit dependency to the new library in `apps/documentation/project.json` so the docs get build automatically
 4. add a `publish` target to the project.json
-   ```
-    "publish": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs <libName>"
-      },
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
-        }
-      ]
-    },
-   ```
+    ```
+     "publish": {
+       "executor": "@nx/workspace:run-commands",
+       "options": {
+         "command": "node tools/scripts/publish.mjs <libName>"
+       },
+       "dependsOn": [
+         {
+           "projects": "self",
+           "target": "build"
+         }
+       ]
+     },
+    ```

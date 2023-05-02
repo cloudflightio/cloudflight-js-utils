@@ -1,81 +1,80 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/akita-read/src",
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "project": "packages/akita-read/package.json",
-        "outputPath": "dist/packages/akita-read",
-        "entryFile": "packages/akita-read/src/index.ts",
-        "tsConfig": "packages/akita-read/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true,
-        "buildableProjectDepsInPackageJsonType": "dependencies",
-        "compiler": "babel",
-        "external": ["typescript"],
-        "format": ["cjs", "esm"]
-      }
-    },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs akita-read"
-      },
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
+    "name": "akita-read",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/akita-read/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/rollup:rollup",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "project": "packages/akita-read/package.json",
+                "outputPath": "dist/packages/akita-read",
+                "entryFile": "packages/akita-read/src/index.ts",
+                "tsConfig": "packages/akita-read/tsconfig.lib.json",
+                "updateBuildableProjectDepsInPackageJson": true,
+                "buildableProjectDepsInPackageJsonType": "dependencies",
+                "compiler": "babel",
+                "external": ["typescript"],
+                "format": ["cjs", "esm"]
+            }
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node tools/scripts/publish.mjs akita-read"
+            },
+            "dependsOn": [
+                {
+                    "target": "build"
+                }
+            ]
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/akita-read/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/packages/akita-read"],
+            "options": {
+                "jestConfig": "packages/akita-read/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "generate-docs": {
+            "executor": "@cloudflight/nx-plugin-typedoc:build",
+            "outputs": ["{options.output}"],
+            "inputs": ["default"],
+            "options": {
+                "output": "apps/documentation/src/api/akita-read",
+                "entryPoint": "packages/akita-read/src/index.ts",
+                "tsConfig": "packages/akita-read/tsconfig.lib.json",
+                "externalSymbolLinkMappings": {
+                    "@datorama/akita": {
+                        "Query": "https://opensource.salesforce.com/akita/docs/query/",
+                        "QueryEntity": "https://opensource.salesforce.com/akita/docs/entities/query-entity"
+                    },
+                    "rxjs": {
+                        "Observable": "https://rxjs.dev/api/index/class/Observable",
+                        "BehaviorSubject": "https://rxjs.dev/api/index/class/BehaviorSubject",
+                        "of": "https://rxjs.dev/api/index/function/of",
+                        "combineLatest": "https://rxjs.dev/api/index/function/combineLatest",
+                        "distinctUntilChanged": "https://rxjs.dev/api/operators/distinctUntilChanged",
+                        "filter": "https://rxjs.dev/api/index/function/filter",
+                        "map": "https://rxjs.dev/api/index/function/map",
+                        "shareReplay": "https://rxjs.dev/api/index/function/shareReplay",
+                        "skip": "https://rxjs.dev/api/index/function/skip",
+                        "switchMap": "https://rxjs.dev/api/index/function/switchMap",
+                        "takeUntil": "https://rxjs.dev/api/index/function/takeUntil",
+                        "withLatestFrom": "https://rxjs.dev/api/index/function/withLatestFrom"
+                    }
+                }
+            }
         }
-      ]
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/akita-read/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/packages/akita-read"],
-      "options": {
-        "jestConfig": "packages/akita-read/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "generate-docs": {
-      "executor": "@cloudflight/nx-plugin-typedoc:build",
-      "outputs": ["{options.output}"],
-      "inputs": ["default"],
-      "options": {
-        "output": "apps/documentation/src/api/akita-read",
-        "entryPoint": "packages/akita-read/src/index.ts",
-        "tsConfig": "packages/akita-read/tsconfig.lib.json",
-        "externalSymbolLinkMappings": {
-          "@datorama/akita": {
-            "Query": "https://opensource.salesforce.com/akita/docs/query/",
-            "QueryEntity": "https://opensource.salesforce.com/akita/docs/entities/query-entity"
-          },
-          "rxjs": {
-            "Observable": "https://rxjs.dev/api/index/class/Observable",
-            "BehaviorSubject": "https://rxjs.dev/api/index/class/BehaviorSubject",
-            "of": "https://rxjs.dev/api/index/function/of",
-            "combineLatest": "https://rxjs.dev/api/index/function/combineLatest",
-            "distinctUntilChanged": "https://rxjs.dev/api/operators/distinctUntilChanged",
-            "filter": "https://rxjs.dev/api/index/function/filter",
-            "map": "https://rxjs.dev/api/index/function/map",
-            "shareReplay": "https://rxjs.dev/api/index/function/shareReplay",
-            "skip": "https://rxjs.dev/api/index/function/skip",
-            "switchMap": "https://rxjs.dev/api/index/function/switchMap",
-            "takeUntil": "https://rxjs.dev/api/index/function/takeUntil",
-            "withLatestFrom": "https://rxjs.dev/api/index/function/withLatestFrom"
-          }
-        }
-      }
-    }
-  },
-  "tags": ["js"],
-  "name": "akita-read"
+    "tags": ["js"]
 }
