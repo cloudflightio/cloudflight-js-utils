@@ -1,64 +1,61 @@
 {
-  "projectType": "library",
-  "sourceRoot": "packages/angular-display/src",
-  "prefix": "cloudflight",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/angular-display"],
-      "options": {
-        "project": "packages/angular-display/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "packages/angular-display/tsconfig.lib.prod.json"
+    "name": "angular-display",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "packages/angular-display/src",
+    "prefix": "cloudflight",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["dist/packages/angular-display"],
+            "options": {
+                "project": "packages/angular-display/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "packages/angular-display/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "packages/angular-display/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "packages/angular-display/tsconfig.lib.json"
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node tools/scripts/publish.mjs angular-display"
+            },
+            "dependsOn": [
+                {
+                    "target": "build"
+                }
+            ]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/packages/angular-display"],
+            "options": {
+                "jestConfig": "packages/angular-display/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["packages/angular-display/**/*.ts", "packages/angular-display/**/*.html"]
+            }
+        },
+        "generate-docs": {
+            "executor": "@cloudflight/nx-plugin-typedoc:build",
+            "outputs": ["{options.output}"],
+            "inputs": ["default"],
+            "options": {
+                "output": "apps/documentation/src/api/angular-display",
+                "entryPoint": "packages/angular-display/src/index.ts",
+                "tsConfig": "packages/angular-display/tsconfig.lib.json"
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs angular-display"
-      },
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
-        }
-      ]
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/packages/angular-display"],
-      "options": {
-        "jestConfig": "packages/angular-display/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "packages/angular-display/**/*.ts",
-          "packages/angular-display/**/*.html"
-        ]
-      }
-    },
-    "generate-docs": {
-      "executor": "@cloudflight/nx-plugin-typedoc:build",
-      "outputs": ["{options.output}"],
-      "inputs": ["default"],
-      "options": {
-        "output": "apps/documentation/src/api/angular-display",
-        "entryPoint": "packages/angular-display/src/index.ts",
-        "tsConfig": "packages/angular-display/tsconfig.lib.json"
-      }
-    }
-  },
-  "tags": ["angular"],
-  "name": "angular-display"
+    "tags": ["angular"]
 }

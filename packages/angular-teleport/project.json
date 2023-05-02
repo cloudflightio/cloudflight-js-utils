@@ -1,64 +1,61 @@
 {
-  "projectType": "library",
-  "sourceRoot": "packages/angular-teleport/src",
-  "prefix": "cloudflight",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/angular-teleport"],
-      "options": {
-        "project": "packages/angular-teleport/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "packages/angular-teleport/tsconfig.lib.prod.json"
+    "name": "angular-teleport",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "packages/angular-teleport/src",
+    "prefix": "cloudflight",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["dist/packages/angular-teleport"],
+            "options": {
+                "project": "packages/angular-teleport/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "packages/angular-teleport/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "packages/angular-teleport/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "packages/angular-teleport/tsconfig.lib.json"
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node tools/scripts/publish.mjs angular-teleport"
+            },
+            "dependsOn": [
+                {
+                    "target": "build"
+                }
+            ]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/packages/angular-teleport"],
+            "options": {
+                "jestConfig": "packages/angular-teleport/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["packages/angular-teleport/**/*.ts", "packages/angular-teleport/**/*.html"]
+            }
+        },
+        "generate-docs": {
+            "executor": "@cloudflight/nx-plugin-typedoc:build",
+            "outputs": ["{options.output}"],
+            "inputs": ["default"],
+            "options": {
+                "output": "apps/documentation/src/api/angular-teleport",
+                "entryPoint": "packages/angular-teleport/src/index.ts",
+                "tsConfig": "packages/angular-teleport/tsconfig.lib.json"
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs angular-teleport"
-      },
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
-        }
-      ]
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/packages/angular-teleport"],
-      "options": {
-        "jestConfig": "packages/angular-teleport/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "packages/angular-teleport/**/*.ts",
-          "packages/angular-teleport/**/*.html"
-        ]
-      }
-    },
-    "generate-docs": {
-      "executor": "@cloudflight/nx-plugin-typedoc:build",
-      "outputs": ["{options.output}"],
-      "inputs": ["default"],
-      "options": {
-        "output": "apps/documentation/src/api/angular-teleport",
-        "entryPoint": "packages/angular-teleport/src/index.ts",
-        "tsConfig": "packages/angular-teleport/tsconfig.lib.json"
-      }
-    }
-  },
-  "tags": ["angular"],
-  "name": "angular-teleport"
+    "tags": ["angular"]
 }
