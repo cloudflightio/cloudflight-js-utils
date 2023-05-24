@@ -1,21 +1,21 @@
 {
-  "name": "@cloudflight/akita-read",
-  "version": "0.4.0",
-  "keywords": [
-    "akita-read",
-    "akita"
-  ],
-  "homepage": "https://github.com/cloudflightio/cloudflight-js-utils",
-  "bugs": {
-    "url": "https://github.com/cloudflightio/cloudflight-js-utils/issues"
-  },
-  "author": "Cloudflight GmbH",
-  "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "@datorama/akita": ">=8.0.0 <9.0.0",
-    "rxjs": ">=7.0.0 <8.0.0"
-  }
+    "name": "@cloudflight/akita-read",
+    "version": "0.4.1",
+    "keywords": [
+        "akita-read",
+        "akita"
+    ],
+    "homepage": "https://github.com/cloudflightio/cloudflight-js-utils",
+    "bugs": {
+        "url": "https://github.com/cloudflightio/cloudflight-js-utils/issues"
+    },
+    "author": "Cloudflight GmbH",
+    "license": "Apache-2.0",
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "@datorama/akita": ">=8.0.0 <9.0.0",
+        "rxjs": ">=7.0.0 <8.0.0"
+    }
 }
