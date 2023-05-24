@@ -11,6 +11,7 @@ import rxjsReadItems from '../api/rxjs-read/typedoc-sidebar.json';
 export default defineConfig({
     title: 'Cloudflight Js Utils',
     description: 'Documentation page for Cloudflight Js Utils',
+    base: '/cloudflight-js-utils/',
     themeConfig: {
         sidebar: {
             '/api/akita-read/': [
