@@ -23,13 +23,11 @@ You created a Query for your Store that reads the date and formats it using [dat
 
 ```ts
 export class ProductQuery extends Query<ProductState> {
-  constructor(protected store: ProductStore) {
-    super(store);
-  }
+    constructor(protected store: ProductStore) {
+        super(store);
+    }
 
-  readonly expirationDate$ = this.select('expirationDate').pipe(
-    map((date) => format(date, 'dd.MM.yyyy hh:mm'))
-  );
+    readonly expirationDate$ = this.select('expirationDate').pipe(map((date) => format(date, 'dd.MM.yyyy hh:mm')));
 }
 ```
 
@@ -37,13 +35,13 @@ For some reason you figure it would also be good to have access to this in a syn
 
 ```ts
 export class ProductQuery extends Query<ProductState> {
-  //... other stuff ...
+    //... other stuff ...
 
-  get expirationDate(): string {
-    return format(this.getValue().expirationDate, 'dd.MM.yyyy HH:mm');
-  }
+    get expirationDate(): string {
+        return format(this.getValue().expirationDate, 'dd.MM.yyyy HH:mm');
+    }
 
-  //... other stuff ...
+    //... other stuff ...
 }
 ```
 
@@ -51,13 +49,11 @@ Later you get the requirement that the expiration date always needs to be at the
 
 ```ts
 export class ProductQuery extends Query<ProductState> {
-  //... other stuff ...
+    //... other stuff ...
 
-  readonly expirationDate$ = this.select('expirationDate').pipe(
-    map((date) => format(endOfDay(date), 'dd.MM.yyyy hh:mm'))
-  );
+    readonly expirationDate$ = this.select('expirationDate').pipe(map((date) => format(endOfDay(date), 'dd.MM.yyyy hh:mm')));
 
-  //... other stuff ...
+    //... other stuff ...
 }
 ```
 
@@ -68,16 +64,14 @@ But you just introduced a **bug**, because you forgot to change it for the synch
 This is where this wrapper comes into play. Instead of directly selecting/reading the value you can let this library do it for you:
 
 ```ts
-import { readFrom, map } from '@cloudflight/akita-read';
+import {readFrom, map} from '@cloudflight/akita-read';
 
 export class ProductQuery extends Query<ProductState> {
-  constructor(protected store: ProductStore) {
-    super(store);
-  }
+    constructor(protected store: ProductStore) {
+        super(store);
+    }
 
-  readonly expirationDate$ = readFrom(this, 'expirationDate').pipe(
-    map((date: string) => format(date, 'dd.MM.yyyy hh:mm'))
-  );
+    readonly expirationDate$ = readFrom(this, 'expirationDate').pipe(map((date: string) => format(date, 'dd.MM.yyyy hh:mm')));
 }
 ```
 
@@ -88,9 +82,9 @@ declare const productQuery: ProductQuery;
 
 // accessing the value asynchronously
 productQuery.expirationDate$.subscribe({
-  next(expirationDate) {
-    console.log(expirationDate);
-  },
+    next(expirationDate) {
+        console.log(expirationDate);
+    },
 });
 
 // accessing the value synchronously
@@ -101,8 +95,8 @@ Now whenever you change the implementation both ways of accessing will be up-to-
 
 ## Usage
 
-The akita specific functions provided by this library build on the base library [`@cloudflight/rxjs-read`](../rxjs-read/README.md).
-There the base class [`Read`](../rxjs-read/classes/Read.md) and all the operators are defined and reexported in this library for convenience reasons.  
+The akita specific functions provided by this library build on the base library [`@cloudflight/rxjs-read`](../rxjs-read/).
+There the base class [`Read`](../rxjs-read/classes/class.Read.md) and all the operators are defined and reexported in this library for convenience reasons.  
 Even though you can use `@cloudflight/rxjs-read` as a standalone library, it is not recommended, because it heavily goes against the redux concepts on which RXJS is built upon.
 
 ### [Akita-Query](https://opensource.salesforce.com/akita/docs/query)
@@ -111,15 +105,15 @@ To create a Read from a Query you can simply use the `readFrom` function.
 It allows the same selection options like the normal `select` method of the Akita-Query.
 
 ```ts
-import { readFrom } from '@cloudflight/akita-read';
+import {readFrom} from '@cloudflight/akita-read';
 
 export class ProductQuery extends Query<ProductState> {
-  constructor(protected store: ProductStore) {
-    super(store);
-  }
+    constructor(protected store: ProductStore) {
+        super(store);
+    }
 
-  readonly expirationDate$ = readFrom(this);
+    readonly expirationDate$ = readFrom(this);
 }
 ```
 
-For more examples check out the API documentation of [`readFrom`](modules.md#readFrom)
+For more examples check out the API documentation of [`readFrom`](functions/function.readFrom.md)

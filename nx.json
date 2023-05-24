@@ -18,25 +18,8 @@
     "affected": {
         "defaultBase": "main"
     },
-    "implicitDependencies": {
-        "tools/scripts/generate-doc.js": "*"
-    },
     "namedInputs": {
         "default": ["{projectRoot}/**/*"]
-    },
-    "targetDependencies": {
-        "build": [
-            {
-                "target": "build",
-                "projects": "dependencies"
-            }
-        ],
-        "generate-docs": [
-            {
-                "target": "generate-docs",
-                "projects": "dependencies"
-            }
-        ]
     },
     "generators": {
         "@nx/angular:application": {
@@ -71,6 +54,12 @@
         },
         "lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.js"]
+        },
+        "build": {
+            "dependsOn": ["^build"]
+        },
+        "generate-docs": {
+            "dependsOn": ["^generate-docs"]
         }
     }
 }

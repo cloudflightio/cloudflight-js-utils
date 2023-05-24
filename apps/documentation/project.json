@@ -19,8 +19,8 @@
             "outputs": ["{options.outputPath}"],
             "inputs": ["default", "^default"],
             "options": {
-                "outputPath": "dist/apps/documentation",
-                "command": "vuepress build apps/documentation/src"
+                "outputPath": "dist/apps/documentation/cloudflight-js-utils",
+                "command": "vitepress build apps/documentation/src"
             }
         },
         "serve": {

@@ -1,6 +1,6 @@
 {
     "name": "cloudflight",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "scripts": {
         "build": "nx run-many --target=build --all --parallel",
         "test": "nx run-many --target=test --all --parallel",
@@ -10,7 +10,7 @@
         "postinstall": "husky install && ngcc --properties es2020 browser module main",
         "lint:format": "nx format:check --all",
         "format:staged": "nx format:write --uncommitted",
-        "docs:serve": "nx run apps-documentation:serve"
+        "docs:serve": "vitepress serve apps/documentation/src"
     },
     "private": true,
     "author": "Cloudflight GmbH",
@@ -94,8 +94,9 @@
         "ts-jest": "29.1.0",
         "ts-node": "10.9.1",
         "typedoc": "0.24.6",
-        "typedoc-plugin-markdown": "3.15.3",
+        "typedoc-plugin-markdown": "4.0.0-next.12",
+        "typedoc-vitepress-theme": "1.0.0-next.1",
         "typescript": "4.9.5",
-        "vuepress": "2.0.0-beta.61"
+        "vitepress": "1.0.0-beta.1"
     }
 }
