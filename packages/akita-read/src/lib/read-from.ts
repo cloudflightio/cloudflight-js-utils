@@ -9,8 +9,8 @@ type Projection<T, P = unknown> = (state: T) => P;
  * or reading the state of a {@link rxjs!BehaviorSubject | BehaviorSubject}:
  *
  * ```ts
- * const state$: Read<StoreState> = readFrom(query);
- * const subjectState$: Read<string> = readFrom(behaviorSubject);
+ * const state$: Read\<StoreState\> = readFrom(query);
+ * const subjectState$: Read\<string\> = readFrom(behaviorSubject);
  * ```
  *
  * @group Selectors
@@ -23,7 +23,7 @@ export function readFrom<T>(target: Query<T> | BehaviorSubject<T>): Read<T>;
  * Create a new {@link Read} by selecting a key from the Store using a {@link @datorama/akita!Query | Query}:
  *
  * ```ts
- * const date$: Read<Date> = readFrom(query, 'date');
+ * const date$: Read\<Date\> = readFrom(query, 'date');
  * ```
  *
  * @group Selectors
@@ -38,7 +38,7 @@ export function readFrom<T, K extends keyof T>(query: Query<T>, key: K): Read<T[
  * Create a new {@link Read} using a projection from the Store using a {@link @datorama/akita!Query | Query}:
  *
  * ```ts
- * const date$: Read<Date> = readFrom(query, state => state.date);
+ * const date$: Read\<Date\> = readFrom(query, state => state.date);
  * ```
  *
  * :warning: Avoid doing heavy calculations inside the projection. :warning:
@@ -46,7 +46,7 @@ export function readFrom<T, K extends keyof T>(query: Query<T>, key: K): Read<T[
  * > The result of the projection is automatically piped through a `distinctUntilChanged`
  * > operator to avoid unnecessary recalculations/emissions.
  * > ```ts
- * > const sum$: Read<number> = readFrom(query, state => state.prices.reduce((sum, curr) => sum + curr, 0));
+ * > const sum$: Read\<number\> = readFrom(query, state => state.prices.reduce((sum, curr) => sum + curr, 0));
  * > ```
  * > By doing this calculation inside the projection, this calculation is always redone when the state changes,
  * > even though the prices did not change at all.
@@ -63,7 +63,7 @@ export function readFrom<T, P>(query: Query<T>, projection: (state: T) => P): Re
  * Create a new {@link Read} by selecting a list of keys from the Store using a {@link @datorama/akita!Query | Query}:
  *
  * ```ts
- * const data$: Read<{date: Date, count: number}> = readFrom(query, ['date', 'count']);
+ * const data$: Read\<{date: Date, count: number}\> = readFrom(query, ['date', 'count']);
  * ```
  *
  * @group Selectors

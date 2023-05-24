@@ -17,6 +17,11 @@ declare module 'typedoc' {
         hideMembersSymbol: boolean;
         preserveAnchorCasing: boolean;
     }
+
+    // options from typedoc-vitepress-theme
+    interface TypeDocOptionMap {
+        docsRoot: string;
+    }
 }
 
 export default async function runExecutor(options: BuildExecutorSchema, context: ExecutorContext): Promise<{success: boolean}> {
@@ -24,7 +29,7 @@ export default async function runExecutor(options: BuildExecutorSchema, context:
 
     app.options.addReader(new TSConfigReader());
 
-    app.bootstrap({
+    await app.bootstrapWithPlugins({
         entryPoints: [options.entryPoint],
         out: options.output,
         tsconfig: options.tsConfig,
@@ -32,10 +37,12 @@ export default async function runExecutor(options: BuildExecutorSchema, context:
         excludeInternal: true,
         externalSymbolLinkMappings: options.externalSymbolLinkMappings ?? {},
         sort: ['source-order'],
-        plugin: ['typedoc-plugin-markdown'],
+        plugin: ['typedoc-plugin-markdown', 'typedoc-vitepress-theme'],
         includeVersion: true,
         // typedoc-plugin-markdown configs
         hideInPageTOC: true,
+        // typedoc-vitepress-theme configs
+        docsRoot: 'apps/documentation/src',
     });
 
     const convertedProject = app.convert();

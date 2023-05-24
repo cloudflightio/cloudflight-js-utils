@@ -2,9 +2,9 @@
 
 [![@cloudflight/rxjs-read](https://img.shields.io/npm/v/@cloudflight/rxjs-read?label=@cloudflight/rxjs-read)](https://www.npmjs.com/package/@cloudflight/rxjs-read)
 
-This library provides the basic functionality for [`@cloudflight/akita-read`](../akita-read/README.md).
+This library provides the basic functionality for [`@cloudflight/akita-read`](../akita-read/).
 
-**:warning: This library is not meant to be used directly, it should only be used in combination with `@cloudflight/akita-read`. Read about why [here](../akita-read/README.md#Usage).:warning:**
+**:warning: This library is not meant to be used directly, it should only be used in combination with `@cloudflight/akita-read`. Read about why [here](../akita-read/#usage).:warning:**
 
 That being said, you can use this library without `Akita-Read` and it will work just fine.
 
@@ -21,16 +21,16 @@ pnpm add @cloudflight/akita-read
 ## Goal of this library
 
 This library aims to provide a type-save way of reusing RxJS operator pipelines to also access those values synchronously.  
-It is the base of [Akita-Read](../akita-read/README.md) and aims to provide all the basic functionality so that its goal can be achieved.
+It is the base of [Akita-Read](../akita-read/) and aims to provide all the basic functionality so that its goal can be achieved.
 
 To achieve this type-safety there are a few limitations when using this library. You can find them [here](#Limitations).
 
 ## Usage
 
-To create a new Read from a BehaviorSubject you can simply use the [`readFrom`](modules.md#readFrom) function.
+To create a new Read from a BehaviorSubject you can simply use the [`readFrom`](functions/function.readFrom.md) function.
 
 ```ts
-import { readFrom } from '@cloudflight/rxjs-read';
+import {readFrom} from '@cloudflight/rxjs-read';
 
 const subject = new BehaviorSubject('test');
 const read$ = readFrom(subject);
@@ -38,9 +38,9 @@ const read$ = readFrom(subject);
 
 The created Read can now be used to
 
-- subscribe to the value reactively
-- read the value synchronously
-- pipe the value through operators similar to RxJS operators
+-   subscribe to the value reactively
+-   read the value synchronously
+-   pipe the value through operators similar to RxJS operators
 
 ### Subscribing to a Read
 
@@ -48,15 +48,15 @@ Simply call the `subscribe` method and pass it an Observer:
 
 ```ts
 const subscription = read$.subscribe({
-  next(value: string) {
-    console.log('new value', string);
-  },
-  error(err: unknown) {
-    console.error('new error', err);
-  },
-  complete() {
-    console.log('subscription completed');
-  },
+    next(value: string) {
+        console.log('new value', string);
+    },
+    error(err: unknown) {
+        console.error('new error', err);
+    },
+    complete() {
+        console.log('subscription completed');
+    },
 });
 ```
 
@@ -82,9 +82,7 @@ const value = read$.value;
 Like with RxJS you can pipe a Read using the provided subset of RxJS-like operators.
 
 ```ts
-const pipped$: Read<number> = read$.pipe(
-  map((value: string) => Number.parseInt(value, 10))
-);
+const pipped$: Read<number> = read$.pipe(map((value: string) => Number.parseInt(value, 10)));
 ```
 
 This creates a new `Read` with the result after piping the value of the original `Read`.
@@ -92,9 +90,7 @@ This creates a new `Read` with the result after piping the value of the original
 There are some `PipeOperator`s that can cancel the calculation in the pipeline like `filter`:
 
 ```ts
-const filtered$: Read<number, true> = pipped$.pipe(
-  filter((value: number) => value >= 0)
-);
+const filtered$: Read<number, true> = pipped$.pipe(filter((value: number) => value >= 0));
 ```
 
 As you can see this results in a slightly different generic type for the resulting `Read`.  
@@ -109,14 +105,10 @@ You will receive `undefined` whenever the synchronous calculation is canceled. I
 If you pipe the cancelling Read again the operators do not need to care that the value might be undefined:
 
 ```ts
-const mappedFiltered$: Read<string, true> = filtered$.pipe(
-  map((value: number) => `${value}`)
-);
+const mappedFiltered$: Read<string, true> = filtered$.pipe(map((value: number) => `${value}`));
 ```
 
 But the resulting `Read` is still a cancelling `Read` since somewhere along the pipeline there is a cancelling `PipeOperator`.
-
-You can find all the existing operators in the [API](modules.md#Operators).
 
 ## Limitations
 
