@@ -51,7 +51,7 @@
         "@angular-devkit/schematics": "15.2.7",
         "@angular/cli": "15.2.7",
         "@angular/compiler-cli": "15.2.8",
-        "@angular/language-service": "15.2.8",
+        "@angular/language-service": "16.0.3",
         "@cloudflight/eslint-plugin-angular": "0.15.1",
         "@cloudflight/eslint-plugin-typescript": "0.15.1",
         "@cloudflight/prettier-config": "0.15.0",
