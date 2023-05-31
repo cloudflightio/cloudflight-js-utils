@@ -17,7 +17,7 @@ pnpm add @cloudflight/logger
 ## Usage
 
 ```ts
-import { globalLoggerInstance } from '@cloudflight/logger';
+import {globalLoggerInstance} from '@cloudflight/logger';
 
 globalLoggerInstance.info('HAL', `I'm sorry Dave. I'm afraid I can't do that.`);
 ```
@@ -28,18 +28,18 @@ The first parameter to any logging method is the source of the log. It can be a 
 do that every time. Thus, the named logger is born to abstract it away.
 
 ```ts
-import { createNamedLogger } from '@cloudflight/logger';
+import {createNamedLogger} from '@cloudflight/logger';
 
 const namedLogger = createNamedLogger('HAL');
 
 namedLogger.info(`I'm sorry Dave. I'm afraid I can't do that.`);
 
 class HAL {
-  private readonly namedLogger = createNamedLogger('HAL');
+    private readonly namedLogger = createNamedLogger('HAL');
 
-  public apologize(): void {
-    this.namedLogger.info(`I'm sorry Dave. I'm afraid I can't do that.`);
-  }
+    public apologize(): void {
+        this.namedLogger.info(`I'm sorry Dave. I'm afraid I can't do that.`);
+    }
 }
 ```
 
@@ -75,10 +75,10 @@ The whole interface is as follows:
 
 ```ts
 interface LoggerAccessor {
-  loggerAccessor: {
-    loggerByKey(key: string): Logger | undefined;
-    consumerByKey(key: string): LogConsumer | undefined;
-  };
+    loggerAccessor: {
+        loggerByKey(key: string): Logger | undefined;
+        consumerByKey(key: string): LogConsumer | undefined;
+    };
 }
 ```
 

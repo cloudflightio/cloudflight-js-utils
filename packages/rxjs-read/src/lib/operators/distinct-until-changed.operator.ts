@@ -1,6 +1,6 @@
-import { distinctUntilChanged as RxDistinctUntilChanged } from 'rxjs';
-import { ContinuingPipeOperator } from '../util/pipe.operator';
-import { identityValueOperator } from './identity-value-operator.util';
+import {distinctUntilChanged as RxDistinctUntilChanged} from 'rxjs';
+import {ContinuingPipeOperator} from '../util/pipe.operator';
+import {identityValueOperator} from './identity-value-operator.util';
 
 /**
  * Prevents emission of a value in the observable chain, if the value did not change.
@@ -24,11 +24,9 @@ import { identityValueOperator } from './identity-value-operator.util';
  * @typeParam T type of the value
  * @param comparator optionally pass a comparator function to use.
  */
-export function distinctUntilChanged<T>(
-  comparator?: (previous: T, current: T) => boolean
-): ContinuingPipeOperator<T, T> {
-  return {
-    observableOperator: RxDistinctUntilChanged(comparator),
-    valueOperator: identityValueOperator,
-  };
+export function distinctUntilChanged<T>(comparator?: (previous: T, current: T) => boolean): ContinuingPipeOperator<T, T> {
+    return {
+        observableOperator: RxDistinctUntilChanged(comparator),
+        valueOperator: identityValueOperator,
+    };
 }

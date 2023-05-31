@@ -1,10 +1,10 @@
-import { LogConsumer } from './model/log-consumer';
-import { Logger } from './model/logger';
-import { LogLevel } from './model/log-level';
-import { addConsumer, addLogger } from './global-access';
+import {LogConsumer} from './model/log-consumer';
+import {Logger} from './model/logger';
+import {LogLevel} from './model/log-level';
+import {addConsumer, addLogger} from './global-access';
 
 export interface LoggerCreationConfig {
-  accessKey: string;
+    accessKey: string;
 }
 
 /**
@@ -18,70 +18,70 @@ export interface LoggerCreationConfig {
  * rare, but still exists in large business applications.
  */
 export function createLogger(config: LoggerCreationConfig): Logger {
-  const consumers = new Set<LogConsumer>();
-  let logLevel = LogLevel.Debug;
+    const consumers = new Set<LogConsumer>();
+    let logLevel = LogLevel.Debug;
 
-  const logger: Logger = {
-    get accessKey(): string {
-      return config.accessKey;
-    },
-    get logLevel() {
-      return logLevel;
-    },
-    set logLevel(level: LogLevel) {
-      logLevel = level;
-    },
-    addConsumer(consumer: LogConsumer): void {
-      addConsumer(consumer);
-      consumers.add(consumer);
-    },
-    debug(source: string, ...messages: unknown[]): void {
-      if (logLevel > LogLevel.Debug) {
-        return;
-      }
+    const logger: Logger = {
+        get accessKey(): string {
+            return config.accessKey;
+        },
+        get logLevel() {
+            return logLevel;
+        },
+        set logLevel(level: LogLevel) {
+            logLevel = level;
+        },
+        addConsumer(consumer: LogConsumer): void {
+            addConsumer(consumer);
+            consumers.add(consumer);
+        },
+        debug(source: string, ...messages: unknown[]): void {
+            if (logLevel > LogLevel.Debug) {
+                return;
+            }
 
-      for (const consumer of consumers) {
-        if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Debug) {
-          consumer.consume(source, LogLevel.Debug, messages);
-        }
-      }
-    },
-    info(source: string, ...messages: unknown[]): void {
-      if (logLevel > LogLevel.Info) {
-        return;
-      }
+            for (const consumer of consumers) {
+                if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Debug) {
+                    consumer.consume(source, LogLevel.Debug, messages);
+                }
+            }
+        },
+        info(source: string, ...messages: unknown[]): void {
+            if (logLevel > LogLevel.Info) {
+                return;
+            }
 
-      for (const consumer of consumers) {
-        if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Info) {
-          consumer.consume(source, LogLevel.Info, messages);
-        }
-      }
-    },
-    warn(source: string, ...messages: unknown[]): void {
-      if (logLevel > LogLevel.Warn) {
-        return;
-      }
+            for (const consumer of consumers) {
+                if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Info) {
+                    consumer.consume(source, LogLevel.Info, messages);
+                }
+            }
+        },
+        warn(source: string, ...messages: unknown[]): void {
+            if (logLevel > LogLevel.Warn) {
+                return;
+            }
 
-      for (const consumer of consumers) {
-        if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Warn) {
-          consumer.consume(source, LogLevel.Warn, messages);
-        }
-      }
-    },
-    error(source: string, ...messages: unknown[]): void {
-      if (logLevel > LogLevel.Error) {
-        return;
-      }
+            for (const consumer of consumers) {
+                if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Warn) {
+                    consumer.consume(source, LogLevel.Warn, messages);
+                }
+            }
+        },
+        error(source: string, ...messages: unknown[]): void {
+            if (logLevel > LogLevel.Error) {
+                return;
+            }
 
-      for (const consumer of consumers) {
-        if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Error) {
-          consumer.consume(source, LogLevel.Error, messages);
-        }
-      }
-    },
-  };
+            for (const consumer of consumers) {
+                if (consumer.logLevel == null || consumer.logLevel <= LogLevel.Error) {
+                    consumer.consume(source, LogLevel.Error, messages);
+                }
+            }
+        },
+    };
 
-  addLogger(logger);
+    addLogger(logger);
 
-  return logger;
+    return logger;
 }

@@ -8,20 +8,20 @@ const distDir = path.join(rootDir, 'dist', 'packages');
 const rootLicenseFile = path.join(rootDir, licenseFileName);
 
 function isNpmPackage(path) {
-  const files = fs.readdirSync(path);
-  return files.some((fileName) => fileName === 'package.json');
+    const files = fs.readdirSync(path);
+    return files.some((fileName) => fileName === 'package.json');
 }
 
 module.exports = {
-  copyLicenses() {
-    const packages = fs.readdirSync(packagesDir);
-    for (const packageDirName of packages) {
-      const packagePath = path.join(distDir, packageDirName);
-      const packageStat = fs.statSync(packagePath);
-      if (packageStat.isDirectory() && isNpmPackage(packagePath)) {
-        const packageLicenseFile = path.join(packagePath, licenseFileName);
-        fs.copyFileSync(rootLicenseFile, packageLicenseFile);
-      }
-    }
-  },
+    copyLicenses() {
+        const packages = fs.readdirSync(packagesDir);
+        for (const packageDirName of packages) {
+            const packagePath = path.join(distDir, packageDirName);
+            const packageStat = fs.statSync(packagePath);
+            if (packageStat.isDirectory() && isNpmPackage(packagePath)) {
+                const packageLicenseFile = path.join(packagePath, licenseFileName);
+                fs.copyFileSync(rootLicenseFile, packageLicenseFile);
+            }
+        }
+    },
 };

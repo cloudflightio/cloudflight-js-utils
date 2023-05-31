@@ -1,4 +1,4 @@
-import { ConcurrencyPool, concurrencyPoolOfSize } from './concurrency-pool';
+import {ConcurrencyPool, concurrencyPoolOfSize} from './concurrency-pool';
 
 /**
  * Ensures only `pool` instances of the provided function is running.
@@ -9,19 +9,18 @@ import { ConcurrencyPool, concurrencyPoolOfSize } from './concurrency-pool';
  * when the pool has available tokens again.
  */
 export function limitConcurrency<Args extends unknown[], Return>(
-  pool: ConcurrencyPool | number,
-  fn: (...params: Args) => Promise<Return>
+    pool: ConcurrencyPool | number,
+    fn: (...params: Args) => Promise<Return>,
 ): (...args: Args) => Promise<Return> {
-  const actualPool =
-    typeof pool === 'number' ? concurrencyPoolOfSize(pool) : pool;
+    const actualPool = typeof pool === 'number' ? concurrencyPoolOfSize(pool) : pool;
 
-  return async (...args: Args) => {
-    const token = await actualPool.acquireToken();
+    return async (...args: Args) => {
+        const token = await actualPool.acquireToken();
 
-    try {
-      return await fn(...args);
-    } finally {
-      token.release();
-    }
-  };
+        try {
+            return await fn(...args);
+        } finally {
+            token.release();
+        }
+    };
 }

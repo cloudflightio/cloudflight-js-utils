@@ -1,7 +1,7 @@
 {
-  "name": "@cloudflight/nx-plugin-typedoc",
-  "version": "0.0.1",
-  "main": "src/index.js",
-  "generators": "./generators.json",
-  "executors": "./executors.json"
+    "name": "@cloudflight/nx-plugin-typedoc",
+    "version": "0.0.1",
+    "main": "src/index.js",
+    "generators": "./generators.json",
+    "executors": "./executors.json"
 }

@@ -1,5 +1,5 @@
-import { filter as RxFilter } from 'rxjs';
-import { CancellingPipeOperator } from '../util/pipe.operator';
+import {filter as RxFilter} from 'rxjs';
+import {CancellingPipeOperator} from '../util/pipe.operator';
 
 /**
  * Prevents emission of a value in the observable chain, if the value does not pass the test in the filterFn.
@@ -25,23 +25,21 @@ import { CancellingPipeOperator } from '../util/pipe.operator';
  * @typeParam T type of the value
  * @param filterFn function used for filtering
  */
-export function filter<T>(
-  filterFn: (value: T) => boolean
-): CancellingPipeOperator<T, T> {
-  return {
-    observableOperator: RxFilter(filterFn),
-    valueOperator: (value: T) => {
-      if (filterFn(value)) {
-        return {
-          type: 'next',
-          value,
-        };
-      } else {
-        return {
-          type: 'cancel',
-          value: undefined,
-        };
-      }
-    },
-  };
+export function filter<T>(filterFn: (value: T) => boolean): CancellingPipeOperator<T, T> {
+    return {
+        observableOperator: RxFilter(filterFn),
+        valueOperator: (value: T) => {
+            if (filterFn(value)) {
+                return {
+                    type: 'next',
+                    value,
+                };
+            } else {
+                return {
+                    type: 'cancel',
+                    value: undefined,
+                };
+            }
+        },
+    };
 }

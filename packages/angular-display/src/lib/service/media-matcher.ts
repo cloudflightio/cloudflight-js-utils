@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class MediaMatcher {
-  public matchMedia(query: string): MediaQueryList {
-    return window.matchMedia(query);
-  }
+    public matchMedia(query: string): MediaQueryList {
+        return window.matchMedia(query);
+    }
 }
