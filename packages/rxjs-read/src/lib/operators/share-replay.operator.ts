@@ -1,6 +1,6 @@
-import { shareReplay as RxShareReplay, ShareReplayConfig } from 'rxjs';
-import { ContinuingPipeOperator } from '../util/pipe.operator';
-import { identityValueOperator } from './identity-value-operator.util';
+import {shareReplay as RxShareReplay, ShareReplayConfig} from 'rxjs';
+import {ContinuingPipeOperator} from '../util/pipe.operator';
+import {identityValueOperator} from './identity-value-operator.util';
 
 /**
  * Share the source and replay specified number of emissions on subscription.
@@ -24,12 +24,9 @@ import { identityValueOperator } from './identity-value-operator.util';
  * @typeParam T type of the value
  * @param config optional configuration on how to share the source
  */
-export function shareReplay<T>(
-  config?: ShareReplayConfig
-): ContinuingPipeOperator<T, T> {
-  return {
-    observableOperator:
-      config == null ? RxShareReplay() : RxShareReplay(config),
-    valueOperator: identityValueOperator,
-  };
+export function shareReplay<T>(config?: ShareReplayConfig): ContinuingPipeOperator<T, T> {
+    return {
+        observableOperator: config == null ? RxShareReplay() : RxShareReplay(config),
+        valueOperator: identityValueOperator,
+    };
 }

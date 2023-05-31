@@ -4,9 +4,9 @@
  * but let warn and error logs pass.
  */
 export const enum LogLevel {
-  Debug,
-  Info,
-  Warn,
-  Error,
-  Disabled,
+    Debug,
+    Info,
+    Warn,
+    Error,
+    Disabled,
 }

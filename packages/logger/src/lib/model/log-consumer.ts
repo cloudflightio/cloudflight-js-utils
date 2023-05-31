@@ -1,8 +1,8 @@
-import { LogLevel } from './log-level';
+import {LogLevel} from './log-level';
 
 export interface LogConsumer {
-  readonly accessKey: string;
-  logLevel?: LogLevel;
+    readonly accessKey: string;
+    logLevel?: LogLevel;
 
-  consume(name: string, level: LogLevel, messages: unknown[]): void;
+    consume(name: string, level: LogLevel, messages: unknown[]): void;
 }

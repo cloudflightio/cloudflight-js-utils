@@ -1,12 +1,9 @@
-import {
-  createDeferredPromise,
-  DeferredPromiseHandle,
-} from './common/deferred-promise-handle';
-import { ConcurrencyPool, subConcurrencyPoolFrom } from './concurrency-pool';
+import {createDeferredPromise, DeferredPromiseHandle} from './common/deferred-promise-handle';
+import {ConcurrencyPool, subConcurrencyPoolFrom} from './concurrency-pool';
 
 interface Item<T, Args extends unknown[]> {
-  handle: DeferredPromiseHandle<T>;
-  args: Args;
+    handle: DeferredPromiseHandle<T>;
+    args: Args;
 }
 
 /**
@@ -21,66 +18,66 @@ interface Item<T, Args extends unknown[]> {
  * at {@link reusePending}.
  */
 export function debounceLatestWithPool<Args extends unknown[], Return>(
-  pool: ConcurrencyPool,
-  fn: (...params: Args) => Promise<Return>
+    pool: ConcurrencyPool,
+    fn: (...params: Args) => Promise<Return>,
 ): (...args: Args) => Promise<Return> {
-  const subPool = subConcurrencyPoolFrom(1, pool);
-  const buffer: Item<Return, Args>[] = [];
+    const subPool = subConcurrencyPoolFrom(1, pool);
+    const buffer: Item<Return, Args>[] = [];
 
-  return async (...args: Args) => {
-    const selfData: Item<Return, Args> = {
-      handle: createDeferredPromise<Return>(),
-      args,
+    return async (...args: Args) => {
+        const selfData: Item<Return, Args> = {
+            handle: createDeferredPromise<Return>(),
+            args,
+        };
+
+        buffer.push(selfData);
+
+        const token = await subPool.acquireToken();
+
+        if (buffer[buffer.length - 1] !== selfData) {
+            token.release();
+
+            return selfData.handle.promise;
+        }
+
+        const toX = buffer.splice(0);
+
+        try {
+            return await doStuff(fn, toX);
+        } finally {
+            token.release();
+        }
     };
-
-    buffer.push(selfData);
-
-    const token = await subPool.acquireToken();
-
-    if (buffer[buffer.length - 1] !== selfData) {
-      token.release();
-
-      return selfData.handle.promise;
-    }
-
-    const toX = buffer.splice(0);
-
-    try {
-      return await doStuff(fn, toX);
-    } finally {
-      token.release();
-    }
-  };
 }
 
 async function doStuff<Args extends unknown[], Return>(
-  fn: (...params: Args) => Promise<Return>,
-  items: Item<Return, Args>[]
+    fn: (...params: Args) => Promise<Return>,
+    items: Item<Return, Args>[],
 ): Promise<Return> {
-  const itemToUse = items[items.length - 1];
+    const itemToUse = items[items.length - 1];
 
-  if (itemToUse == null) {
-    throw new Error('itemToUse is empty but should never happen');
-  }
+    if (itemToUse == null) {
+        throw new Error('itemToUse is empty but should never happen');
+    }
 
-  try {
-    const value = await fn(...itemToUse.args);
+    try {
+        const value = await fn(...itemToUse.args);
 
-    items.forEach((item) => {
-      // we don't want to resolve the current item because its handle will not be returned
-      if (item !== itemToUse) {
-        item.handle.resolve(value);
-      }
-    });
+        items.forEach((item) => {
+            // we don't want to resolve the current item because its handle will not be returned
+            if (item !== itemToUse) {
+                item.handle.resolve(value);
+            }
+        });
 
-    return value;
-  } catch (e: unknown) {
-    items.forEach((item) => {
-      // we don't want to reject the current item because its handle will not be returned
-      if (item !== itemToUse) {
-        item.handle.reject(e);
-      }
-    });
-    throw e;
-  }
+        return value;
+    } catch (e: unknown) {
+        items.forEach((item) => {
+            // we don't want to reject the current item because its handle will not be returned
+            if (item !== itemToUse) {
+                item.handle.reject(e);
+            }
+        });
+        throw e;
+    }
 }

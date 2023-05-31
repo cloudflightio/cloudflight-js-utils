@@ -1,6 +1,6 @@
-import { MaybeCancellingPipeOperator } from '../util/pipe.operator';
-import { skip as RxSkip } from 'rxjs/operators';
-import { identityValueOperator } from './identity-value-operator.util';
+import {MaybeCancellingPipeOperator} from '../util/pipe.operator';
+import {skip as RxSkip} from 'rxjs/operators';
+import {identityValueOperator} from './identity-value-operator.util';
 
 /**
  * Skip a specified number of emissions.
@@ -25,8 +25,8 @@ import { identityValueOperator } from './identity-value-operator.util';
  * @param count number of skipped emissions
  */
 export function skip<T>(count: number): MaybeCancellingPipeOperator<T, T> {
-  return {
-    observableOperator: RxSkip(count),
-    valueOperator: identityValueOperator,
-  };
+    return {
+        observableOperator: RxSkip(count),
+        valueOperator: identityValueOperator,
+    };
 }

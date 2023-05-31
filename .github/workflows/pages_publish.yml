@@ -1,35 +1,35 @@
 name: Publish pages
 on:
-  release:
-    types: [created]
+    release:
+        types: [created]
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 # Allow one concurrent deployment
 concurrency:
-  group: 'publish'
-  cancel-in-progress: true
+    group: 'publish'
+    cancel-in-progress: true
 jobs:
-  pages_publish:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: volta-cli/action@v4.0.0
-      - name: Install
-        run: yarn install --immutable --immutable-cache --check-cache
-      - name: Generate docs
-        run: yarn run generate:docs
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: 'dist/apps/documentation/cloudflight-js-utils'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+    pages_publish:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: volta-cli/action@v4.0.0
+            - name: Install
+              run: yarn install --immutable --immutable-cache --check-cache
+            - name: Generate docs
+              run: yarn run generate:docs
+            - name: Setup Pages
+              uses: actions/configure-pages@v3
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  path: 'dist/apps/documentation/cloudflight-js-utils'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v2
