@@ -1,6 +1,6 @@
 {
     "name": "@cloudflight/angular-display",
-    "version": "0.4.3",
+    "version": "0.5.0",
     "keywords": [
         "angular-display",
         "breakpoints"
@@ -15,7 +15,7 @@
         "access": "public"
     },
     "peerDependencies": {
-        "@angular/common": "^15.0.1",
-        "@angular/core": "^15.0.1"
+        "@angular/common": "^16.0.3",
+        "@angular/core": "^16.0.3"
     }
 }

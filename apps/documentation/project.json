@@ -16,10 +16,9 @@
     "targets": {
         "generate-docs": {
             "executor": "nx:run-commands",
-            "outputs": ["{options.outputPath}"],
+            "outputs": ["{workspaceRoot}/dist/apps/documentation/cloudflight-js-utils"],
             "inputs": ["default", "^default"],
             "options": {
-                "outputPath": "dist/apps/documentation/cloudflight-js-utils",
                 "command": "vitepress build apps/documentation/src"
             }
         },
