@@ -56,17 +56,6 @@ export class IsDisplayDirective implements OnDestroy {
     private elseViewRef: EmbeddedViewRef<IsDisplayContext> | null = null;
 
     /**
-     * Asserts the correct type of the context for the template that `IsDisplay` will render.
-     *
-     * The presence of this method is a signal to the Ivy template type-check compiler that the
-     * `IsDisplay` structural directive renders its template with a specific context type.
-     * @internal
-     */
-    public static ngTemplateContextGuard(dir: IsDisplayDirective, ctx: unknown): ctx is IsDisplayContext {
-        return true;
-    }
-
-    /**
      * @internal
      */
     public constructor(
@@ -75,6 +64,17 @@ export class IsDisplayDirective implements OnDestroy {
         private readonly isDisplayService: IsDisplayService,
     ) {
         this.thenTemplateRef = templateRef;
+    }
+
+    /**
+     * Asserts the correct type of the context for the template that `IsDisplay` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `IsDisplay` structural directive renders its template with a specific context type.
+     * @internal
+     */
+    public static ngTemplateContextGuard(dir: IsDisplayDirective, ctx: unknown): ctx is IsDisplayContext {
+        return true;
     }
 
     /**

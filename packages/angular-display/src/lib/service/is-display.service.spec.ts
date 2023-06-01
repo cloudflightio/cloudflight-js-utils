@@ -5,11 +5,11 @@ import {Breakpoints} from '../model/breakpoints';
 import {firstValueFrom} from 'rxjs';
 
 class FakeMediaQueryList implements MediaQueryList {
+    public constructor(public matches: boolean, public media: string) {}
+
     public onchange = (ev: MediaQueryListEvent): void => {
         // do nothing
     };
-
-    public constructor(public matches: boolean, public media: string) {}
 
     /** Toggles the matches state and "emits" a change event. */
     public setMatches(matches: boolean): void {
