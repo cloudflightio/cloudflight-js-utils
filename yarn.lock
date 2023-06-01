@@ -2713,6 +2713,13 @@
   dependencies:
     "@nx/devkit" "16.0.1"
 
+"@nrwl/devkit@16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-16.3.0.tgz#d5b8852bdc570dadf45144033ffc6556f098cd7e"
+  integrity sha512-Qnghdm6glYf95f0Gqn1MIMycN+zqFI69SMuP57SYBEPzHxm5vA1Idn9LqmCPYgLgRmM9wjJkLwqfUrakseoT/A==
+  dependencies:
+    "@nx/devkit" "16.3.0"
+
 "@nrwl/eslint-plugin-nx@16.0.1":
   version "16.0.1"
   resolved "https://registry.yarnpkg.com/@nrwl/eslint-plugin-nx/-/eslint-plugin-nx-16.0.1.tgz#ca4bef3d4e89a121fb388a114959eb4dbf29c6ff"
@@ -2831,6 +2838,18 @@
   integrity sha512-6/cWPR9Y3qPPN7YGw64dB3gCLetLqUko+6G2VOUpBY4aqDI4oY3FXV/12DvXl343/pJi4ou64JfMDOpFq53wIA==
   dependencies:
     "@nrwl/devkit" "16.0.1"
+    ejs "^3.1.7"
+    ignore "^5.0.4"
+    semver "7.3.4"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+
+"@nx/devkit@16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-16.3.0.tgz#513500e07f3f81049640958b1c8192b311ad757c"
+  integrity sha512-X7bDJgTQauAB+OAsHqvTmsqr0X8m9GatqhYp0+rAtyhAUT9HkL0uVKRbLpUp/U+r/jndESkSRDIuttIs4R5YMw==
+  dependencies:
+    "@nrwl/devkit" "16.3.0"
     ejs "^3.1.7"
     ignore "^5.0.4"
     semver "7.3.4"
