@@ -1,6 +1,6 @@
 {
     "name": "cloudflight",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "scripts": {
         "build": "nx run-many --target=build --all --parallel",
         "test": "nx run-many --target=test --all --parallel",
