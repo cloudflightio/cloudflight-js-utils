@@ -1,11 +1,11 @@
 /* eslint-disable max-classes-per-file */
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {createSpyFromClass} from 'jest-auto-spies';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {IsDisplayService} from '../service/is-display.service';
 import {IsDisplayDirective} from './is-display.directive';
-import {createSpyFromClass} from 'jest-auto-spies';
 
 describe('IsDisplayDirective', () => {
     const isDisplayServiceMock = createSpyFromClass(IsDisplayService);
@@ -32,6 +32,18 @@ describe('IsDisplayDirective', () => {
 
     describe.each(Object.entries(breakpoints))('given a component using the %s breakpoint', (breakpoint, currentBreakpoint$) => {
         @Component({
+            selector: 'clf-complex',
+            template: ` <span>{{ content }}</span> `,
+            changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+        class ComplexComponent {
+            @Input({required: true})
+            public content!: string;
+        }
+
+        const content = 'The Conent';
+
+        @Component({
             template: `
                 <div id="display-only" *clfIsDisplay="'${breakpoint}'">display-only</div>
                 <div id="display-implicit-then" *clfIsDisplay="'${breakpoint}'; else implicitNotDisplay">implicit then</div>
@@ -45,16 +57,19 @@ describe('IsDisplayDirective', () => {
                 <ng-template #explicitNotDisplay>
                     <div id="display-explicit-else">explicit else</div>
                 </ng-template>
+                <clf-complex *clfIsDisplay="'${breakpoint}'" [content]="content"></clf-complex>
             `,
             changeDetection: ChangeDetectionStrategy.OnPush,
         })
-        class BreakpointComponent {}
+        class BreakpointComponent {
+            protected readonly content = content;
+        }
 
         let fixture: ComponentFixture<BreakpointComponent>;
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
-                declarations: [BreakpointComponent, IsDisplayDirective],
+                declarations: [BreakpointComponent, ComplexComponent, IsDisplayDirective],
                 providers: [{provide: IsDisplayService, useValue: isDisplayServiceMock}],
             }).createComponent(BreakpointComponent);
             fixture.detectChanges();
@@ -78,6 +93,11 @@ describe('IsDisplayDirective', () => {
                 expect(thenElement).toBeNull();
                 const elseElement = fixture.debugElement.query(By.css('#display-explicit-else'));
                 expect(elseElement).not.toBeNull();
+            });
+
+            test('should not display the complex component', () => {
+                const complexElement = fixture.debugElement.query(By.css('clf-complex'));
+                expect(complexElement).toBeNull();
             });
         });
 
@@ -124,6 +144,19 @@ describe('IsDisplayDirective', () => {
                 expect(thenElement).not.toBeNull();
                 elseElement = fixture.debugElement.query(By.css('#display-explicit-else'));
                 expect(elseElement).toBeNull();
+            });
+
+            test('should display the complex component correctly', () => {
+                currentBreakpoint$.next(false);
+                fixture.detectChanges();
+                let complexElement = fixture.debugElement.query(By.css('clf-complex'));
+                expect(complexElement).toBeNull();
+
+                currentBreakpoint$.next(true);
+                fixture.detectChanges();
+                complexElement = fixture.debugElement.query(By.css('clf-complex'));
+                expect(complexElement).not.toBeNull();
+                expect(complexElement.nativeElement.textContent).toEqual(content);
             });
         });
     });

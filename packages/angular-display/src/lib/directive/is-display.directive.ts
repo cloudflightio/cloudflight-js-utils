@@ -160,6 +160,7 @@ export class IsDisplayDirective implements OnDestroy {
                 this.elseViewRef = null;
                 if (this.thenTemplateRef != null) {
                     this.thenViewRef = this._viewContainer.createEmbeddedView(this.thenTemplateRef, this.context);
+                    this.thenViewRef.markForCheck();
                 }
             }
         } else {
@@ -168,6 +169,7 @@ export class IsDisplayDirective implements OnDestroy {
                 this.thenViewRef = null;
                 if (this.elseTemplateRef != null) {
                     this.elseViewRef = this._viewContainer.createEmbeddedView(this.elseTemplateRef, this.context);
+                    this.elseViewRef.markForCheck();
                 }
             }
         }
