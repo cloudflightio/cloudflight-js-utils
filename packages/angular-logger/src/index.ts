@@ -7,7 +7,7 @@ export {
     createNoopConsumer,
     LogConsumer,
     LogLevel,
-    globalLoggerInstance,
+    globalLogger,
     createLogger,
     NamedLogger,
     createNamedLogger,

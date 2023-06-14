@@ -1,5 +1,5 @@
 export {createLogger, LoggerCreationConfig} from './lib/create-logger';
-export {globalLoggerInstance} from './lib/logger-global';
+export {globalLogger} from './lib/logger-global';
 export {NamedLogger, createNamedLogger} from './lib/logger-named';
 
 export {createNoopConsumer} from './lib/consumers/noop-consumer';

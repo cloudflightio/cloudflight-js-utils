@@ -10,7 +10,7 @@ export interface LoggerCreationConfig {
 /**
  * Creates a new logger instance with no consumers attached. This is most
  * probably not what you want in 99% of the cases. It is recommended to use
- * the {@link globalLoggerInstance} for logging, since it has your log
+ * the {@link globalLogger} for logging, since it has your log
  * consumers attached.
  *
  * The reason this function is exposed is so ui fragments (think of something

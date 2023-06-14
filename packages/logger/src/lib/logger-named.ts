@@ -1,6 +1,6 @@
 import {LogConsumer} from './model/log-consumer';
 import {LogLevel} from './model/log-level';
-import {globalLoggerInstance} from './logger-global';
+import {globalLogger} from './logger-global';
 
 export interface NamedLogger {
     logLevel: LogLevel;
@@ -16,7 +16,7 @@ export interface NamedLogger {
     addConsumer(consumer: LogConsumer): void;
 }
 
-export function createNamedLogger(name: string, logger = globalLoggerInstance): NamedLogger {
+export function createNamedLogger(name: string, logger = globalLogger): NamedLogger {
     return {
         get logLevel() {
             return logger.logLevel;
