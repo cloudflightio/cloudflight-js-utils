@@ -53,14 +53,14 @@ class AppModule {}
 
 ```ts
 import {NgModule} from '@angular/core';
-import {globalLoggerInstance, LogConsumer, Logger} from '@cloudflight/angular-logger';
+import {globalLogger, LogConsumer, Logger} from '@cloudflight/angular-logger';
 
 @NgModule({
     providers: [
         // this is the default
         {
             provide: Logger,
-            useValue: globalLoggerInstance,
+            useValue: globalLogger,
         },
     ],
 })

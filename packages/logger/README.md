@@ -17,9 +17,9 @@ pnpm add @cloudflight/logger
 ## Usage
 
 ```ts
-import {globalLoggerInstance} from '@cloudflight/logger';
+import {globalLogger} from '@cloudflight/logger';
 
-globalLoggerInstance.info('HAL', `I'm sorry Dave. I'm afraid I can't do that.`);
+globalLogger.info('HAL', `I'm sorry Dave. I'm afraid I can't do that.`);
 ```
 
 ### Named logger

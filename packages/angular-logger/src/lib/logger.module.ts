@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {Logger} from './model/logger';
-import {globalLoggerInstance, LogConsumer} from '@cloudflight/logger';
+import {globalLogger, LogConsumer} from '@cloudflight/logger';
 
 export interface LoggerModuleConfig {
     consumers: LogConsumer[];
@@ -14,7 +14,7 @@ export class LoggerModule {
             providers: [
                 {
                     provide: Logger,
-                    useValue: globalLoggerInstance,
+                    useValue: globalLogger,
                 },
                 {
                     provide: APP_INITIALIZER,
