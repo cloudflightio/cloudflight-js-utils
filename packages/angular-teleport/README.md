@@ -1,3 +1,7 @@
+# Deprecated
+
+Please use https://github.com/ngneat/overview instead, which provides the same functionality.
+
 # angular-teleport
 
 [![@cloudflight/angular-teleport](https://img.shields.io/npm/v/@cloudflight/angular-teleport?label=@cloudflight/angular-teleport)](https://www.npmjs.com/package/@cloudflight/angular-teleport)
