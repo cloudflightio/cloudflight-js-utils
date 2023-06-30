@@ -3,15 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "application",
     "sourceRoot": "apps/documentation/src",
-    "implicitDependencies": [
-        "akita-read",
-        "angular-display",
-        "angular-logger",
-        "angular-teleport",
-        "concurrency-utils",
-        "logger",
-        "rxjs-read"
-    ],
+    "implicitDependencies": ["akita-read", "angular-display", "angular-logger", "concurrency-utils", "logger", "rxjs-read"],
     "tags": [],
     "targets": {
         "generate-docs": {
