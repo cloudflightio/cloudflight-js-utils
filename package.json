@@ -55,7 +55,7 @@
         "@cloudflight/eslint-plugin-angular": "0.16.1",
         "@cloudflight/eslint-plugin-typescript": "0.16.1",
         "@cloudflight/prettier-config": "0.16.1",
-        "@nx/angular": "16.3.0",
+        "@nx/angular": "16.4.2",
         "@nx/devkit": "16.3.0",
         "@nx/eslint-plugin": "16.3.0",
         "@nx/jest": "16.3.0",
