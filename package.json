@@ -7,7 +7,7 @@
         "lint": "nx run-many --target=lint --all --parallel && prettier --check .",
         "publish-workspaces": "node ./tools/scripts/prepare.js && nx run-many --target=publish --all --parallel --skip-nx-cache",
         "generate:docs": "nx run-many --target=generate-docs --all --parallel",
-        "postinstall": "husky install",
+        "postinstall": "husky install && git update-index --chmod=+x ./.husky/pre-commit",
         "lint:format": "nx format:check --all",
         "format:staged": "nx format:write --uncommitted",
         "docs:serve": "vitepress serve apps/documentation/src"
