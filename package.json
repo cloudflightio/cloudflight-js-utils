@@ -94,7 +94,7 @@
         "ts-jest": "29.1.1",
         "ts-node": "10.9.1",
         "typedoc": "0.24.8",
-        "typedoc-plugin-markdown": "4.0.0-next.12",
+        "typedoc-plugin-markdown": "4.0.0-next.17",
         "typedoc-vitepress-theme": "1.0.0-next.1",
         "typescript": "5.1.6",
         "vitepress": "1.0.0-beta.1"
