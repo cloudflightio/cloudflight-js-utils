@@ -1,10 +1,12 @@
-/* eslint-disable max-classes-per-file */
 import {Directive, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Subscription} from 'rxjs';
+import {Breakpoint} from '../model/breakpoints';
 import {IsDisplayService} from '../service/is-display.service';
+import {parseOption, ValidOption} from '../shared/display-option.adapter';
 
 /**
- * For the string values passed to this directive please consult {@link DisplayModule}.
+ * Adds and removes the element depending on the current breakpoint.
+ * For the breakpoint-queries passed to this directive please consult {@link provideIsDisplay}.
  *
  * Example 1
  * ```html
@@ -15,12 +17,26 @@ import {IsDisplayService} from '../service/is-display.service';
  *
  * Example 2
  * ```html
- * <div *clfIsNotDisplay="'small'">
+ * <div *clfIsDisplay="'!small'">
  *   not small
  * </div>
  * ```
  *
  * Example 3
+ * ```html
+ * <div *clfIsDisplay="'>=small'">
+ *   not small
+ * </div>
+ * ```
+ *
+ * Example 4
+ * ```html
+ * <div *clfIsDisplay="'<=small'">
+ *   not small
+ * </div>
+ * ```
+ *
+ * Example 5
  * ```html
  * <div *clfIsDisplay="'small'; else implicitNotSmall">small</div>
  *
@@ -29,7 +45,7 @@ import {IsDisplayService} from '../service/is-display.service';
  * </ng-template>
  * ```
  *
- * Example 4
+ * Example 6
  * ```html
  * <ng-container *clfIsDisplay="'small'; then explicitSmall; else explicitNotSmall"></ng-container>
  *
@@ -41,15 +57,20 @@ import {IsDisplayService} from '../service/is-display.service';
  *   <div>not small</div>
  * </ng-template>
  * ```
+ *
+ * @see {@link ValidOption}
+ * @see {@link provideIsDisplay}
  */
 @Directive({
-    selector: '[clfIsDisplay] , [clfIsNotDisplay]',
+    selector: 'ng-template[clfIsDisplay] , ng-template[clfIsNotDisplay]',
+    standalone: true,
 })
 export class IsDisplayDirective implements OnDestroy {
     private isDisplaySub?: Subscription;
-    private invert = false;
 
-    private readonly context = new IsDisplayContext();
+    private readonly context = {
+        $implicit: false,
+    };
     private thenTemplateRef: TemplateRef<IsDisplayContext> | null = null;
     private elseTemplateRef: TemplateRef<IsDisplayContext> | null = null;
     private thenViewRef: EmbeddedViewRef<IsDisplayContext> | null = null;
@@ -85,30 +106,35 @@ export class IsDisplayDirective implements OnDestroy {
     }
 
     /**
-     * The Breakpoint to evaluate as the condition for showing a template.
+     * The breakpoint-query to evaluate as the condition for showing a template.
+     *
+     * @see {@link ValidOption}
      */
     @Input()
-    public set clfIsDisplay(option: string) {
-        this.init(option, false);
+    public set clfIsDisplay(option: ValidOption) {
+        this._init(option);
     }
 
     /**
      * The Breakpoint to evaluate as the condition for not showing a template.
+     *
+     * @deprecated Use the new syntax of '!<option>' instead
      */
     @Input()
-    public set clfIsNotDisplay(option: string) {
-        this.init(option, true);
+    public set clfIsNotDisplay(option: Breakpoint) {
+        // in normal use ValidOption will be a template-string but here ts thinks it is never, because Breakpoints does not have any keys
+        this._init(`!${option}` as ValidOption);
     }
 
-    private init(option: string, invert: boolean): void {
-        this.invert = invert;
-        this.context.isDisplay = option;
-        this.context.$implicit = this.invert !== this.isDisplayService.isDisplay(option);
+    private _init(option: ValidOption): void {
+        this.isDisplaySub?.unsubscribe();
+        const adapter = parseOption(option, this.isDisplayService);
+
+        this.context.$implicit = adapter.isDisplay;
         this._updateView();
 
-        this.isDisplaySub?.unsubscribe();
-        this.isDisplaySub = this.isDisplayService.isDisplay$(option).subscribe((isCorrectDisplay) => {
-            this.context.$implicit = this.invert !== isCorrectDisplay;
+        this.isDisplaySub = adapter.isDisplay$.subscribe((isCorrectDisplay) => {
+            this.context.$implicit = isCorrectDisplay;
             this._updateView();
         });
     }
@@ -127,6 +153,8 @@ export class IsDisplayDirective implements OnDestroy {
 
     /**
      * @internal
+     *
+     * @deprecated Use the new syntax of '!<option>' instead
      */
     @Input()
     public set clfIsNotDisplayThen(templateRef: TemplateRef<IsDisplayContext> | null) {
@@ -147,6 +175,8 @@ export class IsDisplayDirective implements OnDestroy {
 
     /**
      * @internal
+     *
+     * @deprecated Use the new syntax of '!<option>' instead
      */
     @Input()
     public set clfIsNotDisplayElse(templateRef: TemplateRef<IsDisplayContext> | null) {
@@ -176,9 +206,8 @@ export class IsDisplayDirective implements OnDestroy {
     }
 }
 
-class IsDisplayContext {
-    public $implicit: boolean | undefined;
-    public isDisplay: string | undefined;
+interface IsDisplayContext {
+    $implicit: boolean;
 }
 
 function assertTemplate(property: string, templateRef: TemplateRef<IsDisplayContext> | null): void {

@@ -1,9 +1,8 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, map, Observable, of} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {MediaMatcher} from './media-matcher';
-import {Breakpoints, breakpointsInjectionToken} from '../model/breakpoints';
-import {DOCUMENT} from '@angular/common';
+import {Breakpoint, Breakpoints, breakpointsInjectionToken} from '../model/breakpoints';
 
 type IsDisplay = Record<string, BehaviorSubject<boolean>>;
 
@@ -11,10 +10,12 @@ type MediaQueryEventListener = (event: MediaQueryListEvent) => void;
 
 type IsDisplayQueries = Record<string, {query: MediaQueryList; listener: MediaQueryEventListener}>;
 
+type BreakpointEntry = [Breakpoint, number];
+
 /**
  * Service for querying the display size programmatically.
  *
- * For the string values passed to the `isDisplay` methods please consult {@link DisplayModule}.
+ * For the string values passed to the `isDisplay` methods please consult {@link provideIsDisplay}.
  */
 @Injectable({
     providedIn: 'root',
@@ -22,6 +23,8 @@ type IsDisplayQueries = Record<string, {query: MediaQueryList; listener: MediaQu
 export class IsDisplayService implements OnDestroy {
     private readonly isDisplayQueries: IsDisplayQueries = {};
     private readonly isDisplayState: IsDisplay = {};
+    private readonly breakpointsDsc: Breakpoint[];
+    private readonly breakpointsAsc: Breakpoint[];
 
     /**
      * @internal
@@ -30,13 +33,15 @@ export class IsDisplayService implements OnDestroy {
         @Inject(breakpointsInjectionToken)
         breakpoints: Breakpoints,
         mediaMatcher: MediaMatcher,
-        @Inject(DOCUMENT) document: Document,
     ) {
-        const entries = Object.entries(breakpoints).sort((a, b) => b[1] - a[1]); // sort descending
-
-        entries.forEach(([key, value]) => {
-            document.documentElement.style.setProperty(`--breakpoint-${key}`, `${value}px`);
-        });
+        const entries: BreakpointEntry[] = Object.entries(breakpoints)
+            .map((entry) => {
+                ensureValidBreakpointEntry(entry);
+                return entry;
+            })
+            .sort((a, b) => b[1] - a[1]); // sort descending
+        this.breakpointsDsc = entries.map(([name]) => name);
+        this.breakpointsAsc = [...this.breakpointsDsc].reverse();
 
         entries
             .map(([key, value], index, array) => ({
@@ -77,12 +82,55 @@ export class IsDisplayService implements OnDestroy {
         });
     }
 
-    public isDisplay$(option: string): Observable<boolean> {
+    public isDisplay$(option: Breakpoint): Observable<boolean> {
         return this.isDisplayState[option]?.pipe(distinctUntilChanged()) ?? of(false);
     }
 
-    public isDisplay(option: string): boolean {
+    public isDisplay(option: Breakpoint): boolean {
         return this.isDisplayState[option]?.getValue() ?? false;
+    }
+
+    public isDisplayAtLeast$(option: Breakpoint): Observable<boolean> {
+        return this.combineBreakpoints$(option, this.breakpointsAsc);
+    }
+
+    public isDisplayAtLeast(option: Breakpoint): boolean {
+        return this.combineBreakpoints(option, this.breakpointsAsc);
+    }
+
+    public isDisplayAtMost$(option: Breakpoint): Observable<boolean> {
+        return this.combineBreakpoints$(option, this.breakpointsDsc);
+    }
+
+    public isDisplayAtMost(option: Breakpoint): boolean {
+        return this.combineBreakpoints(option, this.breakpointsDsc);
+    }
+
+    private combineBreakpoints(option: Breakpoint, orderedBreakpoints: Breakpoint[]): boolean {
+        const index = orderedBreakpoints.indexOf(option);
+        if (index === -1) {
+            return false;
+        }
+
+        const breakpoints = orderedBreakpoints.slice(index);
+        const breakpointsValues = breakpoints.map((breakpoint) => this.isDisplay(breakpoint));
+        return breakpointsValues.some((result) => result);
+    }
+
+    private combineBreakpoints$(option: Breakpoint, orderedBreakpoints: Breakpoint[]): Observable<boolean> {
+        const index = orderedBreakpoints.indexOf(option);
+        if (index === -1) {
+            return of(false);
+        }
+
+        const breakpoints = orderedBreakpoints.slice(index);
+        const breakpoints$ = breakpoints.map((breakpoint) => this.isDisplay$(breakpoint));
+        return combineLatest(breakpoints$).pipe(
+            map((results) => {
+                return results.some((result) => result);
+            }),
+            distinctUntilChanged(),
+        );
     }
 }
 
@@ -101,4 +149,11 @@ function createMediaQuery(minWidthInclusive?: number, maxWidthExclusive?: number
         query = `${query}(max-width: ${maxWidth}px)`;
     }
     return query;
+}
+
+function ensureValidBreakpointEntry(entry: [unknown, unknown]): asserts entry is BreakpointEntry {
+    const [key, value] = entry;
+    if (typeof value !== 'number') {
+        throw new Error(`Breakpoints must be defined using a number value, but found: ${value} (${typeof value}) for ${key}`);
+    }
 }
