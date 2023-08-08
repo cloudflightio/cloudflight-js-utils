@@ -7,9 +7,10 @@
     "targets": {
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["dist/packages/angular-display"],
+            "outputs": ["{workspaceRoot}/dist/packages/angular-display"],
             "options": {
-                "project": "packages/angular-display/ng-package.json"
+                "project": "packages/angular-display/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": true
             },
             "configurations": {
                 "production": {

@@ -7,9 +7,10 @@
     "targets": {
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["dist/packages/angular-logger"],
+            "outputs": ["{workspaceRoot}/dist/packages/angular-logger"],
             "options": {
-                "project": "packages/angular-logger/ng-package.json"
+                "project": "packages/angular-logger/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": true
             },
             "configurations": {
                 "production": {

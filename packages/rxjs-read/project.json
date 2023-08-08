@@ -14,7 +14,8 @@
                 "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
                 "compiler": "babel",
                 "external": ["typescript"],
-                "format": ["cjs", "esm"]
+                "format": ["cjs", "esm"],
+                "updateBuildableProjectDepsInPackageJson": true
             }
         },
         "publish": {
