@@ -58,7 +58,7 @@ class FakeMediaMatcher implements MediaMatcher {
 
     /** Fakes the match media response to be controlled in tests. */
     public matchMedia(query: string): FakeMediaQueryList {
-        const mql = new FakeMediaQueryList(true, query);
+        const mql = new FakeMediaQueryList(false, query);
         this.queries.set(query, mql);
         return mql;
     }
@@ -68,6 +68,18 @@ class FakeMediaMatcher implements MediaMatcher {
         if (this.queries.has(query)) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             this.queries.get(query)!.setMatches(matches);
+        }
+    }
+}
+
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace ClfIsDisplay {
+        export interface Breakpoints {
+            phone: number;
+            tablet: number;
+            desktop: number;
+            invalidValueKey?: string;
         }
     }
 }
@@ -83,7 +95,22 @@ describe('IsDisplayService', () => {
             desktop: 1024,
         };
 
-        isDisplayService = new IsDisplayService(breakPoints, fakeMediaMatcher, document);
+        isDisplayService = new IsDisplayService(breakPoints, fakeMediaMatcher);
+    });
+
+    describe('Given invalid configured Breakpoints', () => {
+        describe('When a invalid value type is used', () => {
+            const invalidBreakPoints: Breakpoints = {
+                phone: 0,
+                tablet: 1,
+                desktop: 2,
+                invalidValueKey: 'invalid',
+            };
+
+            test('should throw a error when initializing the IsDisplayService', () => {
+                expect(() => new IsDisplayService(invalidBreakPoints, fakeMediaMatcher)).toThrow();
+            });
+        });
     });
 
     describe('Given the phone media query', () => {
@@ -104,6 +131,22 @@ describe('IsDisplayService', () => {
 
             test(`should emit "${matches}" for isDisplay$('phone')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('phone'))).resolves.toEqual(matches);
+            });
+
+            test(`should emit "false" for isDisplayAtLeast('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtLeast('tablet')).toEqual(false);
+            });
+
+            test(`should emit "false" for isDisplayAtLeast$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(false);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtMost('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtMost('tablet')).toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtMost$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtMost$('tablet'))).resolves.toEqual(matches);
             });
         });
     });
@@ -127,6 +170,22 @@ describe('IsDisplayService', () => {
             test(`should emit "${matches}" for isDisplay$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('tablet'))).resolves.toEqual(matches);
             });
+
+            test(`should emit "${matches}" for isDisplayAtLeast('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtLeast('tablet')).toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtLeast$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtMost('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtMost('tablet')).toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtMost$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtMost$('tablet'))).resolves.toEqual(matches);
+            });
         });
     });
 
@@ -148,6 +207,22 @@ describe('IsDisplayService', () => {
 
             test(`should emit "${matches}" for isDisplay$('desktop')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('desktop'))).resolves.toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtLeast('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtLeast('tablet')).toEqual(matches);
+            });
+
+            test(`should emit "${matches}" for isDisplayAtLeast$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(matches);
+            });
+
+            test(`should emit "false" for isDisplayAtMost('tablet')`, () => {
+                expect(isDisplayService.isDisplayAtMost('tablet')).toEqual(false);
+            });
+
+            test(`should emit "false" for isDisplayAtMost$('tablet')`, async () => {
+                await expect(firstValueFrom(isDisplayService.isDisplayAtMost$('tablet'))).resolves.toEqual(false);
             });
         });
     });

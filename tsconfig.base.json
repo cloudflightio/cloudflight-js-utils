@@ -19,6 +19,7 @@
         "paths": {
             "@cloudflight/akita-read": ["packages/akita-read/src/index.ts"],
             "@cloudflight/angular-display": ["packages/angular-display/src/index.ts"],
+            "@cloudflight/angular-display/lax": ["packages/angular-display/lax/src/index.ts"],
             "@cloudflight/angular-logger": ["packages/angular-logger/src/index.ts"],
             "@cloudflight/concurrency-utils": ["packages/concurrency-utils/src/index.ts"],
             "@cloudflight/logger": ["packages/logger/src/index.ts"],
