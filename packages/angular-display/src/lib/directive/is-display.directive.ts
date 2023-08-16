@@ -123,6 +123,7 @@ export class IsDisplayDirective implements OnDestroy {
     @Input()
     public set clfIsNotDisplay(option: Breakpoint) {
         // in normal use ValidOption will be a template-string but here ts thinks it is never, because Breakpoints does not have any keys
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         this._init(`!${option}` as ValidOption);
     }
 
@@ -184,7 +185,7 @@ export class IsDisplayDirective implements OnDestroy {
     }
 
     private _updateView(): void {
-        if (this.context.$implicit === true) {
+        if (this.context.$implicit) {
             if (this.thenViewRef == null) {
                 this._viewContainer.clear();
                 this.elseViewRef = null;
@@ -193,14 +194,12 @@ export class IsDisplayDirective implements OnDestroy {
                     this.thenViewRef.markForCheck();
                 }
             }
-        } else {
-            if (this.elseViewRef == null) {
-                this._viewContainer.clear();
-                this.thenViewRef = null;
-                if (this.elseTemplateRef != null) {
-                    this.elseViewRef = this._viewContainer.createEmbeddedView(this.elseTemplateRef, this.context);
-                    this.elseViewRef.markForCheck();
-                }
+        } else if (this.elseViewRef == null) {
+            this._viewContainer.clear();
+            this.thenViewRef = null;
+            if (this.elseTemplateRef != null) {
+                this.elseViewRef = this._viewContainer.createEmbeddedView(this.elseTemplateRef, this.context);
+                this.elseViewRef.markForCheck();
             }
         }
     }
@@ -213,6 +212,6 @@ interface IsDisplayContext {
 function assertTemplate(property: string, templateRef: TemplateRef<IsDisplayContext> | null): void {
     const isTemplateRefOrNull = templateRef == null || templateRef.createEmbeddedView != null;
     if (!isTemplateRefOrNull) {
-        throw new Error(`${property} must be a TemplateRef, but received '${templateRef}'.`);
+        throw new Error(`${property} must be a TemplateRef, but received invalid template ref.`);
     }
 }

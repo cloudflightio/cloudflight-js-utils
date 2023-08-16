@@ -2,6 +2,7 @@ import {BehaviorSubject, from, Subject} from 'rxjs';
 import {Read} from '../read';
 import {readFrom} from '../read-from';
 import {takeUntil} from './take-until.operator';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('take-until-operator', () => {
     describe('given a Read', () => {
@@ -29,7 +30,7 @@ describe('take-until-operator', () => {
             describe('when subscribing', () => {
                 describe('when destroy$ does not emit', () => {
                     it('then work as if there was no takeUntil operator', () => {
-                        const emits = jest.fn();
+                        const emits = vi.fn();
                         void from(takeUntilRead).subscribe(emits);
                         source$.next(1);
                         source$.next(2);
@@ -43,8 +44,8 @@ describe('take-until-operator', () => {
 
                 describe('when destroy$ emits', () => {
                     it('then complete and stop emitting', () => {
-                        const emits = jest.fn();
-                        const completed = jest.fn();
+                        const emits = vi.fn();
+                        const completed = vi.fn();
                         void from(takeUntilRead).subscribe({
                             next: emits,
                             complete: completed,

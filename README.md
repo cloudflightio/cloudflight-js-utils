@@ -22,6 +22,10 @@ Please refer to the README's of each plugin to get started:
 -   [@cloudflight/logger](packages/logger/README.md)
 -   [@cloudflight/rxjs-read](packages/rxjs-read/README.md)
 
+## Documentation
+
+The documentation can be found at https://cloudflightio.github.io/cloudflight-js-utils/.
+
 ## Contributing
 
 -   [Contributing to the project](CONTRIBUTING.md)

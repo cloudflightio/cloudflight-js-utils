@@ -52,11 +52,17 @@ export function withLatestFrom<I, R extends Read<any, any>>(
 
         return {
             type: 'next',
+            // needed because of the limitations of typescript
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             value: [value, other.value],
         };
     }
+    // needed because of the limitations of typescript
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const observableOperator: OperatorFunction<I, [I, ObservedValueOf<R>]> = RxWithLatestFrom(read);
 
+    // needed because of the limitations of typescript
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     return {
         observableOperator,
         valueOperator: valueLatestFrom,

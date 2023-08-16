@@ -3,7 +3,7 @@ import {TestScheduler} from 'rxjs/testing';
 import {Read} from '../read';
 import {ContinuingReadProvider} from '../read-providers';
 import {distinctUntilChanged} from './distinct-until-changed.operator';
-import Mocked = jest.Mocked;
+import {beforeEach, describe, expect, it, Mocked, vi} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -11,12 +11,12 @@ const testScheduler = new TestScheduler((actual, expected) => {
 
 describe('distinctUntilChanged-operator', () => {
     const dummyProvider: Mocked<ContinuingReadProvider<string>> = {
-        observable: jest.fn(),
-        result: jest.fn(),
+        observable: vi.fn(),
+        result: vi.fn(),
     };
 
     beforeEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         dummyProvider.observable.mockReturnValue(testScheduler.createColdObservable('aabb', {a: 'a', b: 'b'}));
     });
 

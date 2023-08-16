@@ -4,7 +4,7 @@ import {Read} from '../read';
 import {readFrom} from '../read-from';
 import {filter} from './filter.operator';
 import {map} from './map.operator';
-import MockedFn = jest.MockedFn;
+import {beforeEach, describe, expect, it, vi, MockedFunction} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -102,18 +102,18 @@ describe('filter-operator', () => {
 
             describe('and when piping with the map operator afterwards', () => {
                 let finalRead: Read<string, true>;
-                let mapFn: MockedFn<(data: Data) => string>;
+                let mapFn: MockedFunction<(data: Data) => string>;
 
                 beforeEach(() => {
-                    jest.resetAllMocks();
-                    mapFn = jest.fn().mockReturnValue('oh no!!!');
+                    vi.resetAllMocks();
+                    mapFn = vi.fn().mockReturnValue('oh no!!!');
                     finalRead = mappedRead.pipe(map(mapFn));
                 });
 
                 describe('and when subscribing', () => {
                     it('should not call the map function after the filter', () => {
                         testScheduler.run(({expectObservable, cold}) => {
-                            const expected$ = cold<string>('-------');
+                            const expected$ = cold('-------');
                             expectObservable(from(finalRead)).toEqual(expected$);
                         });
                         expect(mapFn).not.toBeCalled();
@@ -129,13 +129,13 @@ describe('filter-operator', () => {
             });
         });
 
-        describe('when piping with the filter operator and filtering the value ' + 'and mapping the value afterwards', () => {
+        describe('when piping with the filter operator and filtering the value and mapping the value afterwards', () => {
             let mappedRead: Read<number, true>;
-            let mapFn: MockedFn<(data: Data) => number>;
+            let mapFn: MockedFunction<(data: Data) => number>;
 
             beforeEach(() => {
-                jest.resetAllMocks();
-                mapFn = jest.fn().mockReturnValue(2);
+                vi.resetAllMocks();
+                mapFn = vi.fn().mockReturnValue(2);
 
                 mappedRead = read.pipe(
                     filter((data: Data) => false),

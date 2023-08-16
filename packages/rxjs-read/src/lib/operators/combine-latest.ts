@@ -36,9 +36,13 @@ type ReturnTypesOf<R extends Read<any, any>[]> = {
  * @param reads Reads to combine
  * @return Returns a new combined Read
  */
-export function combineLatest<I extends Read<any, any>[]>(reads: readonly [...I]): Read<ReturnTypesOf<I>, ContainsCancellingRead<I>> {
-    return new Read<ReturnTypesOf<I>, any>({
+export function combineLatest<I extends Read<unknown, boolean>[]>(
+    reads: readonly [...I],
+): Read<ReturnTypesOf<I>, ContainsCancellingRead<I>> {
+    return new Read<ReturnTypesOf<I>, boolean>({
         observable(): Observable<ReturnTypesOf<I>> {
+            // needed because of the limitations of typescript
+            // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
             return RxCombineLatest(reads) as unknown as Observable<ReturnTypesOf<I>>;
         },
         result(): PipeFnResult<ReturnTypesOf<I>> {
@@ -52,6 +56,8 @@ export function combineLatest<I extends Read<any, any>[]>(reads: readonly [...I]
 
             return {
                 type: 'next',
+                // needed because of the limitations of typescript
+                // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 value: results.map((result) => result.value) as unknown as ReturnTypesOf<I>,
             };
         },

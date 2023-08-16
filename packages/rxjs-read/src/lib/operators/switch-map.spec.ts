@@ -5,6 +5,7 @@ import {readFrom} from '../read-from';
 import {readOf} from '../read-of';
 import {filter} from './filter.operator';
 import {switchMap} from './switch-map';
+import {beforeEach, describe, expect, it} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);

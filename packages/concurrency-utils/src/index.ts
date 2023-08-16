@@ -1,9 +1,9 @@
 export {limitConcurrency} from './lib/limit-concurrency';
 export {
-    ConcurrencyPool,
+    type ConcurrencyPool,
     concurrencyPoolOfSize,
     InvalidConcurrencyPoolSizeException,
-    ConcurrencyToken,
+    type ConcurrencyToken,
     subConcurrencyPoolFrom,
 } from './lib/concurrency-pool';
 export {debounceLatestWithPool} from './lib/debounce-latest';

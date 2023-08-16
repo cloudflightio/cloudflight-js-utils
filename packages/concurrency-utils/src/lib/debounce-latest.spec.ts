@@ -1,11 +1,16 @@
 import {concurrencyPoolOfSize} from './concurrency-pool';
 import {debounceLatestWithPool} from './debounce-latest';
 import {sleep} from './common/sleep';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('debounceLatestWithPool', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
     describe('when debouncing function', () => {
         it('given only one invocation then it get called once', async () => {
-            const fn = jest.fn(async () => {
+            const fn = vi.fn(async () => {
                 await sleep(10);
             });
             const pool = concurrencyPoolOfSize(1);
@@ -18,7 +23,7 @@ describe('debounceLatestWithPool', () => {
         });
 
         it('given multiple invocations then last one gets called for sure', async () => {
-            const fn = jest.fn(async (callCount: number) => {
+            const fn = vi.fn(async (callCount: number) => {
                 await sleep(10);
 
                 return callCount;
@@ -52,10 +57,13 @@ describe('debounceLatestWithPool', () => {
         });
 
         it('given multiple invocations and the last one throws an error, then all promises should reject', async () => {
-            const fn = jest.fn(async (callCount: number): Promise<number> => {
+            const fn = vi.fn(async (callCount: number) => {
                 if (callCount < 0) {
                     throw new Error('abc');
                 }
+
+                await Promise.resolve();
+
                 return callCount;
             });
             const pool = concurrencyPoolOfSize(1);

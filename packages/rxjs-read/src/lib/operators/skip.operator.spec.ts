@@ -2,6 +2,7 @@ import {BehaviorSubject, from} from 'rxjs';
 import {Read} from '../read';
 import {readFrom} from '../read-from';
 import {skip} from './skip.operator';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('skip-operator', () => {
     describe('given a Read', () => {
@@ -26,7 +27,7 @@ describe('skip-operator', () => {
 
             describe('and when subscribing', () => {
                 it('then skip first value', () => {
-                    const emits = jest.fn();
+                    const emits = vi.fn();
                     void from(skippedRead).subscribe(emits);
                     source$.next(1);
                     source$.next(2);

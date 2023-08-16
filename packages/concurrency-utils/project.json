@@ -5,16 +5,25 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/rollup:rollup",
+            "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "project": "packages/concurrency-utils/package.json",
-                "outputPath": "dist/packages/concurrency-utils",
-                "entryFile": "packages/concurrency-utils/src/index.ts",
-                "tsConfig": "packages/concurrency-utils/tsconfig.lib.json",
-                "compiler": "babel",
-                "external": ["typescript"],
-                "format": ["cjs", "esm"]
+                "outputPath": "dist/packages/concurrency-utils"
+            }
+        },
+        "test": {
+            "executor": "@nx/vite:test",
+            "outputs": ["{workspaceRoot}/coverage/packages/concurrency-utils"],
+            "options": {
+                "passWithNoTests": true,
+                "reportsDirectory": "../../coverage/packages/concurrency-utils"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/concurrency-utils/**/*.ts", "packages/concurrency-utils/package.json"]
             }
         },
         "publish": {
@@ -27,21 +36,6 @@
                     "target": "build"
                 }
             ]
-        },
-        "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["packages/concurrency-utils/**/*.ts"]
-            }
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/packages/concurrency-utils"],
-            "options": {
-                "jestConfig": "packages/concurrency-utils/jest.config.ts",
-                "passWithNoTests": true
-            }
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

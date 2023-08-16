@@ -1,16 +1,16 @@
 import {createDeferredPromise, DeferredPromiseHandle} from './common/deferred-promise-handle';
 import {reusePending} from './reuse-pending';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('reusePending', () => {
     let completion: DeferredPromiseHandle<number>;
-    let fn: () => Promise<number>;
+    const fn = vi.fn(async () => {
+        return await completion.promise;
+    });
 
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         completion = createDeferredPromise<number>();
-        fn = jest.fn(async () => {
-            return await completion.promise;
-        });
     });
 
     describe('when reusing returned Promise of function', () => {

@@ -1,5 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {LogConsumer, Logger, LoggerModule, LogLevel} from '../index';
+import {LogConsumer, LogLevel} from '@cloudflight/logger';
+import {LoggerModule} from './logger.module';
+import {Logger} from './model/logger';
 import {createSpyFromClass} from 'jest-auto-spies';
 
 class LogConsumerImpl implements LogConsumer {

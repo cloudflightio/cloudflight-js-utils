@@ -17,6 +17,7 @@ export default defineConfig({
                 {
                     text: 'Akita Read',
                     link: '/api/akita-read/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(akitaReadItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],
@@ -24,6 +25,7 @@ export default defineConfig({
                 {
                     text: 'Angular Display',
                     link: '/api/angular-display/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(angularDisplayItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],
@@ -31,6 +33,7 @@ export default defineConfig({
                 {
                     text: 'Angular Logger',
                     link: '/api/angular-logger/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(angularLoggerItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],
@@ -38,6 +41,7 @@ export default defineConfig({
                 {
                     text: 'Concurrency Utils',
                     link: '/api/concurrency-utils/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(concurrencyUtilsItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],
@@ -45,6 +49,7 @@ export default defineConfig({
                 {
                     text: 'Logger',
                     link: '/api/logger/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(loggerItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],
@@ -52,6 +57,7 @@ export default defineConfig({
                 {
                     text: 'Rxjs Read',
                     link: '/api/rxjs-read/',
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                     items: removeDuplicateItems(rxjsReadItems as unknown as DefaultTheme.SidebarItem[]),
                 },
             ],

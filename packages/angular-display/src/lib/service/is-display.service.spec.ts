@@ -14,6 +14,8 @@ class FakeMediaQueryList implements MediaQueryList {
     /** Toggles the matches state and "emits" a change event. */
     public setMatches(matches: boolean): void {
         this.matches = matches;
+        // we don't need all those other properties from the normal event type for this test
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         this.onchange({
             matches: this.matches,
             media: this.media,

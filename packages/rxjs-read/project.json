@@ -5,16 +5,25 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/rollup:rollup",
+            "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "project": "packages/rxjs-read/package.json",
-                "outputPath": "dist/packages/rxjs-read",
-                "entryFile": "packages/rxjs-read/src/index.ts",
-                "tsConfig": "packages/rxjs-read/tsconfig.lib.json",
-                "compiler": "babel",
-                "external": ["typescript"],
-                "format": ["cjs", "esm"]
+                "outputPath": "dist/packages/rxjs-read"
+            }
+        },
+        "test": {
+            "executor": "@nx/vite:test",
+            "outputs": ["{workspaceRoot}/coverage/packages/rxjs-read"],
+            "options": {
+                "passWithNoTests": true,
+                "reportsDirectory": "../../coverage/packages/rxjs-read"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/rxjs-read/**/*.ts", "packages/rxjs-read/package.json"]
             }
         },
         "publish": {
@@ -27,21 +36,6 @@
                     "target": "build"
                 }
             ]
-        },
-        "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["packages/rxjs-read/**/*.ts"]
-            }
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/packages/rxjs-read"],
-            "options": {
-                "jestConfig": "packages/rxjs-read/jest.config.ts",
-                "passWithNoTests": true
-            }
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

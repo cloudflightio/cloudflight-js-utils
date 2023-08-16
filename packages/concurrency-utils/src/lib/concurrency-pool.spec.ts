@@ -1,5 +1,6 @@
 import {concurrencyPoolOfSize, InvalidConcurrencyPoolSizeException} from './concurrency-pool';
 import {sleep} from './common/sleep';
+import {describe, expect, it} from 'vitest';
 
 describe('ConcurrencyPool', () => {
     describe('when creating pool', () => {

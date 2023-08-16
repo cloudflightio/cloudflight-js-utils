@@ -72,6 +72,7 @@ export function concurrencyPoolOfSize(maxCount: number): ConcurrencyPool {
     };
 
     return {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         [concurrencyPoolTypeGuard]: undefined as never,
         async acquireToken(): Promise<ConcurrencyToken> {
             const handle = createDeferredPromise<ConcurrencyToken>();
@@ -95,6 +96,7 @@ export function subConcurrencyPoolFrom(size: number, pool: ConcurrencyPool): Con
     const subPool = concurrencyPoolOfSize(size);
 
     return {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         [concurrencyPoolTypeGuard]: undefined as never,
         async acquireToken(): Promise<ConcurrencyToken> {
             const subPoolToken = await subPool.acquireToken();

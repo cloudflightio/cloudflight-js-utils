@@ -80,6 +80,8 @@ export function readFrom<T, K extends keyof T>(query: Query<T>, keys: readonly K
 export function readFrom<T, K extends keyof T>(
     query$: Query<T> | BehaviorSubject<T>,
     projection?: K | Projection<T> | K[],
+    // `unknown` is not redundant
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 ): Read<T | T[K] | unknown> {
     if (query$ instanceof BehaviorSubject) {
         return rxjsReadFrom(query$);
@@ -121,6 +123,7 @@ export function readFrom<T, K extends keyof T>(
                     type: 'next',
                     get value(): Pick<T, K> {
                         const value = query$.getValue();
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                         return projection.reduce<Partial<Pick<T, K>>>(
                             (selection, key) => Object.assign(selection, {[key]: value[key]}),
                             {},
@@ -129,17 +132,17 @@ export function readFrom<T, K extends keyof T>(
                 };
             },
         });
-    } else {
-        return new Read<T[K]>({
-            observable(): Observable<T[K]> {
-                return query$.select(projection);
-            },
-            result(): PipeFnNext<T[K]> {
-                return {
-                    type: 'next',
-                    value: query$.getValue()[projection],
-                };
-            },
-        });
     }
+
+    return new Read<T[K]>({
+        observable(): Observable<T[K]> {
+            return query$.select(projection);
+        },
+        result(): PipeFnNext<T[K]> {
+            return {
+                type: 'next',
+                value: query$.getValue()[projection],
+            };
+        },
+    });
 }

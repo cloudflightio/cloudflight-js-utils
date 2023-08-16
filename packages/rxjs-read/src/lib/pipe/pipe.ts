@@ -63,6 +63,8 @@ export function pipe<Functions extends ((arg: any) => PipeFnResult<any>)[]>(
             if (result.type === 'cancel') {
                 return result;
             }
+            // needed because of the limitations of typescript
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pipeline = result.value;
         }
 
