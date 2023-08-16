@@ -39,6 +39,7 @@ export default async function runExecutor(options: BuildExecutorSchema, context:
         sort: ['source-order'],
         plugin: ['typedoc-plugin-markdown', 'typedoc-vitepress-theme'],
         includeVersion: true,
+        pretty: false,
         // typedoc-plugin-markdown configs
         hideInPageTOC: true,
         // typedoc-vitepress-theme configs
@@ -53,9 +54,9 @@ export default async function runExecutor(options: BuildExecutorSchema, context:
         return {
             success: true,
         };
-    } else {
-        return {
-            success: false,
-        };
     }
+
+    return {
+        success: false,
+    };
 }

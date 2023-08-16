@@ -34,12 +34,12 @@ export function filter<T>(filterFn: (value: T) => boolean): CancellingPipeOperat
                     type: 'next',
                     value,
                 };
-            } else {
-                return {
-                    type: 'cancel',
-                    value: undefined,
-                };
             }
+
+            return {
+                type: 'cancel',
+                value: undefined,
+            };
         },
     };
 }

@@ -94,7 +94,7 @@ export function readEntityFrom<
             },
             result(): PipeFnNext<R | undefined> {
                 const entity = queryEntity.getEntity(id);
-                let value = undefined;
+                let value;
                 if (entity != null) {
                     // the types of Akita state that the projection should handle if the entity does not exist, but in the implementation
                     // (https://github.com/salesforce/akita/blob/d879000c4586319d3fe62761af3abea7a48b2fb7/packages/akita/src/lib/queryEntity.ts#L155)
@@ -108,17 +108,17 @@ export function readEntityFrom<
                 };
             },
         });
-    } else {
-        return new Read({
-            observable(): Observable<EntityType[K] | undefined> {
-                return queryEntity.selectEntity(id, keyOrProject);
-            },
-            result(): PipeFnNext<EntityType[K] | undefined> {
-                return {
-                    type: 'next',
-                    value: queryEntity.getEntity(id)?.[keyOrProject],
-                };
-            },
-        });
     }
+
+    return new Read({
+        observable(): Observable<EntityType[K] | undefined> {
+            return queryEntity.selectEntity(id, keyOrProject);
+        },
+        result(): PipeFnNext<EntityType[K] | undefined> {
+            return {
+                type: 'next',
+                value: queryEntity.getEntity(id)?.[keyOrProject],
+            };
+        },
+    });
 }

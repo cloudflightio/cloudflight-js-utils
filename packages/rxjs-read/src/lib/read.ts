@@ -44,6 +44,8 @@ export class Read<T, Cancelling extends boolean = false> implements InteropObser
      * @param provider provider to use for reactive and synchronous values
      */
     public constructor(provider: MaybeCancellingReadProvider<T, Cancelling>) {
+        // needed because of the limitations of typescript
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         this.provider = new EagerObservableReadProvider<T, Cancelling>(provider) as MaybeCancellingReadProvider<T, Cancelling>;
     }
 
@@ -73,6 +75,8 @@ export class Read<T, Cancelling extends boolean = false> implements InteropObser
      * @return Returns the computed value or undefined if the Read is cancelling
      */
     public get value(): MaybeUndefined<T, Cancelling> {
+        // needed because of the limitations of typescript
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return this.provider.result().value as MaybeUndefined<T, Cancelling>;
     }
 
@@ -94,7 +98,8 @@ export class Read<T, Cancelling extends boolean = false> implements InteropObser
         And<Cancelling | ContainsCancellingPipeOperator<Operators>>
     > {
         const provider = this.provider;
-        return new Read<ReturnTypeOfTailOperator<Operators>, any>({
+
+        return new Read<ReturnTypeOfTailOperator<Operators>, boolean>({
             observable(): Observable<ReturnTypeOfTailOperator<Operators>> {
                 return (
                     provider
@@ -102,7 +107,7 @@ export class Read<T, Cancelling extends boolean = false> implements InteropObser
                         /* the pipe function does provide a rest parameter implementation,
                          TS just cannot find it for some reason
                          @ts-expect-error */
-                        .pipe(...operators.map((it) => it.observableOperator))
+                        .pipe<ReturnTypeOfTailOperator<Operators>>(...operators.map((it) => it.observableOperator))
                 );
             },
             result(): PipeFnResult<ReturnTypeOfTailOperator<Operators>> {

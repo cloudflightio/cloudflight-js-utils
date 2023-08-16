@@ -3,7 +3,7 @@ import {EntityState, EntityStore, QueryEntity} from '@datorama/akita';
 import {from} from 'rxjs';
 import {TestScheduler} from 'rxjs/testing';
 import {readEntityFrom} from './read-entity-from';
-import MockedFn = jest.MockedFn;
+import {beforeEach, describe, expect, it, vi, MockedFunction} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -88,10 +88,10 @@ describe('readEntityFrom', () => {
 
             describe('when creating a new Read for the a entity using its id and a projection', () => {
                 let read: Read<number | undefined>;
-                let projection: MockedFn<(entity?: EntityData) => number>;
+                let projection: MockedFunction<(entity?: EntityData) => number>;
 
                 beforeEach(() => {
-                    projection = jest.fn().mockImplementation((entity?: EntityData) => entity?.count);
+                    projection = vi.fn().mockImplementation((entity?: EntityData) => entity?.count);
 
                     read = readEntityFrom(query, initialEntity.id, projection);
                 });

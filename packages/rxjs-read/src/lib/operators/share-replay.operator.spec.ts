@@ -3,8 +3,8 @@ import {TestScheduler} from 'rxjs/testing';
 import {Read} from '../read';
 import {BehaviorSubject, from} from 'rxjs';
 import {shareReplay} from './share-replay.operator';
-import MockedFn = jest.MockedFn;
 import {readFrom} from '../read-from';
+import {beforeEach, describe, expect, it, MockedFunction, vi} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -19,10 +19,10 @@ describe('shareReplay-operator', () => {
 
     describe('given a mapped Read', () => {
         let read: Read<number>;
-        const mapFn: MockedFn<(v: string) => number> = jest.fn();
+        const mapFn: MockedFunction<(v: string) => number> = vi.fn();
 
         beforeEach(() => {
-            jest.resetAllMocks();
+            vi.resetAllMocks();
 
             mapFn.mockImplementation((v: string) => v.length);
 

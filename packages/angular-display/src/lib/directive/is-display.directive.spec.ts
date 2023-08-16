@@ -51,6 +51,7 @@ describe('IsDisplayDirective', () => {
     });
 
     describe.each(Object.entries(breakpoints))('given the %s breakpoint', (rawBreakpoint: string, currentBreakpoint$) => {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         const breakpoint = rawBreakpoint as Breakpoint;
 
         describe('using the normal option syntax', () => {
@@ -180,6 +181,9 @@ describe('IsDisplayDirective', () => {
                     fixture.detectChanges();
                     complexElement = fixture.debugElement.query(By.css('clf-complex'));
                     expect(complexElement).not.toBeNull();
+                    // the typings provided by Angular contains any
+                    // it is not nice to ignore it here, but there is no better way
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                     expect(complexElement.nativeElement.textContent).toEqual(content);
                 });
             });

@@ -17,8 +17,8 @@ declare global {
 
 describe('IsDisplayPipe', () => {
     let isDisplayServiceMock: Spy<IsDisplayService>;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- this is the recommended way to mock abstract classes
-    const changeDetectionRefMock = createSpyFromClass<ChangeDetectorRef>(ChangeDetectorRef as any, ['markForCheck']);
+    // @ts-expect-error this is the recommended way to mock abstract classes
+    const changeDetectionRefMock = createSpyFromClass<ChangeDetectorRef>(ChangeDetectorRef, ['markForCheck']);
 
     beforeEach(() => {
         jest.clearAllMocks();

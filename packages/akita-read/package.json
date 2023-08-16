@@ -14,8 +14,19 @@
     "publishConfig": {
         "access": "public"
     },
+    "main": "./index.js",
+    "module": "./index.mjs",
+    "typings": "./index.d.ts",
     "peerDependencies": {
+        "@cloudflight/rxjs-read": "*",
         "@datorama/akita": ">=8.0.0 <9.0.0",
         "rxjs": ">=7.0.0 <8.0.0"
+    },
+    "devDependencies": {
+        "@nx/vite": "16.7.0",
+        "symbol-observable": "4.0.0",
+        "vite": "4.4.9",
+        "vite-plugin-dts": "3.5.1",
+        "vitest": "0.34.1"
     }
 }

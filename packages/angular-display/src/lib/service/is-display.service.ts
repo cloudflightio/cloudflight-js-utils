@@ -154,6 +154,7 @@ function createMediaQuery(minWidthInclusive?: number, maxWidthExclusive?: number
 function ensureValidBreakpointEntry(entry: [unknown, unknown]): asserts entry is BreakpointEntry {
     const [key, value] = entry;
     if (typeof value !== 'number') {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Breakpoints must be defined using a number value, but found: ${value} (${typeof value}) for ${key}`);
     }
 }

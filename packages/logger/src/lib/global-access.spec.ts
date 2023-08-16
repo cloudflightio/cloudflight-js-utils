@@ -1,8 +1,10 @@
 import {LogConsumer} from './model/log-consumer';
 import {createLogger} from './create-logger';
 import {LoggerAccessor} from './global-access';
+import {describe, expect} from 'vitest';
 
 describe('globalAccess', () => {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const globalObject = global as unknown as LoggerAccessor;
 
     test('given logger when accessing global loggers then logger exists', () => {
@@ -18,7 +20,9 @@ describe('globalAccess', () => {
                 return 'test-consumer-1';
             },
             logLevel: undefined,
-            consume: jest.fn(),
+            consume: () => {
+                // do nothing
+            },
         };
 
         logger.addConsumer(consumer);

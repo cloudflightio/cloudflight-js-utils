@@ -5,18 +5,25 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/rollup:rollup",
+            "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "project": "packages/akita-read/package.json",
-                "outputPath": "dist/packages/akita-read",
-                "entryFile": "packages/akita-read/src/index.ts",
-                "tsConfig": "packages/akita-read/tsconfig.lib.json",
-                "updateBuildableProjectDepsInPackageJson": true,
-                "buildableProjectDepsInPackageJsonType": "dependencies",
-                "compiler": "babel",
-                "external": ["typescript"],
-                "format": ["cjs", "esm"]
+                "outputPath": "dist/packages/akita-read"
+            }
+        },
+        "test": {
+            "executor": "@nx/vite:test",
+            "outputs": ["{workspaceRoot}/coverage/packages/akita-read"],
+            "options": {
+                "passWithNoTests": true,
+                "reportsDirectory": "../../coverage/packages/akita-read"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/akita-read/**/*.ts", "packages/akita-read/package.json"]
             }
         },
         "publish": {
@@ -29,21 +36,6 @@
                     "target": "build"
                 }
             ]
-        },
-        "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["packages/akita-read/**/*.ts"]
-            }
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/packages/akita-read"],
-            "options": {
-                "jestConfig": "packages/akita-read/jest.config.ts",
-                "passWithNoTests": true
-            }
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

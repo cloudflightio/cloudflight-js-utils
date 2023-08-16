@@ -57,7 +57,9 @@ module.exports = {
         {
             files: '*.json',
             parser: 'jsonc-eslint-parser',
-            rules: {},
+            rules: {
+                '@nx/dependency-checks': 'error',
+            },
         },
         {
             files: ['*.spec.ts'],

@@ -5,7 +5,7 @@ import {filter} from './filter.operator';
 import {Read} from '../read';
 import {readFrom} from '../read-from';
 import {ContinuingReadProvider} from '../read-providers';
-import Mocked = jest.Mocked;
+import {beforeEach, describe, expect, it, Mocked, vi} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);
@@ -124,19 +124,19 @@ describe('combineLatest', () => {
 
             describe('after the first emit when combining them with combineLatest', () => {
                 const mockedProvider1: Mocked<ContinuingReadProvider<string>> = {
-                    observable: jest.fn(),
-                    result: jest.fn(),
+                    observable: vi.fn(),
+                    result: vi.fn(),
                 };
                 const mockedProvider2: Mocked<ContinuingReadProvider<number>> = {
-                    observable: jest.fn(),
-                    result: jest.fn(),
+                    observable: vi.fn(),
+                    result: vi.fn(),
                 };
 
                 const expectedRead: [string, number] = [initial1, initial2];
                 let combined: Read<[string, number], true>;
 
                 beforeEach(() => {
-                    jest.resetAllMocks();
+                    vi.resetAllMocks();
                     mockedProvider1.observable.mockReturnValue(
                         testScheduler.createColdObservable('ab', {
                             a: initial1,

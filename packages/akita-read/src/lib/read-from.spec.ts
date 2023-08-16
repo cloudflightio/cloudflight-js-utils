@@ -3,6 +3,7 @@ import {EntityState, EntityStore, Query, QueryEntity, Store} from '@datorama/aki
 import {BehaviorSubject, from} from 'rxjs';
 import {TestScheduler} from 'rxjs/testing';
 import {readFrom} from './read-from';
+import {beforeEach, describe, expect, it} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);

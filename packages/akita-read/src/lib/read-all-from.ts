@@ -140,14 +140,14 @@ export function readAllFrom<S extends EntityState, EntityType = getEntityType<S>
                 return {type: 'next', value: queryEntity.getAll()};
             },
         });
-    } else {
-        return new Read({
-            observable(): Observable<EntityType[] | HashMap<EntityType>> {
-                return queryEntity.selectAll(options);
-            },
-            result(): PipeFnNext<EntityType[] | HashMap<EntityType>> {
-                return {type: 'next', value: queryEntity.getAll(options)};
-            },
-        });
     }
+
+    return new Read({
+        observable(): Observable<EntityType[] | HashMap<EntityType>> {
+            return queryEntity.selectAll(options);
+        },
+        result(): PipeFnNext<EntityType[] | HashMap<EntityType>> {
+            return {type: 'next', value: queryEntity.getAll(options)};
+        },
+    });
 }

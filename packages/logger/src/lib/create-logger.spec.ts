@@ -1,37 +1,41 @@
 import {createLogger} from './create-logger';
 import {LogConsumer} from './model/log-consumer';
 import {LogLevel} from './model/log-level';
-import Mock = jest.Mock;
-
-interface MockedConsumer extends LogConsumer {
-    consume: Mock<LogConsumer['consume']>;
-}
+import {afterEach, beforeEach, describe, expect, it, SpyInstance, vi} from 'vitest';
 
 describe('createLogger', () => {
-    let consumer: MockedConsumer;
+    const consumer: LogConsumer = {
+        get accessKey(): string {
+            return 'default-test-consumer';
+        },
+        logLevel: undefined,
+        consume: () => {
+            // do nothing
+        },
+    };
+
+    let spy: SpyInstance<Parameters<LogConsumer['consume']>, ReturnType<LogConsumer['consume']>> | undefined;
 
     beforeEach(() => {
-        consumer = {
-            get accessKey(): string {
-                return 'default-test-consumer';
-            },
-            logLevel: undefined,
-            consume: jest.fn(),
-        };
+        spy = vi.spyOn(consumer, 'consume');
     });
 
-    test('given consumer when logging then consumer gets called', () => {
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
+
+    it('given consumer when logging then consumer gets called', () => {
         const logger = createLogger({accessKey: 'default-test-logger'});
 
         logger.addConsumer(consumer);
 
         logger.debug('source', 'message');
 
-        expect(consumer.consume).toHaveBeenCalledTimes(1);
-        expect(consumer.consume).toHaveBeenLastCalledWith('source', LogLevel.Debug, ['message']);
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenLastCalledWith('source', LogLevel.Debug, ['message']);
     });
 
-    test('given consumer level changing when logging then consumer does not get called', () => {
+    it('given consumer level changing when logging then consumer does not get called', () => {
         const logger = createLogger({accessKey: 'default-test-logger'});
 
         logger.addConsumer(consumer);
@@ -40,10 +44,10 @@ describe('createLogger', () => {
 
         logger.debug('source', 'message');
 
-        expect(consumer.consume).toHaveBeenCalledTimes(0);
+        expect(spy).toHaveBeenCalledTimes(0);
     });
 
-    test('given logger level changing when logging then consumer does not get called', () => {
+    it('given logger level changing when logging then consumer does not get called', () => {
         const logger = createLogger({accessKey: 'default-test-logger'});
 
         logger.addConsumer(consumer);
@@ -52,6 +56,6 @@ describe('createLogger', () => {
 
         logger.debug('source', 'message');
 
-        expect(consumer.consume).toHaveBeenCalledTimes(0);
+        expect(spy).toHaveBeenCalledTimes(0);
     });
 });

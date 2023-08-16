@@ -3,6 +3,7 @@ import {EntityState, EntityStore, QueryEntity} from '@datorama/akita';
 import {from} from 'rxjs';
 import {TestScheduler} from 'rxjs/testing';
 import {readManyFrom} from './read-many-from';
+import {beforeEach, describe, expect, it} from 'vitest';
 
 const testScheduler = new TestScheduler((actual, expected) => {
     expect(actual).toEqual(expected);

@@ -62,20 +62,20 @@ export function readManyFrom<S extends EntityState, R, EntityType = getEntityTyp
                 };
             },
         });
-    } else {
-        return new Read({
-            observable(): Observable<R[]> {
-                return queryEntity.selectMany(ids, projection);
-            },
-            result(): PipeFnNext<R[]> {
-                return {
-                    type: 'next',
-                    value: ids
-                        .map((id) => queryEntity.getEntity(id))
-                        .filter(isDefined)
-                        .map(projection),
-                };
-            },
-        });
     }
+
+    return new Read({
+        observable(): Observable<R[]> {
+            return queryEntity.selectMany(ids, projection);
+        },
+        result(): PipeFnNext<R[]> {
+            return {
+                type: 'next',
+                value: ids
+                    .map((id) => queryEntity.getEntity(id))
+                    .filter(isDefined)
+                    .map(projection),
+            };
+        },
+    });
 }

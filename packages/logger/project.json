@@ -5,17 +5,25 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/rollup:rollup",
+            "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "project": "packages/logger/package.json",
-                "outputPath": "dist/packages/logger",
-                "entryFile": "packages/logger/src/index.ts",
-                "tsConfig": "packages/logger/tsconfig.lib.json",
-                "compiler": "babel",
-                "external": ["typescript"],
-                "format": ["cjs", "esm"],
-                "updateBuildableProjectDepsInPackageJson": true
+                "outputPath": "dist/packages/logger"
+            }
+        },
+        "test": {
+            "executor": "@nx/vite:test",
+            "outputs": ["{workspaceRoot}/coverage/packages/logger"],
+            "options": {
+                "passWithNoTests": true,
+                "reportsDirectory": "../../coverage/packages/logger"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/logger/**/*.ts", "packages/logger/package.json"]
             }
         },
         "publish": {
@@ -28,21 +36,6 @@
                     "target": "build"
                 }
             ]
-        },
-        "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["packages/logger/**/*.ts"]
-            }
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/packages/logger"],
-            "options": {
-                "jestConfig": "packages/logger/jest.config.ts",
-                "passWithNoTests": true
-            }
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

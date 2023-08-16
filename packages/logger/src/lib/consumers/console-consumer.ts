@@ -51,9 +51,9 @@ function getColorFor(name: string): number {
         nameToColor.set(name, hue);
 
         return hue;
-    } else {
-        return color;
     }
+
+    return color;
 }
 
 function getLevelName(level: LogLevel): string {

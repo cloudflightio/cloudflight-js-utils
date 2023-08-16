@@ -4,7 +4,7 @@
  * function again.
  */
 export function reusePending<Args extends unknown[], Return>(fn: (...params: Args) => Promise<Return>): (...args: Args) => Promise<Return> {
-    let pending: Promise<Return> | undefined = undefined;
+    let pending: Promise<Return> | undefined;
 
     return async (...args: Args) => {
         if (pending != null) {
@@ -14,8 +14,7 @@ export function reusePending<Args extends unknown[], Return>(fn: (...params: Arg
         pending = fn(...args);
 
         try {
-            const result = await pending;
-            return result;
+            return await pending;
         } finally {
             pending = undefined;
         }
