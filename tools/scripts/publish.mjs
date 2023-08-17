@@ -29,9 +29,15 @@ invariant(project, `Could not find project "${name}" in the workspace. Is the pr
 
 const outputPath = project.data?.targets?.build?.options?.outputPath ?? project.data?.targets?.build?.outputs?.[0];
 
-invariant(outputPath, `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`);
+if (outputPath == null) {
+    throw new Error('there is no output path for the project');
+}
 
-process.chdir(outputPath);
+const actualOutputPath = outputPath.startsWith('{workspaceRoot}/') ? outputPath.slice('{workspaceRoot}/'.length) : outputPath;
+
+invariant(actualOutputPath, `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`);
+
+process.chdir(actualOutputPath);
 
 // Execute "yarn publish" to publish
 execSync(`yarn publish`);
