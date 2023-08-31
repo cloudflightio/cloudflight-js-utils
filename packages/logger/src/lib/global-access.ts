@@ -1,8 +1,6 @@
 import {Logger} from './model/logger';
 import {LogConsumer} from './model/log-consumer';
 
-declare const global: unknown;
-
 export interface LoggerAccessor {
     loggerAccessor: {
         loggerByKey(key: string): Logger | undefined;
@@ -10,7 +8,6 @@ export interface LoggerAccessor {
     };
 }
 
-const globalObject = window ?? global;
 const loggers = new Map<string, Logger>();
 const consumers = new Map<string, LogConsumer>();
 
@@ -23,7 +20,7 @@ export function addConsumer(consumer: LogConsumer): void {
 }
 
 (() => {
-    if (isAccessorAlreadyAttached(globalObject)) {
+    if (isAccessorAlreadyAttached(globalThis)) {
         return;
     }
 
@@ -36,7 +33,7 @@ export function addConsumer(consumer: LogConsumer): void {
         },
     };
 
-    Object.defineProperty(globalObject, 'loggerAccessor', {
+    Object.defineProperty(globalThis, 'loggerAccessor', {
         configurable: false,
         enumerable: false,
         writable: false,
