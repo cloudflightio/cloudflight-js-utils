@@ -101,7 +101,7 @@
         "typescript": "5.1.6",
         "vite": "4.4.9",
         "vite-plugin-dts": "3.5.1",
-        "vitepress": "1.0.0-beta.1",
+        "vitepress": "1.0.0-rc.10",
         "vitest": "0.34.1"
     },
     "lint-staged": {
