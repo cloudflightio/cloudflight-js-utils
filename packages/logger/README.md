@@ -53,6 +53,18 @@ A consumer takes the log messages and sends them to a target that can deal with 
 For example the console consumer exposed by the lib just prints the logs onto the console.
 Consumers can be written for firebase, graylog and others.
 
+#### Default Consumer
+
+Loggers initially **do not** have any consumers. Meaning, nothing happens if they are used as is, not even console
+outputs will exist. Do not forget to set up consumers in your setup file. Below is an example that sets up a console
+consumer.
+
+```ts
+import {createConsoleConsumer, globalLogger} from '@cloudflight/logger';
+
+globalLogger.addConsumer(createConsoleConsumer());
+```
+
 ### Understanding log levels
 
 If you have dug a little into the api documentation then you would have noticed that both the logger and the
