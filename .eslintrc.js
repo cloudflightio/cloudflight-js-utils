@@ -58,7 +58,13 @@ module.exports = {
             files: '*.json',
             parser: 'jsonc-eslint-parser',
             rules: {
-                '@nx/dependency-checks': 'error',
+                '@nx/dependency-checks': [
+                    'error',
+                    {
+                        ignoredFiles: ['{projectRoot}/vite.config.ts', 'packages/nx-plugin-typedoc/src/executors/build/executor.ts'],
+                        ignoredDependencies: ['vitest', 'symbol-observable', 'tslib'],
+                    },
+                ],
             },
         },
         {
