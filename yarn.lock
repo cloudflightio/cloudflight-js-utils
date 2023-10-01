@@ -7442,10 +7442,10 @@ handle-thing@^2.0.0:
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
   integrity sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==
 
-happy-dom@10.10.0:
-  version "10.10.0"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-10.10.0.tgz#46cb9755e51032595556c50edee778149caf7b90"
-  integrity sha512-rpWFSemZoid3OKuzMs47CDUOnAYV10vYlXaVBPD+dBDHTAFkyIIpkHXx8gd/uWMyf+XOluQNnxImWp17SprE2Q==
+happy-dom@12.4.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-12.4.0.tgz#7da7209e9655bbd4642d0b31b0d753846550086d"
+  integrity sha512-I3MUV+70GG4UfPuPLATndGwSZcB1q0EdJtwFTiC5nCNLGQY5tPdloyIJdq94lgVjH537gLFmo8zJgDvqvP/FDw==
   dependencies:
     css.escape "^1.5.1"
     entities "^4.5.0"
