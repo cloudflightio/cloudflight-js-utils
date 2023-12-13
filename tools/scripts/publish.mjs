@@ -10,6 +10,7 @@
 import devkit from '@nx/devkit';
 import {execSync} from 'child_process';
 import chalk from 'chalk';
+import {writeFileSync} from 'node:fs';
 
 function invariant(condition, message) {
     if (!condition) {
@@ -42,7 +43,8 @@ invariant(actualOutputPath, `Could not find "build.options.outputPath" of projec
 process.chdir(actualOutputPath);
 
 // needed, so it does not complain this output dir for not being in the project workspace
-execSync(`volta run --yarn ${packageJson.volta.yarn} yarn install`);
+writeFileSync('yarn.lock', '');
+execSync(`volta run --yarn ${packageJson.volta.yarn} yarn install --mode=update-lockfile`, {encoding: 'utf8'});
 
 // Execute "yarn npm publish" to publish
-execSync(`volta run --yarn ${packageJson.volta.yarn} yarn npm publish`);
+execSync(`volta run --yarn ${packageJson.volta.yarn} yarn npm publish`, {encoding: 'utf8'});
