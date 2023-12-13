@@ -152,3 +152,5 @@ Thumbs.db
 .temp
 .cache
 apps/documentation/src/api
+
+.nx/cache

@@ -61,8 +61,13 @@ module.exports = {
                 '@nx/dependency-checks': [
                     'error',
                     {
-                        ignoredFiles: ['{projectRoot}/vite.config.ts', 'packages/nx-plugin-typedoc/src/executors/build/executor.ts'],
-                        ignoredDependencies: ['vitest', 'symbol-observable', 'tslib'],
+                        ignoredFiles: [
+                            '{projectRoot}/vite.config.ts',
+                            'packages/nx-plugin-typedoc/src/executors/build/executor.ts',
+                            '{projectRoot}/src/test-setup.ts',
+                            '{projectRoot}/src/**/*.spec.ts',
+                        ],
+                        ignoredDependencies: ['tslib'],
                     },
                 ],
             },

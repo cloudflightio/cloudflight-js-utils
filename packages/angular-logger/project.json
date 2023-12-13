@@ -37,15 +37,11 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/packages/angular-logger"],
             "options": {
-                "jestConfig": "packages/angular-logger/jest.config.ts",
-                "passWithNoTests": true
+                "jestConfig": "packages/angular-logger/jest.config.ts"
             }
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["packages/angular-logger/**/*.ts", "packages/angular-logger/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

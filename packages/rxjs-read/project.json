@@ -20,11 +20,8 @@
             }
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["packages/rxjs-read/**/*.ts", "packages/rxjs-read/package.json"]
-            }
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
         },
         "publish": {
             "executor": "nx:run-commands",
