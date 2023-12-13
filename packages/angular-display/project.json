@@ -36,15 +36,11 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/packages/angular-display"],
             "options": {
-                "jestConfig": "packages/angular-display/jest.config.ts",
-                "passWithNoTests": true
+                "jestConfig": "packages/angular-display/jest.config.ts"
             }
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["packages/angular-display/**/*.ts", "packages/angular-display/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "generate-docs": {
             "executor": "@cloudflight/nx-plugin-typedoc:build",

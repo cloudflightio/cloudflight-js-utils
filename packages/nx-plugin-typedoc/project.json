@@ -37,23 +37,14 @@
             }
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": [
-                    "packages/nx-plugin-typedoc/**/*.ts",
-                    "packages/nx-plugin-typedoc/generators.json",
-                    "packages/nx-plugin-typedoc/executors.json",
-                    "packages/nx-plugin-typedoc/package.json"
-                ]
-            }
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
         },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/packages/nx-plugin-typedoc"],
             "options": {
-                "jestConfig": "packages/nx-plugin-typedoc/jest.config.ts",
-                "passWithNoTests": true
+                "jestConfig": "packages/nx-plugin-typedoc/jest.config.ts"
             }
         }
     },

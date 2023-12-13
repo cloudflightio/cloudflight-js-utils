@@ -1,6 +1,6 @@
 {
     "name": "@cloudflight/angular-logger",
-    "version": "0.6.2",
+    "version": "0.7.0",
     "keywords": [
         "angular-logger",
         "logger"
@@ -15,7 +15,7 @@
         "access": "public"
     },
     "peerDependencies": {
-        "@angular/common": "^16.0.3",
-        "@angular/core": "^16.0.3"
+        "@angular/core": "^17.0.6",
+        "@cloudflight/logger": "0.7.0"
     }
 }

@@ -3,3 +3,5 @@ tmp
 /apps/documentation/src/api
 .idea
 .yarn
+
+/.nx/cache
