@@ -13,9 +13,9 @@ __metadata:
   linkType: hard
 
 "@adobe/css-tools@npm:^4.0.1":
-  version: 4.3.1
-  resolution: "@adobe/css-tools@npm:4.3.1"
-  checksum: 05672719b544cc0c21ae3ed0eb6349bf458e9d09457578eeeb07cf0f696469ac6417e9c9be1b129e5d6a18098a061c1db55b2275591760ef30a79822436fcbfa
+  version: 4.3.2
+  resolution: "@adobe/css-tools@npm:4.3.2"
+  checksum: 296a03dd29f227c60500d2da8c7f64991fecf1d8b456ce2b4adb8cec7363d9c08b5b03f1463673fc8cbfe54b538745588e7a13c736d2dd14a80c01a20f127f39
   languageName: node
   linkType: hard
 
@@ -2509,25 +2509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.10.3, @babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.22.11":
-  version: 7.22.11
-  resolution: "@babel/traverse@npm:7.22.11"
-  dependencies:
-    "@babel/code-frame": "npm:^7.22.10"
-    "@babel/generator": "npm:^7.22.10"
-    "@babel/helper-environment-visitor": "npm:^7.22.5"
-    "@babel/helper-function-name": "npm:^7.22.5"
-    "@babel/helper-hoist-variables": "npm:^7.22.5"
-    "@babel/helper-split-export-declaration": "npm:^7.22.6"
-    "@babel/parser": "npm:^7.22.11"
-    "@babel/types": "npm:^7.22.11"
-    debug: "npm:^4.1.0"
-    globals: "npm:^11.1.0"
-  checksum: 0a59df7c8660238d6a018de07e9b52592460cc393b724a7ac0289fe8129081ec2aeb772befe2c36909a32563c781082ffe85b407a26e2237a95b68c0f59e9849
-  languageName: node
-  linkType: hard
-
-"@babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.23.6":
+"@babel/traverse@npm:^7.10.3, @babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.22.11, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.23.6":
   version: 7.23.6
   resolution: "@babel/traverse@npm:7.23.6"
   dependencies:
@@ -8359,7 +8341,7 @@ __metadata:
     lint-staged: "npm:15.2.0"
     ng-packagr: "npm:17.0.2"
     nx: "npm:17.2.4"
-    postcss: "npm:8.4.31"
+    postcss: "npm:8.4.32"
     postcss-import: "npm:15.1.0"
     postcss-preset-env: "npm:9.1.4"
     postcss-url: "npm:10.1.3"
@@ -16613,6 +16595,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:8.4.32, postcss@npm:^8.4.31, postcss@npm:^8.4.32":
+  version: 8.4.32
+  resolution: "postcss@npm:8.4.32"
+  dependencies:
+    nanoid: "npm:^3.3.7"
+    picocolors: "npm:^1.0.0"
+    source-map-js: "npm:^1.0.2"
+  checksum: 39308a9195fa34d4dbdd7b58a896cff0c7809f84f7a4ac1b95b68ca86c9138a395addff33075668ed3983d41b90aac05754c445237a9365eb1c3a5602ebd03ad
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^8.1.10, postcss@npm:^8.2.14, postcss@npm:^8.4.14, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.27":
   version: 8.4.29
   resolution: "postcss@npm:8.4.29"
@@ -16621,17 +16614,6 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
   checksum: b50b7ad4ac6c9ba029eda4381863570b7aed2672ffae2566ef109e556bae01823a51180409877ff2cce1fe186025751c7191c301eafc07b0d90c630ab5e0365c
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.4.31, postcss@npm:^8.4.32":
-  version: 8.4.32
-  resolution: "postcss@npm:8.4.32"
-  dependencies:
-    nanoid: "npm:^3.3.7"
-    picocolors: "npm:^1.0.0"
-    source-map-js: "npm:^1.0.2"
-  checksum: 39308a9195fa34d4dbdd7b58a896cff0c7809f84f7a4ac1b95b68ca86c9138a395addff33075668ed3983d41b90aac05754c445237a9365eb1c3a5602ebd03ad
   languageName: node
   linkType: hard
 
