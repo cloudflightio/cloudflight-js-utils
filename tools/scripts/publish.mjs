@@ -41,5 +41,8 @@ invariant(actualOutputPath, `Could not find "build.options.outputPath" of projec
 
 process.chdir(actualOutputPath);
 
+// needed, so it does not complain this output dir for not being in the project workspace
+execSync(`volta run --yarn ${packageJson.volta.yarn} yarn install`);
+
 // Execute "yarn npm publish" to publish
 execSync(`volta run --yarn ${packageJson.volta.yarn} yarn npm publish`);
