@@ -40,4 +40,4 @@ invariant(actualOutputPath, `Could not find "build.options.outputPath" of projec
 process.chdir(actualOutputPath);
 
 // Execute "yarn publish" to publish
-execSync(`yarn publish`);
+execSync(`yarn npm publish`);
