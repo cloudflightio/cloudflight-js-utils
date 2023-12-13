@@ -33,11 +33,13 @@ if (outputPath == null) {
     throw new Error('there is no output path for the project');
 }
 
+const packageJson = devkit.readJsonFile(`${devkit.workspaceRoot}/package.json`);
+
 const actualOutputPath = outputPath.startsWith('{workspaceRoot}/') ? outputPath.slice('{workspaceRoot}/'.length) : outputPath;
 
 invariant(actualOutputPath, `Could not find "build.options.outputPath" of project "${name}". Is project.json configured correctly?`);
 
 process.chdir(actualOutputPath);
 
-// Execute "yarn publish" to publish
-execSync(`yarn npm publish`);
+// Execute "yarn npm publish" to publish
+execSync(`volta run --yarn ${packageJson.volta.yarn} yarn npm publish`);
