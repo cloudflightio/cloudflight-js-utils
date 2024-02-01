@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 6
   cacheKey: 10c0
 
 "@aashutoshrathi/word-wrap@npm:^1.2.3":
@@ -3087,14 +3087,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.5.2, @docsearch/css@npm:^3.3.5":
+"@docsearch/css@npm:3.5.2, @docsearch/css@npm:^3.5.2":
   version: 3.5.2
   resolution: "@docsearch/css@npm:3.5.2"
   checksum: 736e029b65dba3b2fafb98b4bc4e6f7f411863fed4ef2798c82be8dcdcbdcb9dea6a75376b19d013e9d2f8607b2e3f8d8353938343b08b382894d8b16883ccb3
   languageName: node
   linkType: hard
 
-"@docsearch/js@npm:^3.3.5":
+"@docsearch/js@npm:^3.5.2":
   version: 3.5.2
   resolution: "@docsearch/js@npm:3.5.2"
   dependencies:
@@ -6036,10 +6036,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/web-bluetooth@npm:^0.0.17":
-  version: 0.0.17
-  resolution: "@types/web-bluetooth@npm:0.0.17"
-  checksum: 2708d9673c4d1fa8476dbf58525a3075a696534479bb26c8a0ab2366e0df8945f384a2b2a2160d644c55e98ae12b7a0c47c5e1d619a2886471a366f1f6c1537e
+"@types/web-bluetooth@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "@types/web-bluetooth@npm:0.0.20"
+  checksum: 8/d6d61da683e876e8995ac57e2e5229d829d0f536deb3568d4430898fc626ebcb7e065fe7f655ac6a5205702f7f7049e6335abe689cd5291241eef6e39e8a4371
   languageName: node
   linkType: hard
 
@@ -6306,16 +6306,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^4.2.3":
-  version: 4.3.4
-  resolution: "@vitejs/plugin-vue@npm:4.3.4"
-  peerDependencies:
-    vite: ^4.0.0
-    vue: ^3.2.25
-  checksum: 55c8760f3826ef80cc277f417fc99e58cc43513a2ff6e796250f9051acca811f30ef15b0a122b805d7063e91e78448795c57ddf659d7e853473fccc1afbeec54
-  languageName: node
-  linkType: hard
-
 "@vitest/coverage-istanbul@npm:1.0.4":
   version: 1.0.4
   resolution: "@vitest/coverage-istanbul@npm:1.0.4"
@@ -6574,25 +6564,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:10.4.1, @vueuse/core@npm:^10.1.2":
-  version: 10.4.1
-  resolution: "@vueuse/core@npm:10.4.1"
+"@vueuse/core@npm:10.7.2, @vueuse/core@npm:^10.4.1":
+  version: 10.7.2
+  resolution: "@vueuse/core@npm:10.7.2"
   dependencies:
-    "@types/web-bluetooth": "npm:^0.0.17"
-    "@vueuse/metadata": "npm:10.4.1"
-    "@vueuse/shared": "npm:10.4.1"
-    vue-demi: "npm:>=0.14.5"
-  checksum: 60685a2c7196610a8ed6e1ee32b32a5e68ac0263ecf8105e40818f9fce4179388dab0083592c4436f1ee2d7892c270db3dce8026c31a272d3e2e7200f82022a5
+    "@types/web-bluetooth": ^0.0.20
+    "@vueuse/metadata": 10.7.2
+    "@vueuse/shared": 10.7.2
+    vue-demi: ">=0.14.6"
+  checksum: 8/0a1e9433f4f4cd40838bcb4a055c16f48303ced860d53c4541458103b72b52c261836c3d7896719412f24e5d9e460870db3ab74f3b18b399d46c2dc1dc1ec613
   languageName: node
   linkType: hard
 
-"@vueuse/integrations@npm:^10.1.2":
-  version: 10.4.1
-  resolution: "@vueuse/integrations@npm:10.4.1"
+"@vueuse/integrations@npm:^10.4.1":
+  version: 10.7.2
+  resolution: "@vueuse/integrations@npm:10.7.2"
   dependencies:
-    "@vueuse/core": "npm:10.4.1"
-    "@vueuse/shared": "npm:10.4.1"
-    vue-demi: "npm:>=0.14.5"
+    "@vueuse/core": 10.7.2
+    "@vueuse/shared": 10.7.2
+    vue-demi: ">=0.14.6"
   peerDependencies:
     async-validator: "*"
     axios: "*"
@@ -6631,23 +6621,23 @@ __metadata:
       optional: true
     universal-cookie:
       optional: true
-  checksum: 7369a8f7d2c6ea83ca179c1266fae647acb28ccc78506ddee5451e17d96afe9c9bacefa6c034a687ca2306c19650e57c5e6f30f110431eff18baff402aceffd3
+  checksum: 8/2a2a795d7ab4384eeccfd46cf69ee976005117e6cf63ead5156c3c4a47126c93399dbf66117d3f665038d824c2790867ad439ceeee234cc32207f13d4ad3f53e
   languageName: node
   linkType: hard
 
-"@vueuse/metadata@npm:10.4.1":
-  version: 10.4.1
-  resolution: "@vueuse/metadata@npm:10.4.1"
-  checksum: 144b6861c022581c39da59c4253b536fcf4470abbca1862a3ee0bf0bba392c8442c06c76d6ee34454f2ee7df19455f9fb18afc143041b5998cffff1ae605ff23
+"@vueuse/metadata@npm:10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/metadata@npm:10.7.2"
+  checksum: 8/51bb8d451ff6c867fc9d315559f3ca8ce206a7da65f3dc0124c4ccc69fa608ec0d8ed050e282a69da29a0b8a9528904b1d0e1084bbc08a07ec7a1439e5dffb14
   languageName: node
   linkType: hard
 
-"@vueuse/shared@npm:10.4.1":
-  version: 10.4.1
-  resolution: "@vueuse/shared@npm:10.4.1"
+"@vueuse/shared@npm:10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/shared@npm:10.7.2"
   dependencies:
-    vue-demi: "npm:>=0.14.5"
-  checksum: 3dda444bb1a1b0c512810f7f25096071a58e976cd822318b6f2ace1a0fa2d495a9ad76be1a743c18bf0bb27ef4a1bf8bf0c3d50fd356a0290fc85aeffec22798
+    vue-demi: ">=0.14.6"
+  checksum: 8/c03cbbd7cdf640ff3179ea26bf98879cbbc71cdedd994c8a5a519cb90d96b3ae088dbc5411e904681a76470849ff9a110a1c4c136eca0d94081f1c64ca850798
   languageName: node
   linkType: hard
 
@@ -7726,13 +7716,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-scroll-lock@npm:4.0.0-beta.0":
-  version: 4.0.0-beta.0
-  resolution: "body-scroll-lock@npm:4.0.0-beta.0"
-  checksum: 32a9553b83424e69f3784d7bbcef2949c43159ea13b5084c96dc08b1e2585e4eeb1e915f14e37a4ac44110339dfa6fa2ddde4d3d812be88ecbea060aa724a791
-  languageName: node
-  linkType: hard
-
 "bonjour-service@npm:^1.0.11":
   version: 1.1.1
   resolution: "bonjour-service@npm:1.1.1"
@@ -8287,80 +8270,80 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cloudflight@workspace:."
   dependencies:
-    "@angular-devkit/build-angular": "npm:17.0.6"
-    "@angular-devkit/core": "npm:17.0.6"
-    "@angular-devkit/schematics": "npm:17.0.6"
-    "@angular/animations": "npm:17.0.6"
-    "@angular/cli": "npm:~17.0.6"
-    "@angular/common": "npm:17.0.6"
-    "@angular/compiler": "npm:17.0.6"
-    "@angular/compiler-cli": "npm:17.0.6"
-    "@angular/core": "npm:17.0.6"
-    "@angular/forms": "npm:17.0.6"
-    "@angular/language-service": "npm:17.0.6"
-    "@angular/platform-browser": "npm:17.0.6"
-    "@angular/platform-browser-dynamic": "npm:17.0.6"
-    "@angular/router": "npm:17.0.6"
-    "@cloudflight/eslint-plugin-angular": "npm:0.22.0"
-    "@cloudflight/eslint-plugin-typescript": "npm:0.22.0"
-    "@cloudflight/prettier-config": "npm:0.18.0"
-    "@datorama/akita": "npm:~8.0.1"
-    "@nx/angular": "npm:17.2.4"
-    "@nx/devkit": "npm:17.2.4"
-    "@nx/eslint": "npm:17.2.4"
-    "@nx/eslint-plugin": "npm:17.2.4"
-    "@nx/jest": "npm:17.2.4"
-    "@nx/js": "npm:17.2.4"
-    "@nx/plugin": "npm:17.2.4"
-    "@nx/vite": "npm:17.2.4"
-    "@nx/web": "npm:17.2.4"
-    "@nx/workspace": "npm:17.2.4"
-    "@rushstack/eslint-patch": "npm:1.6.0"
-    "@schematics/angular": "npm:17.0.6"
-    "@swc-node/register": "npm:1.6.8"
-    "@swc/cli": "npm:0.1.63"
-    "@swc/core": "npm:1.3.100"
-    "@swc/helpers": "npm:0.5.3"
-    "@swc/jest": "npm:0.2.29"
-    "@types/jest": "npm:29.5.11"
-    "@types/node": "npm:20.10.4"
-    "@vitest/coverage-istanbul": "npm:1.0.4"
-    "@vitest/ui": "npm:1.0.4"
-    eslint: "npm:8.55.0"
-    eslint-config-prettier: "npm:9.1.0"
-    eslint-import-resolver-typescript: "npm:3.6.1"
-    happy-dom: "npm:12.10.3"
-    husky: "npm:8.0.3"
-    jest: "npm:29.7.0"
-    jest-auto-spies: "npm:3.0.0"
-    jest-environment-jsdom: "npm:29.7.0"
-    jest-environment-node: "npm:29.7.0"
-    jest-preset-angular: "npm:13.1.4"
-    jsdom: "npm:~23.0.1"
-    jsonc-eslint-parser: "npm:2.4.0"
-    lint-staged: "npm:15.2.0"
-    ng-packagr: "npm:17.0.2"
-    nx: "npm:17.2.4"
-    postcss: "npm:8.4.32"
-    postcss-import: "npm:15.1.0"
-    postcss-preset-env: "npm:9.1.4"
-    postcss-url: "npm:10.1.3"
-    prettier: "npm:2.8.8"
-    rxjs: "npm:7.8.1"
-    sass-loader: "npm:13.3.2"
-    symbol-observable: "npm:4.0.0"
-    ts-jest: "npm:29.1.1"
-    ts-node: "npm:10.9.2"
-    tslib: "npm:2.6.2"
-    typedoc: "npm:0.24.8"
-    typedoc-plugin-markdown: "npm:4.0.0-next.12"
-    typedoc-vitepress-theme: "npm:1.0.0-next.1"
-    typescript: "npm:5.2.2"
-    vite: "npm:5.0.8"
-    vite-plugin-dts: "npm:3.6.4"
-    vitepress: "npm:1.0.0-beta.1"
-    vitest: "npm:1.0.4"
-    zone.js: "npm:0.14.2"
+    "@angular-devkit/build-angular": 17.0.6
+    "@angular-devkit/core": 17.0.6
+    "@angular-devkit/schematics": 17.0.6
+    "@angular/animations": 17.0.6
+    "@angular/cli": ~17.0.6
+    "@angular/common": 17.0.6
+    "@angular/compiler": 17.0.6
+    "@angular/compiler-cli": 17.0.6
+    "@angular/core": 17.0.6
+    "@angular/forms": 17.0.6
+    "@angular/language-service": 17.0.6
+    "@angular/platform-browser": 17.0.6
+    "@angular/platform-browser-dynamic": 17.0.6
+    "@angular/router": 17.0.6
+    "@cloudflight/eslint-plugin-angular": 0.22.0
+    "@cloudflight/eslint-plugin-typescript": 0.22.0
+    "@cloudflight/prettier-config": 0.18.0
+    "@datorama/akita": ~8.0.1
+    "@nx/angular": 17.2.4
+    "@nx/devkit": 17.2.4
+    "@nx/eslint": 17.2.4
+    "@nx/eslint-plugin": 17.2.4
+    "@nx/jest": 17.2.4
+    "@nx/js": 17.2.4
+    "@nx/plugin": 17.2.4
+    "@nx/vite": 17.2.4
+    "@nx/web": 17.2.4
+    "@nx/workspace": 17.2.4
+    "@rushstack/eslint-patch": 1.6.0
+    "@schematics/angular": 17.0.6
+    "@swc-node/register": 1.6.8
+    "@swc/cli": 0.1.63
+    "@swc/core": 1.3.100
+    "@swc/helpers": 0.5.3
+    "@swc/jest": 0.2.29
+    "@types/jest": 29.5.11
+    "@types/node": 20.10.4
+    "@vitest/coverage-istanbul": 1.0.4
+    "@vitest/ui": 1.0.4
+    eslint: 8.55.0
+    eslint-config-prettier: 9.1.0
+    eslint-import-resolver-typescript: 3.6.1
+    happy-dom: 12.10.3
+    husky: 8.0.3
+    jest: 29.7.0
+    jest-auto-spies: 3.0.0
+    jest-environment-jsdom: 29.7.0
+    jest-environment-node: 29.7.0
+    jest-preset-angular: 13.1.4
+    jsdom: ~23.0.1
+    jsonc-eslint-parser: 2.4.0
+    lint-staged: 15.2.0
+    ng-packagr: 17.0.2
+    nx: 17.2.4
+    postcss: 8.4.32
+    postcss-import: 15.1.0
+    postcss-preset-env: 9.1.4
+    postcss-url: 10.1.3
+    prettier: 2.8.8
+    rxjs: 7.8.1
+    sass-loader: 13.3.2
+    symbol-observable: 4.0.0
+    ts-jest: 29.1.1
+    ts-node: 10.9.2
+    tslib: 2.6.2
+    typedoc: 0.24.8
+    typedoc-plugin-markdown: 4.0.0-next.12
+    typedoc-vitepress-theme: 1.0.0-next.1
+    typescript: 5.2.2
+    vite: 5.0.8
+    vite-plugin-dts: 3.6.4
+    vitepress: 1.0.0-rc.13
+    vitest: 1.0.4
+    zone.js: 0.14.2
   languageName: unknown
   linkType: soft
 
@@ -10916,12 +10899,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-trap@npm:^7.4.2":
-  version: 7.5.2
-  resolution: "focus-trap@npm:7.5.2"
+"focus-trap@npm:^7.5.2":
+  version: 7.5.4
+  resolution: "focus-trap@npm:7.5.4"
   dependencies:
-    tabbable: "npm:^6.2.0"
-  checksum: 4b6948586304eab08de9bd6955719845c1b070ff6dfa3f6125bc1f6e47f34ca96b86b2c99f9231d5966636fa5d179c1f95c50695cd8039c3530c0474316b2c0a
+    tabbable: ^6.2.0
+  checksum: 8/9589ae0c8ad2f0bb0610c23e949571ef956424f1e7f7e1981c0d95ce518ea97b8bdd3d43b68c6113cbbcf35c9d36d521ffc2841610f7d5cc1746e2aa84faf578
   languageName: node
   linkType: hard
 
@@ -11123,9 +11106,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@npm%3A^2.3.2#optional!builtin<compat/fsevents>, fsevents@patch:fsevents@npm%3A~2.3.2#optional!builtin<compat/fsevents>, fsevents@patch:fsevents@npm%3A~2.3.3#optional!builtin<compat/fsevents>":
+"fsevents@patch:fsevents@npm%3A^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@npm%3A~2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@npm%3A~2.3.3#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
   dependencies:
     node-gyp: "npm:latest"
   conditions: os=darwin
@@ -17150,39 +17133,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A1.22.8#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>":
   version: 1.22.8
-  resolution: "resolve@patch:resolve@npm%3A1.22.8#optional!builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.13.0"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 0446f024439cd2e50c6c8fa8ba77eaa8370b4180f401a96abf3d1ebc770ac51c1955e12764cde449fde3fff480a61f84388e3505ecdbab778f4bef5f8212c729
+  checksum: 8/5479b7d431cacd5185f8db64bfcb7286ae5e31eb299f4c4f404ad8aa6098b77599563ac4257cb2c37a42f59dfc06a1bec2bcf283bb448f319e37f0feb9a09847
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.1.7#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.12.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.4#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A~1.22.1#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.4#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A~1.22.1#~builtin<compat/resolve>":
   version: 1.22.4
-  resolution: "resolve@patch:resolve@npm%3A1.22.4#optional!builtin<compat/resolve>::version=1.22.4&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.4#~builtin<compat/resolve>::version=1.22.4&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.13.0"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 60ca179599acf8b1bb17b850280a7081781b457d235d48197dc893b82d75741f191c5fe2d93e5729292234d0b0d88e9add273df4b9e04755eeed4fd7d23f1c79
+  checksum: 8/c45f2545fdc4d21883861b032789e20aa67a2f2692f68da320cc84d5724cd02f2923766c5354b3210897e88f1a7b3d6d2c7c22faeead8eed7078e4c783a444bc
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A~1.19.0#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A~1.19.0#~builtin<compat/resolve>":
   version: 1.19.0
-  resolution: "resolve@patch:resolve@npm%3A1.19.0#optional!builtin<compat/resolve>::version=1.19.0&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.19.0#~builtin<compat/resolve>::version=1.19.0&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.1.0"
     path-parse: "npm:^1.0.6"
-  checksum: 254980f60dd9fdb28b34a511e70df6e3027d9627efce86a40757eea9b87252d172829c84517554560c4541ebfe207868270c19a0f086997b41209367aa8ef74f
+  checksum: 8/2443b94d347e6946c87c85faf13071f605e609e0b54784829b0ed2b917d050bfc1cbaf4ecc6453f224cfa7d0c5dcd97cbb273454cd210bee68e4af15c1a5abc9
   languageName: node
   linkType: hard
 
@@ -17783,7 +17766,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.14.1, shiki@npm:^0.14.2":
+"shiki@npm:^0.14.1":
   version: 0.14.4
   resolution: "shiki@npm:0.14.4"
   dependencies:
@@ -17792,6 +17775,18 @@ __metadata:
     vscode-oniguruma: "npm:^1.7.0"
     vscode-textmate: "npm:^8.0.0"
   checksum: 9d1609fde8b7d361b0a9bce62dd72fc5cb2be566f215b14427d0d04bbd272bcfe0662cd6a158db56391daa55f246017f0fa8a8a78b8c8611c3cc03923587b6f4
+  languageName: node
+  linkType: hard
+
+"shiki@npm:^0.14.4":
+  version: 0.14.7
+  resolution: "shiki@npm:0.14.7"
+  dependencies:
+    ansi-sequence-parser: ^1.1.0
+    jsonc-parser: ^3.2.0
+    vscode-oniguruma: ^1.7.0
+    vscode-textmate: ^8.0.0
+  checksum: 8/2aec3b3519df977c4391df9e1825cb496e9a4d7e11395f05a0da77e4fa2f7c3d9d6e6ee94029ac699533017f2b25637ee68f6d39f05f311535c2704d0329b520
   languageName: node
   linkType: hard
 
@@ -19156,23 +19151,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.2.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@5.2.2#~builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.2.2#~builtin<compat/typescript>":
   version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 062c1cee1990e6b9419ce8a55162b8dc917eb87f807e4de0327dbc1c2fa4e5f61bc0dd4e034d38ff541d1ed0479b53bcee8e4de3a4075c51a1724eb6216cb6f5
+  checksum: 8/0f4da2f15e6f1245e49db15801dbee52f2bbfb267e1c39225afdab5afee1a72839cd86000e65ee9d7e4dfaff12239d28beaf5ee431357fcced15fb08583d72ca
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A~5.0.4#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A~5.0.4#~builtin<compat/typescript>":
   version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#optional!builtin<compat/typescript>::version=5.0.4&hash=b5f058"
+  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c3f7b80577bddf6fab202a7925131ac733bfc414aec298c2404afcddc7a6f242cfa8395cf2d48192265052e11a7577c27f6e5fac8d8fe6a6602023c83d6b3292
+  checksum: 8/d26b6ba97b6d163c55dbdffd9bbb4c211667ebebc743accfeb2c8c0154aace7afd097b51165a72a5bad2cf65a4612259344ff60f8e642362aa1695c760d303ac
   languageName: node
   linkType: hard
 
@@ -19547,14 +19542,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.3.8":
-  version: 4.4.9
-  resolution: "vite@npm:4.4.9"
+"vite@npm:^4.4.9":
+  version: 4.5.2
+  resolution: "vite@npm:4.5.2"
   dependencies:
-    esbuild: "npm:^0.18.10"
-    fsevents: "npm:~2.3.2"
-    postcss: "npm:^8.4.27"
-    rollup: "npm:^3.27.1"
+    esbuild: ^0.18.10
+    fsevents: ~2.3.2
+    postcss: ^8.4.27
+    rollup: ^3.27.1
   peerDependencies:
     "@types/node": ">= 14"
     less: "*"
@@ -19583,30 +19578,28 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 80dbc632fd75b5866567c8fd605115c9d5718654dbf173f509cfd55c53f39dfbee24f62660e57fd5b11eb93f469a65abdbe6bae880ec8392bb70a5d0d7b6e6a9
+  checksum: 8/9d1f84f703c2660aced34deee7f309278ed368880f66e9570ac115c793d91f7fffb80ab19c602b3c8bc1341fe23437d86a3fcca2a9ef82f7ef0cdac5a40d0c86
   languageName: node
   linkType: hard
 
-"vitepress@npm:1.0.0-beta.1":
-  version: 1.0.0-beta.1
-  resolution: "vitepress@npm:1.0.0-beta.1"
+"vitepress@npm:1.0.0-rc.13":
+  version: 1.0.0-rc.13
+  resolution: "vitepress@npm:1.0.0-rc.13"
   dependencies:
-    "@docsearch/css": "npm:^3.3.5"
-    "@docsearch/js": "npm:^3.3.5"
-    "@vitejs/plugin-vue": "npm:^4.2.3"
-    "@vue/devtools-api": "npm:^6.5.0"
-    "@vueuse/core": "npm:^10.1.2"
-    "@vueuse/integrations": "npm:^10.1.2"
-    body-scroll-lock: "npm:4.0.0-beta.0"
-    focus-trap: "npm:^7.4.2"
-    mark.js: "npm:8.11.1"
-    minisearch: "npm:^6.1.0"
-    shiki: "npm:^0.14.2"
-    vite: "npm:^4.3.8"
-    vue: "npm:^3.3.4"
+    "@docsearch/css": ^3.5.2
+    "@docsearch/js": ^3.5.2
+    "@vue/devtools-api": ^6.5.0
+    "@vueuse/core": ^10.4.1
+    "@vueuse/integrations": ^10.4.1
+    focus-trap: ^7.5.2
+    mark.js: 8.11.1
+    minisearch: ^6.1.0
+    shiki: ^0.14.4
+    vite: ^4.4.9
+    vue: ^3.3.4
   bin:
     vitepress: bin/vitepress.js
-  checksum: 60076d49bd072f36c472ad8c32059afe050be86cda215f2e66a73d2199e694baeaa58cc8bf90ef644f181b3eaf3e13ef0d40416f0ace7484eeb08fc9aeab8ea2
+  checksum: 8/e0f3c34bb4a0d7325df9e0a441031276b1dd44f3032bb3c17a7132e5d35f3b1135b9fb64ca0b633f518956326f216e15e1656cfd121330e66c709f0d13568c22
   languageName: node
   linkType: hard
 
@@ -19675,7 +19668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-demi@npm:>=0.14.5":
+"vue-demi@npm:>=0.14.6":
   version: 0.14.6
   resolution: "vue-demi@npm:0.14.6"
   peerDependencies:
