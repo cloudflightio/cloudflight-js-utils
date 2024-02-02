@@ -7,5 +7,5 @@
         "allowSyntheticDefaultImports": true
     },
     "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
-    "include": ["**/*.ts", "src/.vitepress/config.ts"]
+    "include": ["**/*.ts", "src/.vitepress/config.mts"]
 }
