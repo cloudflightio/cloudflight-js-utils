@@ -40,10 +40,6 @@
     },
     "defaultProject": "documentation",
     "targetDefaults": {
-        "lint": {
-            "inputs": ["default", "{workspaceRoot}/.eslintrc.js"],
-            "cache": true
-        },
         "build": {
             "dependsOn": ["^build"],
             "cache": true
@@ -68,6 +64,10 @@
                     "codeCoverage": true
                 }
             }
+        },
+        "@nx/eslint:lint": {
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.js"],
+            "cache": true
         }
     }
 }
