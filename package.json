@@ -49,7 +49,7 @@
         "@angular-devkit/schematics": "17.1.2",
         "@angular/cli": "17.1.2",
         "@angular/compiler-cli": "17.1.2",
-        "@angular/language-service": "17.1.2",
+        "@angular/language-service": "17.2.3",
         "@cloudflight/eslint-plugin-angular": "0.23.0",
         "@cloudflight/eslint-plugin-typescript": "0.23.0",
         "@cloudflight/prettier-config": "0.18.0",
