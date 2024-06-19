@@ -154,3 +154,4 @@ Thumbs.db
 apps/documentation/src/api
 
 .nx/cache
+.nx/workspace-data
