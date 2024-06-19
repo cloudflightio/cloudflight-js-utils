@@ -127,11 +127,11 @@ describe('IsDisplayService', () => {
                 fakeMediaMatcher.setMatchesQuery(query, matches);
             });
 
-            test(`should return "${matches}" for isDisplay('phone')`, () => {
+            test(`should return "${String(matches)}" for isDisplay('phone')`, () => {
                 expect(isDisplayService.isDisplay('phone')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplay$('phone')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplay$('phone')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('phone'))).resolves.toEqual(matches);
             });
 
@@ -143,11 +143,11 @@ describe('IsDisplayService', () => {
                 await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(false);
             });
 
-            test(`should emit "${matches}" for isDisplayAtMost('tablet')`, () => {
+            test(`should emit "${String(matches)}" for isDisplayAtMost('tablet')`, () => {
                 expect(isDisplayService.isDisplayAtMost('tablet')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtMost$('tablet')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplayAtMost$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplayAtMost$('tablet'))).resolves.toEqual(matches);
             });
         });
@@ -165,27 +165,27 @@ describe('IsDisplayService', () => {
                 fakeMediaMatcher.setMatchesQuery(query, matches);
             });
 
-            test(`should return "${matches}" for isDisplay('tablet')`, () => {
+            test(`should return "${String(matches)}" for isDisplay('tablet')`, () => {
                 expect(isDisplayService.isDisplay('tablet')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplay$('tablet')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplay$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('tablet'))).resolves.toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtLeast('tablet')`, () => {
+            test(`should emit "${String(matches)}" for isDisplayAtLeast('tablet')`, () => {
                 expect(isDisplayService.isDisplayAtLeast('tablet')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtLeast$('tablet')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplayAtLeast$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtMost('tablet')`, () => {
+            test(`should emit "${String(matches)}" for isDisplayAtMost('tablet')`, () => {
                 expect(isDisplayService.isDisplayAtMost('tablet')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtMost$('tablet')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplayAtMost$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplayAtMost$('tablet'))).resolves.toEqual(matches);
             });
         });
@@ -203,19 +203,19 @@ describe('IsDisplayService', () => {
                 fakeMediaMatcher.setMatchesQuery(query, matches);
             });
 
-            test(`should return "${matches}" for isDisplay('desktop')`, () => {
+            test(`should return "${String(matches)}" for isDisplay('desktop')`, () => {
                 expect(isDisplayService.isDisplay('desktop')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplay$('desktop')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplay$('desktop')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplay$('desktop'))).resolves.toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtLeast('tablet')`, () => {
+            test(`should emit "${String(matches)}" for isDisplayAtLeast('tablet')`, () => {
                 expect(isDisplayService.isDisplayAtLeast('tablet')).toEqual(matches);
             });
 
-            test(`should emit "${matches}" for isDisplayAtLeast$('tablet')`, async () => {
+            test(`should emit "${String(matches)}" for isDisplayAtLeast$('tablet')`, async () => {
                 await expect(firstValueFrom(isDisplayService.isDisplayAtLeast$('tablet'))).resolves.toEqual(matches);
             });
 

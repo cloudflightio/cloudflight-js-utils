@@ -59,7 +59,9 @@ export function pipe<Functions extends ((arg: any) => PipeFnResult<any>)[]>(
         let pipeline = arg;
 
         for (const fn of functions) {
-            const result = fn(pipeline);
+            // eslint parsed the type here incorrectly, leading to a false negative
+            // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+            const result = fn(pipeline) as PipeFnResult<any>;
             if (result.type === 'cancel') {
                 return result;
             }

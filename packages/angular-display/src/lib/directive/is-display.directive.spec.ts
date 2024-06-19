@@ -59,6 +59,7 @@ describe('IsDisplayDirective', () => {
                 selector: 'clf-complex',
                 template: ` <span>{{ content }}</span> `,
                 changeDetection: ChangeDetectionStrategy.OnPush,
+                standalone: true,
             })
             class ComplexComponent {
                 @Input({required: true})
@@ -84,6 +85,8 @@ describe('IsDisplayDirective', () => {
                     <clf-complex *clfIsDisplay="'${breakpoint}'" [content]="content"></clf-complex>
                 `,
                 changeDetection: ChangeDetectionStrategy.OnPush,
+                standalone: true,
+                imports: [IsDisplayDirective, ComplexComponent],
             })
             class NormalBreakpointComponent {
                 protected readonly content = content;
@@ -93,8 +96,7 @@ describe('IsDisplayDirective', () => {
 
             beforeEach(() => {
                 fixture = TestBed.configureTestingModule({
-                    imports: [IsDisplayDirective],
-                    declarations: [NormalBreakpointComponent, ComplexComponent],
+                    imports: [NormalBreakpointComponent, ComplexComponent],
                     providers: [{provide: IsDisplayService, useValue: isDisplayServiceMock}],
                 }).createComponent(NormalBreakpointComponent);
                 fixture.detectChanges();
@@ -193,6 +195,8 @@ describe('IsDisplayDirective', () => {
             @Component({
                 template: ` <div id="display-only" *clfIsDisplay="'!${breakpoint}'">display-only</div> `,
                 changeDetection: ChangeDetectionStrategy.OnPush,
+                standalone: true,
+                imports: [IsDisplayDirective],
             })
             class InvertedBreakpointComponent {}
 
@@ -200,8 +204,7 @@ describe('IsDisplayDirective', () => {
 
             beforeEach(() => {
                 fixture = TestBed.configureTestingModule({
-                    imports: [IsDisplayDirective],
-                    declarations: [InvertedBreakpointComponent],
+                    imports: [InvertedBreakpointComponent],
                     providers: [{provide: IsDisplayService, useValue: isDisplayServiceMock}],
                 }).createComponent(InvertedBreakpointComponent);
                 fixture.detectChanges();
@@ -234,6 +237,8 @@ describe('IsDisplayDirective', () => {
         @Component({
             template: ` <div id="display-only" *clfIsDisplay="'<=tablet'">display-only</div> `,
             changeDetection: ChangeDetectionStrategy.OnPush,
+            standalone: true,
+            imports: [IsDisplayDirective],
         })
         class InvertedBreakpointComponent {}
 
@@ -241,8 +246,7 @@ describe('IsDisplayDirective', () => {
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
-                imports: [IsDisplayDirective],
-                declarations: [InvertedBreakpointComponent],
+                imports: [InvertedBreakpointComponent],
                 providers: [{provide: IsDisplayService, useValue: isDisplayServiceMock}],
             }).createComponent(InvertedBreakpointComponent);
             fixture.detectChanges();
@@ -274,6 +278,8 @@ describe('IsDisplayDirective', () => {
         @Component({
             template: ` <div id="display-only" *clfIsDisplay="'>=tablet'">display-only</div> `,
             changeDetection: ChangeDetectionStrategy.OnPush,
+            standalone: true,
+            imports: [IsDisplayDirective],
         })
         class InvertedBreakpointComponent {}
 
@@ -281,8 +287,7 @@ describe('IsDisplayDirective', () => {
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
-                imports: [IsDisplayDirective],
-                declarations: [InvertedBreakpointComponent],
+                imports: [InvertedBreakpointComponent],
                 providers: [{provide: IsDisplayService, useValue: isDisplayServiceMock}],
             }).createComponent(InvertedBreakpointComponent);
             fixture.detectChanges();

@@ -56,14 +56,14 @@ describe('filter-operator', () => {
                 let finalRead: Read<string, true>;
 
                 beforeEach(() => {
-                    finalRead = mappedRead.pipe(map((data: Data) => `${data.count}`));
+                    finalRead = mappedRead.pipe(map((data: Data) => String(data.count)));
                 });
 
                 describe('and when subscribing', () => {
                     it('should observe the mapped state', () => {
                         testScheduler.run(({expectObservable, cold}) => {
                             const expected$ = cold('a', {
-                                a: `${initial.count}`,
+                                a: String(initial.count),
                             });
                             expectObservable(from(finalRead)).toEqual(expected$);
                         });
@@ -72,7 +72,7 @@ describe('filter-operator', () => {
 
                 describe('and when synchronously accessing', () => {
                     it('should return the mapped state', () => {
-                        expect(finalRead.value).toEqual(`${initial.count}`);
+                        expect(finalRead.value).toEqual(String(initial.count));
                     });
                 });
             });
