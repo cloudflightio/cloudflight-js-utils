@@ -19,7 +19,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: volta-cli/action@v4.0.1
+            - uses: volta-cli/action@v4.1.1
             - name: Install
               run: yarn install --immutable --check-cache
             - name: Generate docs
