@@ -2174,7 +2174,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cloudflight/akita-read@workspace:packages/akita-read"
   peerDependencies:
-    "@cloudflight/rxjs-read": 0.7.0
+    "@cloudflight/rxjs-read": 0.8.0
     "@datorama/akita": ">=8.0.0 <9.0.0"
     rxjs: ">=7.0.0 <8.0.0"
   languageName: unknown
@@ -2194,7 +2194,7 @@ __metadata:
   resolution: "@cloudflight/angular-logger@workspace:packages/angular-logger"
   peerDependencies:
     "@angular/core": ^18.0.3
-    "@cloudflight/logger": 0.7.0
+    "@cloudflight/logger": 0.8.0
   languageName: unknown
   linkType: soft
 
