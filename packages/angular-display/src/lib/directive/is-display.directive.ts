@@ -124,7 +124,7 @@ export class IsDisplayDirective implements OnDestroy {
     public set clfIsNotDisplay(option: Breakpoint) {
         // in normal use ValidOption will be a template-string but here ts thinks it is never, because Breakpoints does not have any keys
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        this._init(`!${option}` as ValidOption);
+        this._init(`!${String(option)}` as ValidOption);
     }
 
     private _init(option: ValidOption): void {

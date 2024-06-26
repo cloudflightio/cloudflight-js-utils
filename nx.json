@@ -6,9 +6,6 @@
     },
     "extends": "nx/presets/npm.json",
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
-    "affected": {
-        "defaultBase": "main"
-    },
     "namedInputs": {
         "default": ["{projectRoot}/**/*"]
     },
@@ -69,5 +66,6 @@
             "inputs": ["default", "{workspaceRoot}/.eslintrc.js"],
             "cache": true
         }
-    }
+    },
+    "defaultBase": "main"
 }

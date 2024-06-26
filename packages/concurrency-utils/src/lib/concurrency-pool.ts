@@ -33,7 +33,7 @@ export interface ConcurrencyToken {
  */
 export class InvalidConcurrencyPoolSizeException extends Error {
     public constructor(size: number) {
-        super(`Concurrency pool initialized with size ${size} but should be at least 1`);
+        super(`Concurrency pool initialized with size ${String(size)} but should be at least 1`);
     }
 }
 

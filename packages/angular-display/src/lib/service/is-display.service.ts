@@ -137,7 +137,7 @@ export class IsDisplayService implements OnDestroy {
 function createMediaQuery(minWidthInclusive?: number, maxWidthExclusive?: number): string {
     let query = '';
     if (minWidthInclusive != null) {
-        query = `${query}(min-width: ${minWidthInclusive}px)`;
+        query = `${query}(min-width: ${String(minWidthInclusive)}px)`;
     }
     if (minWidthInclusive != null && maxWidthExclusive != null) {
         query = `${query} and `;
@@ -146,7 +146,7 @@ function createMediaQuery(minWidthInclusive?: number, maxWidthExclusive?: number
         // a very small number to make exclusive work
         // eslint-disable-next-line no-magic-numbers
         const maxWidth = maxWidthExclusive - 0.001;
-        query = `${query}(max-width: ${maxWidth}px)`;
+        query = `${query}(max-width: ${String(maxWidth)}px)`;
     }
     return query;
 }

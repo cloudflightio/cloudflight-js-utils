@@ -104,9 +104,8 @@ export class Read<T, Cancelling extends boolean = false> implements InteropObser
                 return (
                     provider
                         .observable()
-                        /* the pipe function does provide a rest parameter implementation,
-                         TS just cannot find it for some reason
-                         @ts-expect-error */
+                        // @ts-expect-error the pipe function does provide a rest parameter implementation,
+                        // TS just cannot find it for some reason
                         .pipe<ReturnTypeOfTailOperator<Operators>>(...operators.map((it) => it.observableOperator))
                 );
             },

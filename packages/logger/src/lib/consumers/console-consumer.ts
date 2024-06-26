@@ -16,7 +16,8 @@ export function createConsoleConsumer(): LogConsumer {
         logLevel: undefined,
         consume(name: string, level: LogLevel, messages: unknown[]) {
             const identifier = `%c[${name}][${getLevelName(level)}]`;
-            const color = `color:white; background: hsl(${getColorFor(name)},100%,40%);padding: 4px;font-weight:bold`;
+            const colorNumber = getColorFor(name);
+            const color = `color:white; background: hsl(${String(colorNumber)},100%,40%);padding: 4px;font-weight:bold`;
 
             switch (level) {
                 case LogLevel.Debug:
