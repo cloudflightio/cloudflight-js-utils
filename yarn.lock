@@ -359,6 +359,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular-devkit/core@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@angular-devkit/core@npm:18.0.6"
+  dependencies:
+    ajv: "npm:8.13.0"
+    ajv-formats: "npm:3.0.1"
+    jsonc-parser: "npm:3.2.1"
+    picomatch: "npm:4.0.2"
+    rxjs: "npm:7.8.1"
+    source-map: "npm:0.7.4"
+  peerDependencies:
+    chokidar: ^3.5.2
+  peerDependenciesMeta:
+    chokidar:
+      optional: true
+  checksum: 10c0/e8697b8af56cf4a0b344edf82d21d1824aad9cf705fa536f7c3d1e4c11c98a7390af8e15add248fc31bb708b186dba52a0246612a5b059f8bf06d7982ff8eed9
+  languageName: node
+  linkType: hard
+
 "@angular-devkit/schematics@npm:18.0.4":
   version: 18.0.4
   resolution: "@angular-devkit/schematics@npm:18.0.4"
@@ -369,6 +388,19 @@ __metadata:
     ora: "npm:5.4.1"
     rxjs: "npm:7.8.1"
   checksum: 10c0/891aa7ef05b153c0d20bdbf7e9bc1e817c4cbd5b98285b3c56bc4bc7edd573946fadf52d6a93997e3bb554039d38a626918848794ffbcf8a30654dba9d470656
+  languageName: node
+  linkType: hard
+
+"@angular-devkit/schematics@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@angular-devkit/schematics@npm:18.0.6"
+  dependencies:
+    "@angular-devkit/core": "npm:18.0.6"
+    jsonc-parser: "npm:3.2.1"
+    magic-string: "npm:0.30.10"
+    ora: "npm:5.4.1"
+    rxjs: "npm:7.8.1"
+  checksum: 10c0/bc28e8d1e6bc6f576d6573f37bdb720b983c10fa55e85f03b0a3eced5554f72c0d653992ac487db9fcef75b186dc1df1cfc9e5fdd0ba47a9e940d539602d3ae8
   languageName: node
   linkType: hard
 
@@ -4757,6 +4789,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@schematics/angular@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@schematics/angular@npm:18.0.6"
+  dependencies:
+    "@angular-devkit/core": "npm:18.0.6"
+    "@angular-devkit/schematics": "npm:18.0.6"
+    jsonc-parser: "npm:3.2.1"
+  checksum: 10c0/8c562958e80d2da584de7bec617d802a280dd4c0576c76b66ab06c217e1b978c04c7b2e0409e6fc834a045a4b7c97aa2d60356d60c26deecd1930dad63e04dc2
+  languageName: node
+  linkType: hard
+
 "@shikijs/core@npm:1.0.0-beta.3, @shikijs/core@npm:^1.0.0-beta.3":
   version: 1.0.0-beta.3
   resolution: "@shikijs/core@npm:1.0.0-beta.3"
@@ -7716,7 +7759,7 @@ __metadata:
     "@nx/web": "npm:19.3.1"
     "@nx/workspace": "npm:19.3.1"
     "@rushstack/eslint-patch": "npm:1.10.3"
-    "@schematics/angular": "npm:18.0.4"
+    "@schematics/angular": "npm:18.0.6"
     "@swc-node/register": "npm:1.9.2"
     "@swc/cli": "npm:0.3.12"
     "@swc/core": "npm:1.6.3"
