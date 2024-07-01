@@ -7754,7 +7754,7 @@ __metadata:
     ts-node: "npm:10.9.2"
     tslib: "npm:2.6.3"
     typedoc: "npm:0.24.8"
-    typedoc-plugin-markdown: "npm:4.0.0-next.12"
+    typedoc-plugin-markdown: "npm:4.0.0-next.20"
     typedoc-vitepress-theme: "npm:1.0.0-next.1"
     typescript: "npm:5.4.5"
     vite: "npm:5.3.1"
@@ -17729,13 +17729,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:4.0.0-next.12":
-  version: 4.0.0-next.12
-  resolution: "typedoc-plugin-markdown@npm:4.0.0-next.12"
+"typedoc-plugin-markdown@npm:4.0.0-next.20":
+  version: 4.0.0-next.20
+  resolution: "typedoc-plugin-markdown@npm:4.0.0-next.20"
   peerDependencies:
-    prettier: ">=1.8.0"
     typedoc: ">=0.24.0"
-  checksum: 10c0/dd7952604afa48e88cfc00932b6a5bcda1e3c69cfcbc656fa3639c4f3fdfe9b98e175f5e784fac2935b5b4bfbdf05da70b985f765fb3a54735938b5448bde783
+  checksum: 10c0/0d7a036acc11c28bd1a1616548df76dbe6f9dfa08b80acd2d249c72461d9d5e05e5dc39a079bccea75495c26d2155d3595e3dde4159da11bd122e14b11119f9d
   languageName: node
   linkType: hard
 
