@@ -625,19 +625,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser@npm:18.0.3":
-  version: 18.0.3
-  resolution: "@angular/platform-browser@npm:18.0.3"
+"@angular/platform-browser@npm:18.1.3":
+  version: 18.1.3
+  resolution: "@angular/platform-browser@npm:18.1.3"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/animations": 18.0.3
-    "@angular/common": 18.0.3
-    "@angular/core": 18.0.3
+    "@angular/animations": 18.1.3
+    "@angular/common": 18.1.3
+    "@angular/core": 18.1.3
   peerDependenciesMeta:
     "@angular/animations":
       optional: true
-  checksum: 10c0/b1f5d1b66f0a4468b0dfb0db4e0c249ff7d8cbc6bc398eb614b970efc0494fced9875426bbbd311b3886e72e791eef8af362509f4bfb751a97121ac0dfa090b1
+  checksum: 10c0/3410f9a41c05e96391eb64bd683e0514c0cbdafa7d1dbda40e8aca36dd4858bcc3d0b6ed81ad767e4414ee06cd9e5a237d50479253c2e65788a23b7c71bd6471
   languageName: node
   linkType: hard
 
@@ -7698,7 +7698,7 @@ __metadata:
     "@angular/core": "npm:18.0.3"
     "@angular/forms": "npm:18.0.3"
     "@angular/language-service": "npm:18.0.3"
-    "@angular/platform-browser": "npm:18.0.3"
+    "@angular/platform-browser": "npm:18.1.3"
     "@angular/platform-browser-dynamic": "npm:18.0.3"
     "@angular/router": "npm:18.0.3"
     "@cloudflight/eslint-plugin-angular": "npm:0.26.0"
