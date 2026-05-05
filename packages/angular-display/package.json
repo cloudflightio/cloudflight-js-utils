@@ -15,7 +15,7 @@
         "access": "public"
     },
     "peerDependencies": {
-        "@angular/core": "^18.0.3",
+        "@angular/core": ">=18.0.3 < 22.0.0",
         "rxjs": "^7.4.0"
     }
 }
